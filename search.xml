@@ -17,6 +17,25 @@
     
     
     <entry>
+      <title>前端路线</title>
+      <link href="/2021/04/01/%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%BA%BF/"/>
+      <url>/2021/04/01/%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%BA%BF/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前端路线："><a href="#前端路线：" class="headerlink" title="前端路线："></a>前端路线：</h3><h4 id="第一部分：-基础"><a href="#第一部分：-基础" class="headerlink" title="第一部分：(基础)"></a>第一部分：(基础)</h4><ul><li><p><strong>html</strong></p></li><li><p><strong>css</strong></p></li><li><p><strong>html5</strong></p></li><li><p><strong>css3</strong></p></li></ul><h4 id="第二部分：（进阶）"><a href="#第二部分：（进阶）" class="headerlink" title="第二部分：（进阶）"></a>第二部分：（进阶）</h4><ul><li><p><strong>javaScript（这个很重要）</strong></p></li><li><p><strong>javaScript高级</strong></p></li><li><p><strong>AJAX（发请求用到的）</strong></p></li><li><p><strong>es6（同样重要）</strong></p></li><li><p><strong>Promise</strong></p></li><li><p><strong>webpack5</strong></p></li></ul><h4 id="第三部分：（框架）"><a href="#第三部分：（框架）" class="headerlink" title="第三部分：（框架）"></a>第三部分：（框架）</h4><ul><li><p><strong>Vue2+Vue3</strong></p></li><li><p><strong>React</strong></p></li><li><p><strong>axios</strong></p></li><li><p><strong>node.js（前端的后台）</strong></p></li></ul><h4 id="第四部分：（其他）"><a href="#第四部分：（其他）" class="headerlink" title="第四部分：（其他）"></a>第四部分：（其他）</h4><ul><li><p><strong>大厂面试题</strong></p></li><li><p><strong>Git</strong></p></li><li><p><strong>jQuery（可学可不学）</strong></p></li><li><p><strong>Linux</strong></p></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>后端路线</title>
       <link href="/2021/04/01/%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF/"/>
       <url>/2021/04/01/%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF/</url>
