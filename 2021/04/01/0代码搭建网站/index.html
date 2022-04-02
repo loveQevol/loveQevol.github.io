@@ -555,25 +555,25 @@ layout: <span class="token string">"friends"</span>
 ---
 </code></pre>
 <p>同时，在 <code>source</code> 目录下新建 <code>_data</code> 目录，在 <code>_data</code> 目录中新建 <code>friends.json</code> 文件，文件内容如下所示：</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">[</span><span class="token punctuation">{</span>
     <span class="token string">"avatar"</span><span class="token keyword">:</span> <span class="token string">"https://www.lixl.cn/medias/avatar.jpg"</span>,
     <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"悟尘记"</span>,
     <span class="token string">"introduction"</span><span class="token keyword">:</span> <span class="token string">"人生就是一场修行，上善若水，厚德载物。"</span>,
     <span class="token string">"url"</span><span class="token keyword">:</span> <span class="token string">"https://www.lixl.cn/"</span>,
     <span class="token string">"title"</span><span class="token keyword">:</span> <span class="token string">"前去参观"</span>
-<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;, &amp;#123;</span>
+<span class="token punctuation">}</span>, <span class="token punctuation">{</span>
     <span class="token string">"avatar"</span><span class="token keyword">:</span> <span class="token string">"https://wiki.hyperledger.org/download/attachments/2392069/fabric?version=1&amp;modificationDate=1540928132000&amp;api=v2"</span>,
     <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"Fabric"</span>,
     <span class="token string">"introduction"</span><span class="token keyword">:</span> <span class="token string">"A Blockchain Platform for the Enterprise"</span>,
     <span class="token string">"url"</span><span class="token keyword">:</span> <span class="token string">"https://hyperledger-fabric.readthedocs.io/en/master/"</span>,
     <span class="token string">"title"</span><span class="token keyword">:</span> <span class="token string">"前去学习"</span>
-<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;, &amp;#123;</span>
+<span class="token punctuation">}</span>, <span class="token punctuation">{</span>
     <span class="token string">"avatar"</span><span class="token keyword">:</span> <span class="token string">"https://www.bootcdn.cn/assets/img/maoyun.svg"</span>,
     <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"BootCDN"</span>,
     <span class="token string">"introduction"</span><span class="token keyword">:</span> <span class="token string">"稳定、快速、免费的前端开源项目 CDN 加速服务。"</span>,
     <span class="token string">"url"</span><span class="token keyword">:</span> <span class="token string">"https://www.bootcdn.cn/"</span>,
     <span class="token string">"title"</span><span class="token keyword">:</span> <span class="token string">"前去加速"</span>
-<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;]</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span>
 </code></pre>
 <h3 id="代码高亮"><a href="#代码高亮" class="headerlink" title="代码高亮"></a>代码高亮</h3><p>由于 Hexo 自带的代码高亮主题显示不好看，所以主题中使用到了 <a target="_blank" rel="noopener" href="https://github.com/ele828/hexo-prism-plugin">hexo-prism-plugin</a> 的 Hexo 插件来做代码高亮，安装命令如下：</p>
 <pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> i -S hexo-prism-plugin
@@ -724,17 +724,17 @@ abbrlink:
 <p>如果本主题中的诸多功能和主题色彩你不满意，可以在主题中自定义修改，很多更自由的功能和细节点的修改难以在主题的 <code>_config.yml</code> 中完成，需要修改源代码才来完成。以下列出了可能有用的地方：</p>
 <h3 id="修改主题颜色"><a href="#修改主题颜色" class="headerlink" title="修改主题颜色"></a>修改主题颜色</h3><p>在主题文件的 <code>/source/css/matery.css</code> 文件中，搜索 <code>.bg-color</code> 来修改背景颜色：</p>
 <pre class=" language-bash"><code class="language-bash">/* 整体背景颜色，包括导航、移动端的导航、页尾、标签页等的背景颜色. */
-.bg-color <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+.bg-color <span class="token punctuation">{</span>
     background-image: linear-gradient<span class="token punctuation">(</span>to right, <span class="token comment" spellcheck="true">#4cbf30 0%, #0f9d58 100%);</span>
-<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;</span>
+<span class="token punctuation">}</span>
 
-@-webkit-keyframes rainbow <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+@-webkit-keyframes rainbow <span class="token punctuation">{</span>
    /* 动态切换背景颜色. */
-<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;</span>
+<span class="token punctuation">}</span>
 
-@keyframes rainbow <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+@keyframes rainbow <span class="token punctuation">{</span>
     /* 动态切换背景颜色. */
-<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h3 id="修改-banner-图和文章特色图"><a href="#修改-banner-图和文章特色图" class="headerlink" title="修改 banner 图和文章特色图"></a>修改 banner 图和文章特色图</h3><p>可以直接在 &#x2F;source&#x2F;medias&#x2F;banner 文件夹中更换喜欢的 banner 图片，主题代码中是每天动态切换一张，只需 7 张即可。如果会 JavaScript 代码，可以修改成自己喜欢切换逻辑，如：随机切换等，banner 切换的代码位置在 &#x2F;layout&#x2F;_partial&#x2F;bg-cover-content.ejs 文件的 <script></script> 代码中：</p>
 <pre class=" language-bash"><code class="language-bash"><span class="token punctuation">$(</span><span class="token string">'.bg-cover'</span><span class="token punctuation">)</span>.css<span class="token punctuation">(</span><span class="token string">'background-image'</span>, <span class="token string">'url(/medias/banner/'</span> + new Date<span class="token punctuation">(</span><span class="token punctuation">)</span>.getDay<span class="token punctuation">(</span><span class="token punctuation">)</span> + <span class="token string">'.jpg)'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
