@@ -4,11 +4,31 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="HashMap的底层数据结构, 谦谦的个人博客">
-    <meta name="description" content="HashMap 的底层数据结构是怎样的 ？JDK8之前：
-JDK1.8 之前 HashMap 底层是 数组和链表  结合在一起使用也就是 链表散列
+    <meta name="keywords" content="后端路线, 谦谦的个人博客">
+    <meta name="description" content="后端路线：第一部分：java基础
+java基础
+javase
+数据库基础
+jdbc
 
-HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
+第二部分：数据结构
+数组
+栈
+队列
+链表
+树
+散列表
+堆
+图
+
+第三部分：web前端
+html
+css
+js基础
+jquery
+
+第四部分：框架总结
+ja">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +42,7 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
 
     
 
-    <title>HashMap的底层数据结构 | 谦谦的个人博客</title>
+    <title>后端路线 | 谦谦的个人博客</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/awesome/css/all.min.css">
@@ -312,12 +332,12 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">HashMap的底层数据结构</h1>
+                    <h1 class="description center-align post-title">后端路线</h1>
                 </div>
             </div>
         </div>
@@ -433,8 +453,8 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">
-                                <span class="chip bg-color">面试题</span>
+                            <a href="/tags/java%E5%90%8E%E7%AB%AF/">
+                                <span class="chip bg-color">java后端</span>
                             </a>
                         
                     </div>
@@ -449,7 +469,7 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-03
+                    2022-04-01
                 </div>
                 
 
@@ -470,16 +490,119 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="HashMap-的底层数据结构是怎样的-？"><a href="#HashMap-的底层数据结构是怎样的-？" class="headerlink" title="HashMap 的底层数据结构是怎样的 ？"></a>HashMap 的底层数据结构是怎样的 ？</h2><h4 id="JDK8之前："><a href="#JDK8之前：" class="headerlink" title="JDK8之前："></a>JDK8之前：</h4><ul>
-<li><p><strong>JDK1.8 之前 HashMap 底层是 <font color=red>数组和链表</font>  结合在一起使用也就是 <font color=red>链表散列</font></strong></p>
+                <h3 id="后端路线："><a href="#后端路线：" class="headerlink" title="后端路线："></a>后端路线：</h3><h4 id="第一部分：java基础"><a href="#第一部分：java基础" class="headerlink" title="第一部分：java基础"></a>第一部分：java基础</h4><ul>
+<li><strong>java基础</strong></li>
+<li><strong>javase</strong></li>
+<li><strong>数据库基础</strong></li>
+<li><strong>jdbc</strong></li>
+</ul>
+<h4 id="第二部分：数据结构"><a href="#第二部分：数据结构" class="headerlink" title="第二部分：数据结构"></a>第二部分：数据结构</h4><ul>
+<li><strong>数组</strong></li>
+<li><strong>栈</strong></li>
+<li><strong>队列</strong></li>
+<li><strong>链表</strong></li>
+<li><strong>树</strong></li>
+<li><strong>散列表</strong></li>
+<li><strong>堆</strong></li>
+<li><strong>图</strong></li>
+</ul>
+<h4 id="第三部分：web前端"><a href="#第三部分：web前端" class="headerlink" title="第三部分：web前端"></a>第三部分：web前端</h4><ul>
+<li><strong>html</strong></li>
+<li><strong>css</strong></li>
+<li><strong>js基础</strong></li>
+<li><strong>jquery</strong></li>
+</ul>
+<h4 id="第四部分：框架总结"><a href="#第四部分：框架总结" class="headerlink" title="第四部分：框架总结"></a>第四部分：框架总结</h4><ul>
+<li><strong>javaweb</strong></li>
+<li><strong>ssm</strong></li>
+</ul>
+<h4 id="第五部分：分布式，微服务，并行架构"><a href="#第五部分：分布式，微服务，并行架构" class="headerlink" title="第五部分：分布式，微服务，并行架构"></a>第五部分：分布式，微服务，并行架构</h4><ul>
+<li><p><strong>Netty</strong></p>
 </li>
-<li><p><strong>HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过   <font color=red>(n - 1) &amp; hash </font>  判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在 元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话， 直接覆盖，不相同就通过拉链法解决冲突。</strong></p>
+<li><p><strong>Dubbo(PRC框架)</strong></p>
 </li>
-<li><p><strong>所谓扰动函数指的就是 HashMap 的 hash 方法。使用 hash 方法也就是扰动函数是为了 防止一些实现比较差的 hashCode() 方法 换句话说使用扰动函数之后可以减少碰撞。</strong></p>
+<li><p><strong>FastDFS(分布式的文件系统)</strong></p>
+</li>
+<li><p><strong>Spring家族</strong></p>
+<ul>
+<li><strong>SpringBoot</strong></li>
+<li><strong>SpringCloud</strong><ul>
+<li><strong>Nacos（阿里巴巴服务器发现，配置，管理）</strong></li>
+<li><strong>Seata（阿里巴巴，分布式事务的中间件）</strong></li>
+<li><strong>Sentinel（阿里巴巴，流量控制，熔断，系统负载保护）</strong></li>
+<li><strong>GateWay（网关，限流，日志，监控，鉴权）</strong></li>
+<li><strong>OpenFeign（服务间调用）</strong></li>
+</ul>
 </li>
 </ul>
-<h4 id="JDK1-8之后："><a href="#JDK1-8之后：" class="headerlink" title="JDK1.8之后："></a>JDK1.8之后：</h4><ul>
-<li><strong>当链表长度大于阈值（默认为 8）时，会首先调用   <font color=red> treeifyBin()方法 </font>。  这个方法会根据 HashMap 数组来决定是否转换为红黑树。只有当数组长度大于或者等于 64 的情况下，才会 执行转换红黑树操作，以减少搜索时间。否则，就是只是执行   <font color=red>resize() 方法</font>  对数组扩容。</strong></li>
+</li>
+<li><p><strong>搜索引擎</strong></p>
+<ul>
+<li><strong>ElasticSeqrch（简称es）</strong></li>
+<li><strong>Solr</strong></li>
+</ul>
+</li>
+<li><p><strong>中间件</strong></p>
+<ul>
+<li><strong>MyCat（数据库中间件，分库分表）</strong></li>
+<li><strong>消息中间件</strong><ul>
+<li><strong>ActiveMQ</strong></li>
+<li><strong>RabbitMQ</strong></li>
+<li><strong>KafKa</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>日志分析与监控（ELK）</strong></p>
+<ul>
+<li><strong>ElasticSearch（搜集，存储数据）</strong></li>
+<li><strong>LogStatsh（分析日志）</strong></li>
+<li><strong>Kibana（可视化）</strong></li>
+</ul>
+</li>
+<li><p><strong>Zookeepr（一致性服务：比如 配置维护，域名维护，分布式同步）</strong></p>
+</li>
+</ul>
+<h4 id="第六部分：DevOps-开发运维一体化-自动化部分管理项目，解决CI-x2F-CD"><a href="#第六部分：DevOps-开发运维一体化-自动化部分管理项目，解决CI-x2F-CD" class="headerlink" title="第六部分：DevOps(开发运维一体化)自动化部分管理项目，解决CI&#x2F;CD"></a>第六部分：DevOps(开发运维一体化)自动化部分管理项目，解决CI&#x2F;CD</h4><ul>
+<li><strong>k8s（让部署容器化的应用简单高效）</strong></li>
+<li><strong>普罗米修斯（prometheus）[系统监控和报警]</strong></li>
+<li><strong>Jenkins（监控持续的工作[部署，集成，交付]）</strong></li>
+<li><strong>Harbor（容器的镜像仓库）</strong></li>
+<li><strong>GitLab</strong></li>
+<li><strong>项目工程代码质量检测（sonarqube）</strong></li>
+</ul>
+<h4 id="第七部分：大数据技术"><a href="#第七部分：大数据技术" class="headerlink" title="第七部分：大数据技术"></a>第七部分：大数据技术</h4><ul>
+<li><strong>Hadoop</strong></li>
+<li><strong>Hive</strong></li>
+<li><strong>Impals</strong></li>
+<li><strong>spark</strong></li>
+<li><strong>flink</strong></li>
+</ul>
+<h4 id="第八部分：项目"><a href="#第八部分：项目" class="headerlink" title="第八部分：项目"></a>第八部分：项目</h4><ul>
+<li><strong>电商</strong></li>
+<li><strong>金融</strong></li>
+<li><strong>教育</strong></li>
+<li><strong>直播</strong></li>
+<li><strong>CRM,ERP</strong></li>
+</ul>
+<h4 id="第九部分："><a href="#第九部分：" class="headerlink" title="第九部分："></a>第九部分：</h4><ul>
+<li><strong>大厂的高配面试题</strong></li>
+</ul>
+<h4 id="第十部分：底层源码-x2F-内核研究"><a href="#第十部分：底层源码-x2F-内核研究" class="headerlink" title="第十部分：底层源码&#x2F;内核研究"></a>第十部分：底层源码&#x2F;内核研究</h4><h5 id="编程基础的扩展（科班）"><a href="#编程基础的扩展（科班）" class="headerlink" title="编程基础的扩展（科班）"></a>编程基础的扩展（科班）</h5><ul>
+<li><p><strong>计算机网络</strong></p>
+</li>
+<li><p><strong>操作系统</strong></p>
+</li>
+<li><p><strong>编译原理</strong></p>
+</li>
+<li><p><strong>离散数学</strong></p>
+</li>
+<li><p><strong>数值分析</strong></p>
+</li>
+<li><p><strong>计算机组成原理</strong></p>
+</li>
+<li><p><strong>汇编语言</strong></p>
+</li>
 </ul>
 
                 
@@ -507,7 +630,7 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://loveQevol.github.io/2022/04/03/HashMap%E5%BA%95%E5%B1%82/">http://loveQevol.github.io/2022/04/03/HashMap%E5%BA%95%E5%B1%82/</a>
+                    <a href="http://loveQevol.github.io/2022/04/01/%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF/">http://loveQevol.github.io/2022/04/01/%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -545,8 +668,8 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">
-                                    <span class="chip bg-color">面试题</span>
+                                <a href="/tags/java%E5%90%8E%E7%AB%AF/">
+                                    <span class="chip bg-color">java后端</span>
                                 </a>
                             
                         </div>
@@ -724,13 +847,13 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/04/03/Maven%E9%AB%98%E7%BA%A7/">
+                <a href="/2022/04/01/%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%BA%BF/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="Maven高级">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="前端路线">
                         
-                        <span class="card-title">Maven高级</span>
+                        <span class="card-title">前端路线</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -741,7 +864,7 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-03
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-01
                         </span>
                         <span class="publish-author">
                             
@@ -754,8 +877,8 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
-                        <span class="chip bg-color">管理工具</span>
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
                     </a>
                     
                 </div>
@@ -769,13 +892,13 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/03/%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB/">
+                <a href="/2022/04/01/0%E4%BB%A3%E7%A0%81%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="接口的抽象类的区别">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/7.jpg" class="responsive-img" alt="0代快速码搭建网站">
                         
-                        <span class="card-title">接口的抽象类的区别</span>
+                        <span class="card-title">0代快速码搭建网站</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -786,7 +909,7 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-01
                             </span>
                         <span class="publish-author">
                             
@@ -799,8 +922,8 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%98%93%E9%94%99/">
-                        <span class="chip bg-color">易错</span>
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
                     </a>
                     
                 </div>
