@@ -5,10 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="0代快速码搭建网站, 谦谦的个人博客">
-    <meta name="description" content="网站搭建安装hexoHexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
-前提安装 Hexo 相当简单，只需要先安装下列应用程序即可：
-
-Node">
+    <meta name="description" content="
+## 网站搭建
+### 安装hexo
+Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
+### 前提
+安装 Hexo 相当简单，只需要先安装">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -470,12 +472,17 @@ Node">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="网站搭建"><a href="#网站搭建" class="headerlink" title="网站搭建"></a>网站搭建</h2><h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
-<ul>
-<li>Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)</li>
-<li>Git<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</li>
-</ul>
+                <meta name="referrer" content="no-referror">
+## 网站搭建
+### 安装hexo
+Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
+### 前提
+安装 Hexo 相当简单，只需要先安装下列应用程序即可：
+- Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)
+- Git
+### 安装
+所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。
+
 <pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli
 </code></pre>
 <p>安装以后，可以使用以下两种方式执行 Hexo：</p>
@@ -741,7 +748,7 @@ abbrlink:
 </code></pre>
 <p>在 <code>/source/medias/featureimages</code> 文件夹中默认有 24 张特色图片，你可以再增加或者减少，并需要在 <code>_config.yml</code> 做同步修改。</p>
 <h2 id="文章-Front-matter-介绍"><a href="#文章-Front-matter-介绍" class="headerlink" title="文章 Front-matter 介绍"></a>文章 Front-matter 介绍</h2><h3 id="Front-matter-选项详解"><a href="#Front-matter-选项详解" class="headerlink" title="Front-matter 选项详解"></a>Front-matter 选项详解</h3><p><code>Front-matter</code> 选项中的所有内容均为<strong>非必填</strong>的。但仍然建议至少填写 <code>title</code> 和 <code>date</code> 的值。</p>
-<p><img src="C:\Users\薛之谦\AppData\Roaming\Typora\typora-user-images\image-20220401103401684.png" alt="image-20220401103401684"></p>
+<p><img src="/2022/04/01/0%E4%BB%A3%E7%A0%81%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/image-20220401103401684.png"></p>
 <p>注意:</p>
 <p>如果 img 属性不填写的话，文章特色图会根据文章标题的 hashcode 的值取余，然后选取主题中对应的特色图片，从而达到让所有文章都的特色图各有特色。<br>date 的值尽量保证每篇文章是唯一的，因为本主题中 Gitalk 和 Gitment 识别 id 是通过 date 的值来作为唯一标识的。<br>如果要对文章设置阅读验证密码的功能，不仅要在 Front-matter 中设置采用了 SHA256 加密的 password 的值，还需要在主题的 _config.yml 中激活了配置。有些在线的 SHA256 加密的地址，可供使用：开源中国在线工具、chahuo、站长工具。</p>
 <p>以下为文章的 <code>Front-matter</code> 示例。</p>

@@ -471,15 +471,15 @@ HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="HashMap-的底层数据结构是怎样的-？"><a href="#HashMap-的底层数据结构是怎样的-？" class="headerlink" title="HashMap 的底层数据结构是怎样的 ？"></a>HashMap 的底层数据结构是怎样的 ？</h2><h4 id="JDK8之前："><a href="#JDK8之前：" class="headerlink" title="JDK8之前："></a>JDK8之前：</h4><ul>
-<li><p><strong>JDK1.8 之前 HashMap 底层是 <font color=red>数组和链表</font>  结合在一起使用也就是 <font color=red>链表散列</font></strong></p>
+<li><p><strong>JDK1.8 之前 HashMap 底层是 <font color="red">数组和链表</font>  结合在一起使用也就是 <font color="red">链表散列</font></strong></p>
 </li>
-<li><p><strong>HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过   <font color=red>(n - 1) &amp; hash </font>  判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在 元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话， 直接覆盖，不相同就通过拉链法解决冲突。</strong></p>
+<li><p><strong>HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过   <font color="red">(n - 1) &amp; hash </font>  判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在 元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话， 直接覆盖，不相同就通过拉链法解决冲突。</strong></p>
 </li>
 <li><p><strong>所谓扰动函数指的就是 HashMap 的 hash 方法。使用 hash 方法也就是扰动函数是为了 防止一些实现比较差的 hashCode() 方法 换句话说使用扰动函数之后可以减少碰撞。</strong></p>
 </li>
 </ul>
 <h4 id="JDK1-8之后："><a href="#JDK1-8之后：" class="headerlink" title="JDK1.8之后："></a>JDK1.8之后：</h4><ul>
-<li><strong>当链表长度大于阈值（默认为 8）时，会首先调用   <font color=red> treeifyBin()方法 </font>。  这个方法会根据 HashMap 数组来决定是否转换为红黑树。只有当数组长度大于或者等于 64 的情况下，才会 执行转换红黑树操作，以减少搜索时间。否则，就是只是执行   <font color=red>resize() 方法</font>  对数组扩容。</strong></li>
+<li><strong>当链表长度大于阈值（默认为 8）时，会首先调用   <font color="red"> treeifyBin()方法 </font>。  这个方法会根据 HashMap 数组来决定是否转换为红黑树。只有当数组长度大于或者等于 64 的情况下，才会 执行转换红黑树操作，以减少搜索时间。否则，就是只是执行   <font color="red">resize() 方法</font>  对数组扩容。</strong></li>
 </ul>
 
                 
