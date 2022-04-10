@@ -467,9 +467,136 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、WebSocket"><a href="#1、WebSocket" class="headerlink" title="1、WebSocket"></a>1、WebSocket</h2><h3 id="1-1、WebSocket介绍"><a href="#1-1、WebSocket介绍" class="headerlink" title="1.1、WebSocket介绍"></a>1.1、WebSocket介绍</h3><h5 id="WebSocket是一种网络通信协议。DEC6455-定义了它的通信标准。"><a href="#WebSocket是一种网络通信协议。DEC6455-定义了它的通信标准。" class="headerlink" title="WebSocket是一种网络通信协议。DEC6455 定义了它的通信标准。"></a>WebSocket是一种网络通信协议。DEC6455 定义了它的通信标准。</h5><h5 id="WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。"><a href="#WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。" class="headerlink" title="WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。"></a>WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。</h5><h5 id="HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求-x2F-响应模型。通信请求只能由客户端发起，服务端对请求"><a href="#HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求-x2F-响应模型。通信请求只能由客户端发起，服务端对请求" class="headerlink" title="HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求&#x2F;响应模型。通信请求只能由客户端发起，服务端对请求"></a>HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求&#x2F;响应模型。通信请求只能由客户端发起，服务端对请求</h5><p>做出应答处理。</p>
-<h5 id="这种通信模型有一一个弊端-HTTP-协议无法实现服务器主动向客户端发起消息。"><a href="#这种通信模型有一一个弊端-HTTP-协议无法实现服务器主动向客户端发起消息。" class="headerlink" title="这种通信模型有一一个弊端: HTTP 协议无法实现服务器主动向客户端发起消息。"></a>这种通信模型有一一个弊端: HTTP 协议无法实现服务器主动向客户端发起消息。</h5><h5 id="这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步"><a href="#这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步" class="headerlink" title="这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步"></a>这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步</h5><p>AJAX请求实现长轮询。轮询的效率低，非常浪费资源(因为必须不停连接,或者HTTP连接始终打开)。</p>
-
+                <h2 id="1、WebSocket"><a href="#1、WebSocket" class="headerlink" title="1、WebSocket"></a>1、WebSocket</h2><h3 id="1-1、WebSocket介绍"><a href="#1-1、WebSocket介绍" class="headerlink" title="1.1、WebSocket介绍"></a>1.1、WebSocket介绍</h3><h5 id="WebSocket是一种网络通信协议。DEC6455-定义了它的通信标准。"><a href="#WebSocket是一种网络通信协议。DEC6455-定义了它的通信标准。" class="headerlink" title="WebSocket是一种网络通信协议。DEC6455 定义了它的通信标准。"></a>WebSocket是一种网络通信协议。DEC6455 定义了它的通信标准。</h5><h5 id="WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。"><a href="#WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。" class="headerlink" title="WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。"></a>WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。</h5><h5 id="HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求-x2F-响应模型。通信请求只能由客户端发起，服务端对请求"><a href="#HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求-x2F-响应模型。通信请求只能由客户端发起，服务端对请求" class="headerlink" title="HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求&#x2F;响应模型。通信请求只能由客户端发起，服务端对请求"></a>HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求&#x2F;响应模型。通信请求只能由客户端发起，服务端对请求</h5><h5 id="做出应答处理。"><a href="#做出应答处理。" class="headerlink" title="做出应答处理。"></a>做出应答处理。</h5><h5 id="这种通信模型有一一个弊端-HTTP-协议无法实现服务器主动向客户端发起消息。"><a href="#这种通信模型有一一个弊端-HTTP-协议无法实现服务器主动向客户端发起消息。" class="headerlink" title="这种通信模型有一一个弊端: HTTP 协议无法实现服务器主动向客户端发起消息。"></a>这种通信模型有一一个弊端: HTTP 协议无法实现服务器主动向客户端发起消息。</h5><h5 id="这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步"><a href="#这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步" class="headerlink" title="这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步"></a>这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步</h5><h5 id="AJAX请求实现长轮询。轮询的效率低，非常浪费资源-因为必须不停连接-或者HTTP连接始终打开-。"><a href="#AJAX请求实现长轮询。轮询的效率低，非常浪费资源-因为必须不停连接-或者HTTP连接始终打开-。" class="headerlink" title="AJAX请求实现长轮询。轮询的效率低，非常浪费资源(因为必须不停连接,或者HTTP连接始终打开)。"></a>AJAX请求实现长轮询。轮询的效率低，非常浪费资源(因为必须不停连接,或者HTTP连接始终打开)。</h5><p><img src="/2022/04/06/WebSocket%E5%85%A5%E9%97%A8/image-20220408112811396.png"></p>
+<h3 id="1-2-websocket协议"><a href="#1-2-websocket协议" class="headerlink" title="1.2 websocket协议"></a>1.2 websocket协议</h3><h5 id="本协议有两部分-握手和数据传输。"><a href="#本协议有两部分-握手和数据传输。" class="headerlink" title="本协议有两部分:握手和数据传输。"></a>本协议有两部分:握手和数据传输。</h5><h5 id="握手是基于http协议的。"><a href="#握手是基于http协议的。" class="headerlink" title="握手是基于http协议的。"></a>握手是基于http协议的。</h5><h5 id="来自客户端的握手看起来像如下形式"><a href="#来自客户端的握手看起来像如下形式" class="headerlink" title="来自客户端的握手看起来像如下形式:"></a>来自客户端的握手看起来像如下形式:</h5><pre class=" language-http"><code class="language-http">1| GET ws://localhost/chat HTTP/1.1
+2| Host: localhost
+3| Upgrade: websocket
+4| Connection: Upgrade
+5| Sec-web Socket-Key: dGh1IHNhbXB sZSBub25jZQ==
+6| Sec -Websocket- Extensions: pe rmessage-deflate
+7| Sec -Websocket-Version: 13
+</code></pre>
+<h5 id="来自服务器-的握手看起来像如下形式："><a href="#来自服务器-的握手看起来像如下形式：" class="headerlink" title="来自服务器 的握手看起来像如下形式："></a>来自服务器 的握手看起来像如下形式：</h5><pre class=" language-http"><code class="language-http"><span class="token response-status">HTTP/1.1 <span class="token property">101 Switching Protocols</span></span>
+<span class="token header-name keyword">upgrade:</span> websocket
+<span class="token header-name keyword">connection:</span> Upgrade
+Sec -Web Socket- Accept: s3pPLMBi TxaQ9kYGzzhZRbK+x00=
+Sec-Wwebsocket-Extensi ons: permessage-deflate
+</code></pre>
+<h5 id="字段说明："><a href="#字段说明：" class="headerlink" title="字段说明："></a>字段说明：</h5><table>
+<thead>
+<tr>
+<th>头名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Connection : Upgrade</td>
+<td>标识该HTTP请求是一一个协议升级请求</td>
+</tr>
+<tr>
+<td>Upgrade : WebSocket</td>
+<td>协议升级为webSocke t协议</td>
+</tr>
+<tr>
+<td>Sec-WebSocket - Version: 13</td>
+<td>客户端支持webSocket的版本</td>
+</tr>
+<tr>
+<td>Sec-WebSocket - Key :</td>
+<td>客户端采用base6 4编码的24位随机字符序列，服务器接受客户端HTTP协议升级的证明。要求服务端响应一个对应加密的Sec-WebSocket -Accept头信息作为应答</td>
+</tr>
+<tr>
+<td>Sec-WebSocket - Extensions</td>
+<td>协议扩展类型</td>
+</tr>
+</tbody></table>
+<h3 id="1-3、客户端（浏览器）实现"><a href="#1-3、客户端（浏览器）实现" class="headerlink" title="1.3、客户端（浏览器）实现"></a>1.3、客户端（浏览器）实现</h3><h4 id="1-3-1、websocket对象"><a href="#1-3-1、websocket对象" class="headerlink" title="1.3.1、websocket对象"></a>1.3.1、websocket对象</h4><h5 id="实现webSockets的Web浏览器将通过webSocket对象公开所有必需的客户端功能-主要指支持Html5-的浏览器-。"><a href="#实现webSockets的Web浏览器将通过webSocket对象公开所有必需的客户端功能-主要指支持Html5-的浏览器-。" class="headerlink" title="实现webSockets的Web浏览器将通过webSocket对象公开所有必需的客户端功能(主要指支持Html5 的浏览器)。"></a>实现webSockets的Web浏览器将通过webSocket对象公开所有必需的客户端功能(主要指支持Html5 的浏览器)。</h5><h5 id="以下API用于创建WebSocket-对象"><a href="#以下API用于创建WebSocket-对象" class="headerlink" title="以下API用于创建WebSocket 对象:"></a>以下API用于创建WebSocket 对象:</h5><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> ws <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebSocket</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>参数url说明：ws：&#x2F;&#x2F;ip地址：端口号&#x2F;资源名称</li>
+</ul>
+<h4 id="1-3-2、websocket事件"><a href="#1-3-2、websocket事件" class="headerlink" title="1.3.2、websocket事件"></a>1.3.2、websocket事件</h4><h5 id="WebSocket对象相关事件"><a href="#WebSocket对象相关事件" class="headerlink" title="WebSocket对象相关事件"></a>WebSocket对象相关事件</h5><table>
+<thead>
+<tr>
+<th>事件</th>
+<th>事件处理程序</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>open</td>
+<td>WebSocket对象.onopen</td>
+<td>连接建立时触发</td>
+</tr>
+<tr>
+<td>message</td>
+<td>WebSocket对象.onmessage</td>
+<td>客户端接收服务端数据时触发</td>
+</tr>
+<tr>
+<td>error</td>
+<td>WebSocket对象.onerror</td>
+<td>通信发生错误时触发</td>
+</tr>
+<tr>
+<td>close</td>
+<td>WebSocket对象.onclose</td>
+<td>连接关闭时触发</td>
+</tr>
+</tbody></table>
+<h4 id="1-3-3、WebSocket方法"><a href="#1-3-3、WebSocket方法" class="headerlink" title="1.3.3、WebSocket方法"></a>1.3.3、WebSocket方法</h4><h5 id="WebSocket-对象的相关方法"><a href="#WebSocket-对象的相关方法" class="headerlink" title="WebSocket 对象的相关方法"></a>WebSocket 对象的相关方法</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>send（）</td>
+<td>使用连接发送数据</td>
+</tr>
+</tbody></table>
+<h3 id="1-4、服务端实现"><a href="#1-4、服务端实现" class="headerlink" title="1.4、服务端实现"></a>1.4、服务端实现</h3><h5 id="Tomcat的7-0-5版本开始支持webSocket-并且实现了Java-webSocket-规范-JSR356-。"><a href="#Tomcat的7-0-5版本开始支持webSocket-并且实现了Java-webSocket-规范-JSR356-。" class="headerlink" title="Tomcat的7.0.5版本开始支持webSocket ,并且实现了Java webSocket 规范(JSR356)。"></a>Tomcat的7.0.5版本开始支持webSocket ,并且实现了Java webSocket 规范(JSR356)。</h5><h5 id="Java-WebSocket应用由-系列的webSocketEndpoint组成。-Endpoint-是一-个java对象-代表webSocket链接的一-端，-对于"><a href="#Java-WebSocket应用由-系列的webSocketEndpoint组成。-Endpoint-是一-个java对象-代表webSocket链接的一-端，-对于" class="headerlink" title="Java WebSocket应用由- -系列的webSocketEndpoint组成。 Endpoint 是一-个java对象,代表webSocket链接的一-端， 对于"></a>Java WebSocket应用由- -系列的webSocketEndpoint组成。 Endpoint 是一-个java对象,代表webSocket链接的一-端， 对于</h5><h5 id="服务端，我们可以视为处理具体webSocket消息的接口，就像Servlet之与http请求一样。"><a href="#服务端，我们可以视为处理具体webSocket消息的接口，就像Servlet之与http请求一样。" class="headerlink" title="服务端，我们可以视为处理具体webSocket消息的接口，就像Servlet之与http请求一样。"></a>服务端，我们可以视为处理具体webSocket消息的接口，就像Servlet之与http请求一样。</h5><h5 id="我们可以通过两种方式定义Endpoint"><a href="#我们可以通过两种方式定义Endpoint" class="headerlink" title="我们可以通过两种方式定义Endpoint :"></a>我们可以通过两种方式定义Endpoint :</h5><ul>
+<li><strong>第一种是编程式， 即继承类javax. websocket . EndPoint并实现其方法。</strong></li>
+<li><strong>第二种是注解式，即定义一-个POJO， 并添加@ServerEndpoint相关注解。</strong></li>
+</ul>
+<h5 id="Endpoint实例在webSocket握手时创建，并在客户端与服务端链接过程中有效-最后在链接关闭时结束。在Endpoint接口中明确"><a href="#Endpoint实例在webSocket握手时创建，并在客户端与服务端链接过程中有效-最后在链接关闭时结束。在Endpoint接口中明确" class="headerlink" title="Endpoint实例在webSocket握手时创建，并在客户端与服务端链接过程中有效,最后在链接关闭时结束。在Endpoint接口中明确"></a>Endpoint实例在webSocket握手时创建，并在客户端与服务端链接过程中有效,最后在链接关闭时结束。在Endpoint接口中明确</h5><h5 id="定义了与其生命周期相关的方法，规范实现者确保生-命周期的各个阶段调用实例的相关方法。生命周期方法如下"><a href="#定义了与其生命周期相关的方法，规范实现者确保生-命周期的各个阶段调用实例的相关方法。生命周期方法如下" class="headerlink" title="定义了与其生命周期相关的方法，规范实现者确保生 命周期的各个阶段调用实例的相关方法。生命周期方法如下:"></a>定义了与其生命周期相关的方法，规范实现者确保生 命周期的各个阶段调用实例的相关方法。生命周期方法如下:</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义描述</th>
+<th>注解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onClose</td>
+<td>当会话关闭时调用</td>
+<td>@OnClose</td>
+</tr>
+<tr>
+<td>onOpen</td>
+<td>当开启一个 新的会话时调用，该方法时客户端与服务端握手成功之后调用的方法</td>
+<td>@OnOpen</td>
+</tr>
+<tr>
+<td>onError</td>
+<td>当连接过程中异常时调用</td>
+<td>@OnError</td>
+</tr>
+</tbody></table>
+<h4 id="服务端如何接收客户端发送的数据呢"><a href="#服务端如何接收客户端发送的数据呢" class="headerlink" title="服务端如何接收客户端发送的数据呢?"></a>服务端如何接收客户端发送的数据呢?</h4><h5 id="通过为session-添加MessageHandler消息处理器来接收消息，当采用注解方式定义Endpoint时-我们还可以通过"><a href="#通过为session-添加MessageHandler消息处理器来接收消息，当采用注解方式定义Endpoint时-我们还可以通过" class="headerlink" title="通过为session 添加MessageHandler消息处理器来接收消息，当采用注解方式定义Endpoint时,我们还可以通过"></a>通过为session 添加MessageHandler消息处理器来接收消息，当采用注解方式定义Endpoint时,我们还可以通过</h5><h5 id="OnMessage注解指定接收消息的方法。"><a href="#OnMessage注解指定接收消息的方法。" class="headerlink" title="@OnMessage注解指定接收消息的方法。"></a>@OnMessage注解指定接收消息的方法。</h5><h4 id="服务端如何推送数据给客户端呢"><a href="#服务端如何推送数据给客户端呢" class="headerlink" title="服务端如何推送数据给客户端呢?"></a>服务端如何推送数据给客户端呢?</h4><h5 id="发送消息则由RemoteErpdpoint-完成，其实例由-Session-维护，根据使用情况，-我们可以通过"><a href="#发送消息则由RemoteErpdpoint-完成，其实例由-Session-维护，根据使用情况，-我们可以通过" class="headerlink" title="发送消息则由RemoteErpdpoint 完成，其实例由 Session 维护，根据使用情况， 我们可以通过"></a>发送消息则由RemoteErpdpoint 完成，其实例由 Session 维护，根据使用情况， 我们可以通过</h5><h5 id="Session-getBasicRemote获取同步消息发送的实例，然后调用其-sendXxX-方法就可以发送消息，可以通过"><a href="#Session-getBasicRemote获取同步消息发送的实例，然后调用其-sendXxX-方法就可以发送消息，可以通过" class="headerlink" title="Session. getBasicRemote获取同步消息发送的实例，然后调用其 sendXxX ()方法就可以发送消息，可以通过"></a>Session. getBasicRemote获取同步消息发送的实例，然后调用其 sendXxX ()方法就可以发送消息，可以通过</h5><h5 id="Session-getAsyncRemote获取异步消息发送实例。"><a href="#Session-getAsyncRemote获取异步消息发送实例。" class="headerlink" title="Session. getAsyncRemote获取异步消息发送实例。"></a>Session. getAsyncRemote获取异步消息发送实例。</h5><h3 id="2-2、实验流程"><a href="#2-2、实验流程" class="headerlink" title="2.2、实验流程"></a>2.2、实验流程</h3><p><img src="/2022/04/06/WebSocket%E5%85%A5%E9%97%A8/image-20220408124332502.png"></p>
+<h3 id="2-3、消息格式"><a href="#2-3、消息格式" class="headerlink" title="2.3、消息格式"></a>2.3、消息格式</h3><ul>
+<li><p><strong>客户端 –&gt; 服务器</strong></p>
+<p>{“toName”:”张三”，”message”:”你好”}</p>
+</li>
+<li><p><strong>服务端 –&gt; 客户端</strong></p>
+<ul>
+<li>系统消息格式：{“isSystem”：true，”fromName”：null，”message”：[“李四”，”王五”]}</li>
+<li>推送给某一个的消息格式: { “isSystem” : false, “ fromName”: “张三”, “message”: “你好”}</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4、功能实现"><a href="#2-4、功能实现" class="headerlink" title="2.4、功能实现"></a>2.4、功能实现</h3><h4 id="2-4-1-创建项目，导入相关jar包的坐标"><a href="#2-4-1-创建项目，导入相关jar包的坐标" class="headerlink" title="2.4.1 创建项目，导入相关jar包的坐标"></a>2.4.1 创建项目，导入相关jar包的坐标</h4>
                 
             </div>
             <hr/>
@@ -708,18 +835,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/04/06/WebSocket%E5%85%A5%E9%97%A8/">
+                <a href="/2022/04/10/Swagger%E5%85%A5%E9%97%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/10.jpg" class="responsive-img" alt="WebSocket入门">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="Swagger入门">
                         
-                        <span class="card-title">WebSocket入门</span>
+                        <span class="card-title">Swagger入门</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -729,18 +855,21 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-06
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-10
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            谦
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/category/java%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    java知识
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
