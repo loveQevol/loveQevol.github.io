@@ -455,14 +455,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    5 分
                 </div>
                 
 
@@ -483,7 +483,14 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="1、WebSocket"><a href="#1、WebSocket" class="headerlink" title="1、WebSocket"></a>1、WebSocket</h2><h3 id="1-1、WebSocket介绍"><a href="#1-1、WebSocket介绍" class="headerlink" title="1.1、WebSocket介绍"></a>1.1、WebSocket介绍</h3><h5 id="WebSocket是一种网络通信协议。DEC6455-定义了它的通信标准。"><a href="#WebSocket是一种网络通信协议。DEC6455-定义了它的通信标准。" class="headerlink" title="WebSocket是一种网络通信协议。DEC6455 定义了它的通信标准。"></a>WebSocket是一种网络通信协议。DEC6455 定义了它的通信标准。</h5><h5 id="WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。"><a href="#WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。" class="headerlink" title="WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。"></a>WebSocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。</h5><h5 id="HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求-x2F-响应模型。通信请求只能由客户端发起，服务端对请求"><a href="#HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求-x2F-响应模型。通信请求只能由客户端发起，服务端对请求" class="headerlink" title="HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求&#x2F;响应模型。通信请求只能由客户端发起，服务端对请求"></a>HTTP协议是一种无状态的、无连接的、单向的应用层协议。它采用了请求&#x2F;响应模型。通信请求只能由客户端发起，服务端对请求</h5><h5 id="做出应答处理。"><a href="#做出应答处理。" class="headerlink" title="做出应答处理。"></a>做出应答处理。</h5><h5 id="这种通信模型有一一个弊端-HTTP-协议无法实现服务器主动向客户端发起消息。"><a href="#这种通信模型有一一个弊端-HTTP-协议无法实现服务器主动向客户端发起消息。" class="headerlink" title="这种通信模型有一一个弊端: HTTP 协议无法实现服务器主动向客户端发起消息。"></a>这种通信模型有一一个弊端: HTTP 协议无法实现服务器主动向客户端发起消息。</h5><h5 id="这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步"><a href="#这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步" class="headerlink" title="这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步"></a>这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。大多数web应用程序将通过频繁的异步</h5><h5 id="AJAX请求实现长轮询。轮询的效率低，非常浪费资源-因为必须不停连接-或者HTTP连接始终打开-。"><a href="#AJAX请求实现长轮询。轮询的效率低，非常浪费资源-因为必须不停连接-或者HTTP连接始终打开-。" class="headerlink" title="AJAX请求实现长轮询。轮询的效率低，非常浪费资源(因为必须不停连接,或者HTTP连接始终打开)。"></a>AJAX请求实现长轮询。轮询的效率低，非常浪费资源(因为必须不停连接,或者HTTP连接始终打开)。</h5><p><img src="/2022/04/06/WebSocket%E5%85%A5%E9%97%A8/image-20220408112811396.png"></p>
-<h3 id="1-2-websocket协议"><a href="#1-2-websocket协议" class="headerlink" title="1.2 websocket协议"></a>1.2 websocket协议</h3><h5 id="本协议有两部分-握手和数据传输。"><a href="#本协议有两部分-握手和数据传输。" class="headerlink" title="本协议有两部分:握手和数据传输。"></a>本协议有两部分:握手和数据传输。</h5><h5 id="握手是基于http协议的。"><a href="#握手是基于http协议的。" class="headerlink" title="握手是基于http协议的。"></a>握手是基于http协议的。</h5><h5 id="来自客户端的握手看起来像如下形式"><a href="#来自客户端的握手看起来像如下形式" class="headerlink" title="来自客户端的握手看起来像如下形式:"></a>来自客户端的握手看起来像如下形式:</h5><pre class=" language-http"><code class="language-http">1| GET ws://localhost/chat HTTP/1.1
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><h5 id="其特点包括："><a href="#其特点包括：" class="headerlink" title="其特点包括："></a>其特点包括：</h5><ul>
+<li><strong>（1）建立在TCP协议上，服务器端的实现比较容器。</strong></li>
+<li><strong>（2）与HTTP协议有着良好的兼容性。默认端口也是80和443，并且握手阶段采用HTTP协议，因此握手时不容易屏蔽，能通过各种HTTP代理服务器。</strong></li>
+<li><strong>（3）数据格式比较轻量化，性能开销小，通信高效</strong></li>
+<li><strong>（4）可以发送文本，也可以发送二进制数据</strong></li>
+<li><strong>（5）没有同源限制，客户端可以与任意服务器通信</strong></li>
+</ul>
+<h3 id><a href="#" class="headerlink" title></a></h3><h3 id="1-2-websocket协议"><a href="#1-2-websocket协议" class="headerlink" title="1.2 websocket协议"></a>1.2 websocket协议</h3><h5 id="本协议有两部分-握手和数据传输。"><a href="#本协议有两部分-握手和数据传输。" class="headerlink" title="本协议有两部分:握手和数据传输。"></a>本协议有两部分:握手和数据传输。</h5><h5 id="握手是基于http协议的。"><a href="#握手是基于http协议的。" class="headerlink" title="握手是基于http协议的。"></a>握手是基于http协议的。</h5><h5 id="来自客户端的握手看起来像如下形式"><a href="#来自客户端的握手看起来像如下形式" class="headerlink" title="来自客户端的握手看起来像如下形式:"></a>来自客户端的握手看起来像如下形式:</h5><pre class=" language-http"><code class="language-http">1| GET ws://localhost/chat HTTP/1.1
 2| Host: localhost
 3| Upgrade: websocket
 4| Connection: Upgrade
