@@ -460,7 +460,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-25
+                    2022-06-28
                 </div>
                 
 
@@ -514,7 +514,7 @@
 <li>在软件工程中，类tu1是一种静态的结构图，描述了系统的类的集合，类的属性和类之间的关系，可以简化了人们对系统的理解；</li>
 <li>类图是系统分析和设计阶段的重要产物，是系统偏码和测试的重要模型。</li>
 </ul>
-<h3 id="2-3、类图表示法"><a href="#2-3、类图表示法" class="headerlink" title="2.3、类图表示法"></a>2.3、类图表示法</h3><h4 id="2-3-1、类的表示方法"><a href="#2-3-1、类的表示方法" class="headerlink" title="2.3.1、类的表示方法"></a>2.3.1、类的表示方法</h4><p>在UML类图中，类的使用包含类名、属性和方法并且带有分割线的矩形来表示，比如下图表示一个Employee类，它包含name，age和address这 3 个属性，以及work()方法。<br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525153009430.png"></p>
+<h3 id="2-3、类图表示法"><a href="#2-3、类图表示法" class="headerlink" title="2.3、类图表示法"></a>2.3、类图表示法</h3><h4 id="2-3-1、类的表示方法"><a href="#2-3-1、类的表示方法" class="headerlink" title="2.3.1、类的表示方法"></a>2.3.1、类的表示方法</h4><p>在UML类图中，类的使用包含类名、属性和方法并且带有分割线的矩形来表示，比如下图表示一个Employee类，它包含name，age和address这 3 个属性，以及work()方法。<br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525153009430.png"></p>
 <p>属性&#x2F;方法名称前加的加号和减号表示了这个属性&#x2F;方法的可见性，UML类图中表示可见性的符号有三种：</p>
 <ul>
 <li>+：表示public</li>
@@ -528,7 +528,7 @@
 <p>​        1、中括号中的内容表示是可选的</p>
 <p>​        2、也有将类型放到变量名前面，返回值类型放在方法名前面</p>
 </blockquote>
-<p><strong>举个例子：</strong><br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525154454726.png"></p>
+<p><strong>举个例子：</strong><br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525154454726.png"></p>
 <p>上图Demo类定义了三个方法：</p>
 <ul>
 <li>method()方法：修饰符为public，没有参数，没有返回值。</li>
@@ -537,32 +537,32 @@
 </ul>
 <h4 id="2-3-2、类与类之间关系的表示方式"><a href="#2-3-2、类与类之间关系的表示方式" class="headerlink" title="2.3.2、类与类之间关系的表示方式"></a>2.3.2、类与类之间关系的表示方式</h4><h4 id="2-3-2-1、关联关系"><a href="#2-3-2-1、关联关系" class="headerlink" title="2.3.2.1、关联关系"></a>2.3.2.1、关联关系</h4><p>关联关系是对象之间的一种引用关系，用于表示一类对象与另一类对象之间的联系，如老师和学生、师傅和徒弟、丈夫和妻子等。关联关系是类与类之间最常用的一种关系，分为一般关联关系、聚合关联关系和组合关系。先介绍一般关联。</p>
 <p>关联又可以分为单向关联，双向关联，自关联。</p>
-<p><strong>1、单向关联</strong><br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525155547585.png"></p>
+<p><strong>1、单向关联</strong><br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525155547585.png"></p>
 <p>在UML类图中单向关联用一个带箭头的实线表示。上图表示每个顾客都有一个地址，这通过让Customer类持有一个类型为Address的成员变量类实现。</p>
-<p><strong>2、双向关联</strong><br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525160122272.png"></p>
+<p><strong>2、双向关联</strong><br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525160122272.png"></p>
 <p>从图中我们很容易看出，所谓的双向关联就是双方各自持有对方类型的成员变量。</p>
 <p>在UML类图中，双向关联用一个不带箭头的直线表示。上图中Customer类中维护一个List<Product>，表示一个顾客可以购买多个商品；在Product类中维护一个Customer类型成员变量表示这个产品被哪个顾客所购买。</Product></p>
-<p><strong>3、自关联</strong><br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525160824417.png"></p>
+<p><strong>3、自关联</strong><br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525160824417.png"></p>
 <p>自关联在UML类图中用一个带有箭头且指向自身的线表示。上图的意思就是Node类包含类型为Node的成员变量，也就是”自己包含自己“。</p>
 <h4 id="2-3-2-2-聚合关系"><a href="#2-3-2-2-聚合关系" class="headerlink" title="2.3.2.2 聚合关系"></a>2.3.2.2 聚合关系</h4><p>聚合关系是关联关系的一种，是强关联关系，是整体和部分之间的关系。</p>
 <p>聚合关系也是通过成员对象来实现的，其中成员对象是整体对象的一部分，但是成员对象可以脱离整体 对象而独立存在。例如，学校与老师的关系，学校包含老师，但如果学校停办了，老师依然存在</p>
-<p>在 UML 类图中，聚合关系可以用带空心菱形的实线来表示，菱形指向整体。下图所示是大学和教师的 关系图：<br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525163317864.png"></p>
+<p>在 UML 类图中，聚合关系可以用带空心菱形的实线来表示，菱形指向整体。下图所示是大学和教师的 关系图：<br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525163317864.png"></p>
 <h4 id="2-3-2-3-组合关系"><a href="#2-3-2-3-组合关系" class="headerlink" title="2.3.2.3 组合关系"></a>2.3.2.3 组合关系</h4><p>组合表示类之间的整体与部分的关系，但它是一种更强烈的聚合关系。</p>
 <p>在组合关系中，整体对象可以控制部分对象的生命周期，一旦整体对象不存在，部分对象也将不存在， 部分对象不能脱离整体对象而存在。例如，头和嘴的关系，没有了头，嘴也就不存在了。</p>
-<p>在 UML 类图中，组合关系用带实心菱形的实线来表示，菱形指向整体。下图所示是头和嘴的关系图：<br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525163949877.png"></p>
+<p>在 UML 类图中，组合关系用带实心菱形的实线来表示，菱形指向整体。下图所示是头和嘴的关系图：<br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525163949877.png"></p>
 <h4 id="2-3-2-4-依赖关系"><a href="#2-3-2-4-依赖关系" class="headerlink" title="2.3.2.4 依赖关系"></a>2.3.2.4 依赖关系</h4><p>依赖关系是一种使用关系，它是对象之间耦合度最弱的一种关联方式，是临时性的关联。在代码中，某 个类的方法通过局部变量、方法的参数或者对静态方法的调用来访问另一个类（被依赖类）中的某些方 法来完成一些职责。</p>
-<p>在 UML 类图中，依赖关系使用带箭头的虚线来表示，箭头从使用类指向被依赖的类。下图所示是司机 和汽车的关系图，司机驾驶汽车：<br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525164821374.png"></p>
+<p>在 UML 类图中，依赖关系使用带箭头的虚线来表示，箭头从使用类指向被依赖的类。下图所示是司机 和汽车的关系图，司机驾驶汽车：<br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525164821374.png"></p>
 <h4 id="2-3-2-5-继承关系"><a href="#2-3-2-5-继承关系" class="headerlink" title="2.3.2.5 继承关系"></a>2.3.2.5 继承关系</h4><p>继承关系是对象之间耦合度最大的一种关系，表示一般与特殊的关系，是父类与子类之间的关系，是一 种继承关系。</p>
-<p>在 UML 类图中，泛化关系用带空心三角箭头的实线来表示，箭头从子类指向父类。在代码实现时，使 用面向对象的继承机制来实现泛化关系。例如，Student 类和 Teacher 类都是 Person 类的子 类，其类图如下图所示：<br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525165201611.png"></p>
+<p>在 UML 类图中，泛化关系用带空心三角箭头的实线来表示，箭头从子类指向父类。在代码实现时，使 用面向对象的继承机制来实现泛化关系。例如，Student 类和 Teacher 类都是 Person 类的子 类，其类图如下图所示：<br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525165201611.png"></p>
 <h4 id="2-3-2-6-实现关系"><a href="#2-3-2-6-实现关系" class="headerlink" title="2.3.2.6 实现关系"></a>2.3.2.6 实现关系</h4><p>实现关系是接口与实现类之间的关系。在这种关系中，类实现了接口，类中的操作实现了接口中所声明 的所有的抽象操作。</p>
-<p>在 UML 类图中，实现关系使用带空心三角箭头的虚线来表示，箭头从实现类指向接口。例如，汽车和 船实现了交通工具，其类图如图所示。<br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525165502221.png"></p>
+<p>在 UML 类图中，实现关系使用带空心三角箭头的虚线来表示，箭头从实现类指向接口。例如，汽车和 船实现了交通工具，其类图如图所示。<br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525165502221.png"></p>
 <h2 id="3，软件设计原则"><a href="#3，软件设计原则" class="headerlink" title="3，软件设计原则"></a>3，软件设计原则</h2><p>在软件开发中，为了提高软件系统的可维护性和可复用性，增加软件的可扩展性和灵活性，程序员要尽 量根据6条原则来开发程序，从而提高软件开发效率、节约软件开发成本和维护成本。</p>
 <h3 id="3-1-开闭原则"><a href="#3-1-开闭原则" class="headerlink" title="3.1 开闭原则"></a>3.1 开闭原则</h3><p><strong>对扩展开放，对修改关闭。</strong>在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效 果。简言之，是为了使程序的扩展性好，易于维护和升级。</p>
 <p>想要达到这样的效果，我们需要使用接口和抽象类。</p>
 <p>因为抽象灵活性好，适应性广，只要抽象的合理，可以基本保持软件架构的稳定。而软件中易变的细节 可以从抽象派生来的实现类来进行扩展，当软件需要发生变化时，只需要根据需求重新派生一个实现类 来扩展就可以了。 </p>
 <p>下面以 搜狗输入法 的皮肤为例介绍开闭原则的应用。</p>
 <p><strong>【例】</strong> 搜狗输入法 的皮肤设计。</p>
-<p>分析： 搜狗输入法 的皮肤是输入法背景图片、窗口颜色和声音等元素的组合。用户可以根据自己的喜 爱更换自己的输入法的皮肤，也可以从网上下载新的皮肤。这些皮肤有共同的特点，可以为其定义一个 抽象类（AbstractSkin），而每个具体的皮肤（DefaultSpecificSkin和 HeimaSpecificSkin）是其子类。用户窗体可以根据需要选择或者增加新的主题，而不需要修改原代 码，所以它是满足开闭原则的。<font color="red">PS:SouGoulnput 对 AbstractSkin 为聚合关系，图中画错了</font><br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525170537310.png"></p>
+<p>分析： 搜狗输入法 的皮肤是输入法背景图片、窗口颜色和声音等元素的组合。用户可以根据自己的喜 爱更换自己的输入法的皮肤，也可以从网上下载新的皮肤。这些皮肤有共同的特点，可以为其定义一个 抽象类（AbstractSkin），而每个具体的皮肤（DefaultSpecificSkin和 HeimaSpecificSkin）是其子类。用户窗体可以根据需要选择或者增加新的主题，而不需要修改原代 码，所以它是满足开闭原则的。<font color="red">PS:SouGoulnput 对 AbstractSkin 为聚合关系，图中画错了</font><br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525170537310.png"></p>
 <p>示例代码：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>st<span class="token punctuation">.</span>principles<span class="token punctuation">.</span>demo1<span class="token punctuation">;</span>
 
@@ -629,7 +629,7 @@
 <p>如果通过重写父类的方法来完成新的功能，这样写起来虽然简单，但是整个继承体系的可复用性会比较 差，特别是运用多态比较频繁时，程序运行出错的概率会非常大。</p>
 <p>下面看一个里氏替换原则中经典的一个例子</p>
 <p><strong>【例】</strong>正方形不是长方形。</p>
-<p>在数学领域里，正方形毫无疑问是长方形，它是一个长宽相等的长方形。所以，我们开发的一个与几何 图形相关的软件系统，就可以顺理成章的让正方形继承自长方形。<br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525173328004.png"></p>
+<p>在数学领域里，正方形毫无疑问是长方形，它是一个长宽相等的长方形。所以，我们开发的一个与几何 图形相关的软件系统，就可以顺理成章的让正方形继承自长方形。<br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220525173328004.png"></p>
 <p>代码如下：</p>
 <p><strong>长方形类（Rectangle）：</strong></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
@@ -710,13 +710,13 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529100819117.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529100819117.png"></p>
 <h4 id="3-3、依赖倒转原则"><a href="#3-3、依赖倒转原则" class="headerlink" title="3.3、依赖倒转原则"></a>3.3、依赖倒转原则</h4><p>高层模块不应该依赖低层模块，两者都应该依赖其抽象；抽象不应该依赖细节，细节应该依赖抽象。简 单的说就是要求对抽象进行编程，不要对实现进行编程，这样就降低了客户与实现模块间的耦合。</p>
 <p>个例子来理解依赖倒转原则：</p>
 <p><strong>【例】</strong>组装电脑</p>
-<p>现要组装一台电脑，需要配件cpu，硬盘，内存条。只有这些配置都有了，计算机才能正常的运行。选 择cpu有很多选择，如Intel，AMD等，硬盘可以选择希捷，西数等，内存条可以选择金士顿，海盗船 等。<br><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529101626348.png"></p>
+<p>现要组装一台电脑，需要配件cpu，硬盘，内存条。只有这些配置都有了，计算机才能正常的运行。选 择cpu有很多选择，如Intel，AMD等，硬盘可以选择希捷，西数等，内存条可以选择金士顿，海盗船 等。<br><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529101626348.png"></p>
 <p>根据依赖倒转原则进行改进： 代码我们只需要修改Computer类，让Computer类依赖抽象（各个配件的接口），而不是依赖于各个 组件具体的实现类。</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529110858661.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529110858661.png"></p>
 <p><strong>代码如下：</strong></p>
 <p><strong>电脑：</strong></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Computer</span> <span class="token punctuation">{</span>
@@ -835,9 +835,9 @@
 <h4 id="3-4、接口隔离原则"><a href="#3-4、接口隔离原则" class="headerlink" title="3.4、接口隔离原则"></a>3.4、接口隔离原则</h4><p>客户端不应该被迫依赖于它不使用的方法；一个类对另一个类的依赖应该建立在最小的接口上。</p>
 <p><strong>【例】</strong>安全门案例</p>
 <p>我们需要创建一个安全门，该安全门具有防火，防水，防盗的功能。可以将防火，防水，放盗能提取成一个接口，形成一套规范。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529112326742.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529112326742.png"></p>
 <p>上面的设计我们发现了它存在的问题，黑马品牌的安全门具有防盗，防水，防火的功能。现在如果我们 还需要再创建一个传智品牌的安全门，而该安全门只具有防盗、防水功能呢？很显然如果实现 SafetyDoor接口就违背了接口隔离原则，那么我们如何进行修改呢？看如下类图：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529112522314.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529112522314.png"></p>
 <p><strong>代码如下：</strong></p>
 <p><strong>AntiThetf（接口）：</strong></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">AntiTheft</span> <span class="token punctuation">{</span>
@@ -885,7 +885,7 @@
 <p><strong>【例】</strong>明星与经纪人的关系实例</p>
 <p>明星由于全身心投入艺术，所以许多日常事务由经纪人负责处理，如和粉丝的见面会，和媒体公司的业 务洽淡等。这里的经纪人是明星的朋友，而粉丝和媒体公司是陌生人，所以适合使用迪米特法则。</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529154432396.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529154432396.png"></p>
 <p><strong>代码如下：</strong></p>
 <p><strong>明星类</strong></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Star</span> <span class="token punctuation">{</span>
@@ -965,9 +965,9 @@
 <p><strong>一个例子来理解合成复用原则</strong></p>
 <p><strong>【例】</strong>汽车分类管理程序</p>
 <p>汽车按“动力源”划分可分为汽油汽车、电动汽车等；按“颜色”划分可分为白色汽车、黑色汽车和红色 汽车等。如果同时考虑这两种分类，其组合就很多。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529170851538.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529170851538.png"></p>
 <p>从上面类图可以看到使用继承复用产生了很多子类，如果现在又有新的动力源或者新的颜色的话， 就需要再定义新的类。我们试着将继承复用改为聚合复用看一下。</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529171122632.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220529171122632.png"></p>
 <h2 id="4、创建者模式"><a href="#4、创建者模式" class="headerlink" title="4、创建者模式"></a>4、创建者模式</h2><p>创建型模式的主要关注点是“怎样创建对象？”，它的主要特点是“将对象的创建与使用分离”。</p>
 <p>这样可以降低系统的耦合度，使用者不需要关注对象的创建细节。</p>
 <p>创建型模式分为：</p>
@@ -1395,7 +1395,7 @@ ClassNotFoundException<span class="token punctuation">{</span>
 <h2 id="4、创建型模式"><a href="#4、创建型模式" class="headerlink" title="4、创建型模式"></a>4、创建型模式</h2><h3 id="4-2-工厂模式"><a href="#4-2-工厂模式" class="headerlink" title="4.2 工厂模式"></a>4.2 工厂模式</h3><h4 id="4-2-1-概述"><a href="#4-2-1-概述" class="headerlink" title="4.2.1 概述"></a>4.2.1 概述</h4><p>需求：设计一个咖啡店点餐系统。</p>
 <p>设计一个咖啡类（Coffee），并定义其两个子类（美式咖啡【AmericanCoffee】和拿铁咖啡 【LatteCoffee】）；再设计一个咖啡店类（CoffeeStore），咖啡店具有点咖啡的功能。</p>
 <p>具体类的设计如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220531203539953.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220531203539953.png"></p>
 <p>在java中，万物皆对象，这些对象都需要创建，如果创建的时候直接new该对象，就会对该对象耦合严 重，假如我们要更换对象，所有new对象的地方都需要修改一遍，这显然违背了软件设计的开闭原则。 如果我们使用工厂来生产对象，我们就只和工厂打交道就可以了，彻底和对象解耦，如果要更换对象， 直接在工厂里更换该对象即可，达到了与对象解耦的目的；所以说，工厂模式最大的优点就是：<strong>解耦。</strong></p>
 <p>在本教程中会介绍三种工厂的使用</p>
 <ul>
@@ -1411,7 +1411,7 @@ ClassNotFoundException<span class="token punctuation">{</span>
 <li>具体工厂 ：提供了创建产品的方法，调用者通过该方法来获取产品。</li>
 </ul>
 <h5 id="4-2-2-2-实现"><a href="#4-2-2-2-实现" class="headerlink" title="4.2.2.2 实现"></a>4.2.2.2 实现</h5><p>现在使用简单工厂对上面案例进行改进，类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220531210545935.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220531210545935.png"></p>
 <p>工厂类代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SimpleCoffeeFactory</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> Coffee <span class="token function">createCoffee</span><span class="token punctuation">(</span>String type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1459,7 +1459,7 @@ ClassNotFoundException<span class="token punctuation">{</span>
 </li>
 </ul>
 <h5 id="4-2-3-3-实现"><a href="#4-2-3-3-实现" class="headerlink" title="4.2.3.3 实现"></a>4.2.3.3 实现</h5><p>使用工厂方法模式对上例进行改进，类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220614113530001.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220614113530001.png"></p>
 <p>代码如下：</p>
 <p>抽象工厂：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">CoffeeFactory</span> <span class="token punctuation">{</span>
@@ -1509,8 +1509,8 @@ ClassNotFoundException<span class="token punctuation">{</span>
 <h4 id="4-2-4-抽象工厂模式"><a href="#4-2-4-抽象工厂模式" class="headerlink" title="4.2.4 抽象工厂模式"></a>4.2.4 抽象工厂模式</h4><p>前面介绍的工厂方法模式中考虑的是一类产品的生产，如畜牧场只养动物、电视机厂只生产电视机、传 智播客只培养计算机软件专业的学生等。</p>
 <p>这些工厂只生产同种类产品，同种类产品称为同等级产品，也就是说：工厂方法模式只考虑生产同等级 的产品，但是在现实生活中许多工厂是综合型的工厂，能生产多等级（种类） 的产品，如电器厂既生 产电视机又生产洗衣机或空调，大学既有软件专业又有生物专业等。</p>
 <p>本节要介绍的抽象工厂模式将考虑多等级产品的生产，将同一个具体工厂所生产的位于不同等级的一组 产品称为一个产品族，下图所示横轴是产品等级，也就是同一类产品；纵轴是产品族，也就是同一品牌 的产品，同一品牌的产品产自同一个工厂。</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220614152045184.png"></p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220614152640293.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220614152045184.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220614152640293.png"></p>
 <h5 id="4-2-4-1-概念"><a href="#4-2-4-1-概念" class="headerlink" title="4.2.4.1 概念"></a>4.2.4.1 概念</h5><p>是一种为访问类提供一个创建一组相关或相互依赖对象的接口，且访问类无须指定所要产品的具体类就 能得到同族的不同等级的产品的模式结构。</p>
 <p>抽象工厂模式是工厂方法模式的升级版本，工厂方法模式只生产一个等级的产品，而抽象工厂模式可生 产多个等级的产品。</p>
 <h5 id="4-2-4-2-结构"><a href="#4-2-4-2-结构" class="headerlink" title="4.2.4.2 结构"></a>4.2.4.2 结构</h5><p>抽象工厂模式的主要角色如下：</p>
@@ -1525,7 +1525,7 @@ ClassNotFoundException<span class="token punctuation">{</span>
 </li>
 </ul>
 <h5 id="4-2-4-2-实现"><a href="#4-2-4-2-实现" class="headerlink" title="4.2.4.2 实现"></a>4.2.4.2 实现</h5><p>现咖啡店业务发生改变，不仅要生产咖啡还要生产甜点，如提拉米苏、抹茶慕斯等，要是按照工厂方法 模式，需要定义提拉米苏类、抹茶慕斯类、提拉米苏工厂、抹茶慕斯工厂、甜点工厂类，很容易发生类 爆炸情况。其中拿铁咖啡、美式咖啡是一个产品等级，都是咖啡；提拉米苏、抹茶慕斯也是一个产品等 级；拿铁咖啡和提拉米苏是同一产品族（也就是都属于意大利风味），美式咖啡和抹茶慕斯是同一产品 族（也就是都属于美式风味）。所以这个案例可以使用抽象工厂模式实现。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220615153941089.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220615153941089.png"></p>
 <p>代码如下：</p>
 <p>抽象工厂：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">DessertFactory</span> <span class="token punctuation">{</span>
@@ -1621,7 +1621,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <span class="token punctuation">}</span>
 </code></pre>
 <p>使用迭代器遍历集合，获取集合中的元素。而单列集合获取迭代器的方法 就使用到了工厂方法模式。我们看通过类图看看结构：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220615170848649.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220615170848649.png"></p>
 <p>Collection接口是抽象工厂类，ArrayList是具体的工厂类；Iterator接口是抽象商品类， ArrayList类中的Iter内部类是具体的商品类。在具体的工厂类中iterator()方法创建具体的商品 类的对象。</p>
 <blockquote>
 <p>另：</p>
@@ -1636,7 +1636,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <li>访问类：使用具体原型类中的 clone() 方法来复制新的对象。</li>
 </ul>
 <p>接口类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220615172539866.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220615172539866.png"></p>
 <h4 id="4-3-3-实现"><a href="#4-3-3-实现" class="headerlink" title="4.3.3 实现"></a>4.3.3 实现</h4><p>原型模式的克隆分为浅克隆和深克隆。</p>
 <blockquote>
 <p>浅克隆：创建一个新对象，新对象的属性和原来对象完全相同，对于非基本类型属性，仍指向原 有属性所指向的对象的内存地址。</p>
@@ -1669,7 +1669,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <h4 id="4-3-4-案例"><a href="#4-3-4-案例" class="headerlink" title="4.3.4 案例"></a>4.3.4 案例</h4><p><strong>用原型模式生成“三好学生”奖状</strong></p>
 <p>同一学校的“三好学生”奖状除了获奖人姓名不同，其他都相同，可以使用原型模式复制多个“三好学 生”奖状出来，然后在修改奖状上的名字即可。</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220617164124604.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220617164124604.png"></p>
 <p>代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//奖状类</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Citation</span> <span class="token keyword">implements</span> <span class="token class-name">Cloneable</span> <span class="token punctuation">{</span>
@@ -1832,11 +1832,11 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <li>指挥者类（Director）：调用具体建造者来创建复杂对象的各个部分，在指导者中不涉及具体产 品的信息，只负责保证对象各部分完整创建或按某种顺序创建。</li>
 </ul>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220619161526768.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220619161526768.png"></p>
 <h5 id="4-4-3-实例"><a href="#4-4-3-实例" class="headerlink" title="4.4.3 实例"></a>4.4.3 实例</h5><p><strong>创建共享单车</strong></p>
 <p>生产自行车是一个复杂的过程，它包含了车架，车座等组件的生产。而车架又有碳纤维，铝合金等材质 的，车座有橡胶，真皮等材质。对于自行车的生产就可以使用建造者模式。</p>
 <p>这里Bike是产品，包含车架，车座等组件；Builder是抽象建造者，MobikeBuilder 和 OfoBuilder是具体的建造者；Director是指挥者。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220619162638431.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220619162638431.png"></p>
 <p>代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//自行车类</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Bike</span> <span class="token punctuation">{</span>
@@ -2109,7 +2109,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 </ul>
 <h4 id="5-1-3-静态代理"><a href="#5-1-3-静态代理" class="headerlink" title="5.1.3 静态代理"></a>5.1.3 静态代理</h4><p>【例】火车站卖票</p>
 <p>如果要买火车票的话，需要去火车站买票，坐车到火车站，排队等一系列的操作，显然比较麻烦。而火 车站在多个地方都有代售点，我们去代售点买票就方便很多了。这个例子其实就是典型的代理模式，火 车站是目标对象，代售点是代理对象。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220619201841458.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220619201841458.png"></p>
 <p>代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//卖票接口</span>
 <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">SellTickets</span> <span class="token punctuation">{</span>
@@ -2415,7 +2415,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <p>【例】读卡器</p>
 <p>现有一台电脑只能读取SD卡，而要读取TF卡中的内容的话就需要使用到适配器模式。创建一个读卡 器，将TF卡中的内容读取出来。</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220622201856286.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220622201856286.png"></p>
 <p>代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//SD卡的接口</span>
     <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">SDCard</span> <span class="token punctuation">{</span>
@@ -2498,7 +2498,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <h4 id="5-2-4-对象适配器模式"><a href="#5-2-4-对象适配器模式" class="headerlink" title="5.2.4 对象适配器模式"></a>5.2.4 对象适配器模式</h4><p>实现方式：对象适配器模式可釆用将现有组件库中已经实现的组件引入适配器类中，该类同时实现当前 系统的业务接口。</p>
 <p>【例】读卡器</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220622201856286.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220622201856286.png"></p>
 <p>代码如下：</p>
 <p>类适配器模式的代码，我们只需要修改适配器类（SDAdapterTF）和测试类。</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//创建适配器对象（SD兼容TF）</span>
@@ -2551,7 +2551,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <span class="token punctuation">}</span>
 </code></pre>
 <p>如上代码中的sd（StreamDecoder类对象），在Sun的JDK实现中，实际的方法实现是对 sun.nio.cs.StreamDecoder类的同名方法的调用封装。类结构图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220622212945845.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220622212945845.png"></p>
 <p>从上图可以看出：</p>
 <ul>
 <li>InputStreamReader是对同样实现了Reader的StreamDecoder的封装。</li>
@@ -2580,7 +2580,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 </ul>
 <h4 id="5-3-3-案例"><a href="#5-3-3-案例" class="headerlink" title="5.3.3 案例"></a>5.3.3 案例</h4><p>我们使用装饰者模式对快餐店案例进行改进，体会装饰者模式的精髓。</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623094721632.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623094721632.png"></p>
 <p>代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//快餐接口</span>
 <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">FastFood</span> <span class="token punctuation">{</span>
@@ -2747,7 +2747,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <span class="token punctuation">}</span>
 </code></pre>
 <p>使用起来感觉确实像是装饰者模式，接下来看它们的结构：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623111007742.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623111007742.png"></p>
 <blockquote>
 <p><font color="red">小结：</font></p>
 <p>BufferedWriter使用装饰者模式对Writer子实现类进行了增强，添加了缓冲区，提高了写数 据的效率。</p>
@@ -2769,7 +2769,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 </li>
 </ul>
 <h3 id="5-4-桥接模式"><a href="#5-4-桥接模式" class="headerlink" title="5.4 桥接模式"></a>5.4 桥接模式</h3><h4 id="5-4-1-概述"><a href="#5-4-1-概述" class="headerlink" title="5.4.1 概述"></a>5.4.1 概述</h4><p>现在有一个需求，需要创建不同的图形，并且每个图形都有可能会有不同的颜色。我们可以利用继承的 方式来设计类的关系：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623112924549.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623112924549.png"></p>
 <p>我们可以发现有很多的类，假如我们再增加一个形状或再增加一种颜色，就需要创建更多的类。</p>
 <p>试想，在一个有多种可能会变化的维度的系统中，用继承方式会造成类爆炸，扩展起来不灵活。每次在 一个维度上新增一个具体实现都要增加多个子类。为了更加灵活的设计系统，我们此时可以考虑使用桥 接模式。</p>
 <p><strong>定义：</strong></p>
@@ -2784,7 +2784,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <h4 id="5-4-3-案例"><a href="#5-4-3-案例" class="headerlink" title="5.4.3 案例"></a>5.4.3 案例</h4><p>【例】视频播放器</p>
 <p>需要开发一个跨平台视频播放器，可以在不同操作系统平台（如Windows、Mac、Linux等）上播放多 种格式的视频文件，常见的视频格式包括RMVB、AVI、WMV等。该播放器包含了两个维度，适合使用桥 接模式。</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623113617135.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623113617135.png"></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//视频文件</span>
 <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">VideoFile</span> <span class="token punctuation">{</span>
     <span class="token keyword">void</span> <span class="token function">decode</span><span class="token punctuation">(</span>String fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -2859,7 +2859,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <p><strong>定义：</strong></p>
 <p>又名门面模式，是一种通过为多个复杂的子系统提供一个一致的接口，而使这些子系统更加容易被访问 的模式。该模式对外有一个统一接口，外部应用程序不用关心内部子系统的具体的细节，这样会大大降 低应用程序的复杂度，提高了程序的可维护性。</p>
 <p>外观（Facade）模式是“迪米特法则”的典型应用</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623153612791.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623153612791.png"></p>
 <h4 id="5-5-2-结构"><a href="#5-5-2-结构" class="headerlink" title="5.5.2 结构"></a>5.5.2 结构</h4><p>外观（Facade）模式包含以下主要角色：</p>
 <ul>
 <li>外观（Facade）角色：为多个子系统对外提供一个共同的接口。</li>
@@ -2867,7 +2867,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 </ul>
 <h4 id="5-5-3-案例"><a href="#5-5-3-案例" class="headerlink" title="5.5.3 案例"></a>5.5.3 案例</h4><p>【例】智能家电控制</p>
 <p>小明的爷爷已经60岁了，一个人在家生活：每次都需要打开灯、打开电视、打开空调；睡觉时关闭灯、 关闭电视、关闭空调；操作起来都比较麻烦。所以小明给爷爷买了智能音箱，可以通过语音直接控制这 些智能家电的开启和关闭。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623153941460.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623153941460.png"></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//灯类</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Light</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">on</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -2965,7 +2965,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 </ul>
 <h4 id="5-5-5-源码解析"><a href="#5-5-5-源码解析" class="headerlink" title="5.5.5 源码解析"></a>5.5.5 源码解析</h4><p>使用tomcat作为web容器时，接收浏览器发送过来的请求，tomcat会将请求信息封装成 ServletRequest对象，如下图①处对象。但是大家想想ServletRequest是一个接口，它还有一个 子接口HttpServletRequest，而我们知道该request对象肯定是一个HttpServletRequest对象 的子实现类对象，到底是哪个类的对象呢？可以通过输出request对象，我们就会发现是一个名为 RequestFacade的类的对象。</p>
 <p>RequestFacade类就使用了外观模式。先看结构图：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623161647580.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623161647580.png"></p>
 <p><strong>为什么在此处使用外观模式呢？</strong></p>
 <p>定义 RequestFacade 类，分别实现 ServletRequest ，同时定义私有成员变量 Request ，并 且方法的实现调用 Request 的实现。然后，将 RequestFacade上转为 ServletRequest 传给 servlet 的 service 方法，这样即使在 servlet 中被下转为 RequestFacade ，也不能访问 私有成员变量对象中的方法。既用了 Request ，又能防止其中方法被不合理的访问。</p>
 <h3 id="5-6-组合模式"><a href="#5-6-组合模式" class="headerlink" title="5.6 组合模式"></a>5.6 组合模式</h3><h4 id="5-6-1-概述"><a href="#5-6-1-概述" class="headerlink" title="5.6.1 概述"></a>5.6.1 概述</h4><p><strong>定义：</strong></p>
@@ -2978,9 +2978,9 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 </ul>
 <h4 id="5-6-3-案例实现"><a href="#5-6-3-案例实现" class="headerlink" title="5.6.3 案例实现"></a>5.6.3 案例实现</h4><p>【例】软件菜单</p>
 <p>我们在访问别的一些管理系统时，经常可以看到类似的菜单。一个菜单可以包含菜单项（菜单 项是指不再包含其他内容的菜单条目），也可以包含带有其他菜单项的菜单，因此使用组合模式描述菜 单就很恰当，我们的需求是针对一个菜单，打印出其包含的所有菜单以及菜单项的名称。</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623164044079.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623164044079.png"></p>
 <p>要实现该案例，我们先画出类图：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623164315536.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623164315536.png"></p>
 <p><strong>代码实现：</strong></p>
 <p>不管是菜单还是菜单项，都应该继承自统一的接口，这里姑且将这个统一的接口称为菜单组件。</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//菜单组件 不管是菜单还是菜单项，都应该继承该类</span>
@@ -3080,7 +3080,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <p>在安全组合模式中，在抽象构件角色中没有声明任何用于管理成员对象的方法，而是在树枝节点 Menu 类中声明并实现这些方法。安全组合模式的缺点是不够透明，因为叶子构件和容器构件具 有不同的方法，且容器构件中那些用于管理成员对象的方法没有在抽象构件类中定义，因此客户端 不能完全针对抽象编程，必须有区别地对待叶子构件和容器构件。</p>
 </li>
 </ul>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623202626838.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623202626838.png"></p>
 <h4 id="5-6-5-优点"><a href="#5-6-5-优点" class="headerlink" title="5.6.5 优点"></a>5.6.5 优点</h4><ul>
 <li>组合模式可以清楚地定义分层次的复杂对象，表示对象的全部或部分层次，它让客户端忽略了层次 的差异，方便对整个层次结构进行控制。</li>
 <li>客户端可以一致地使用一个组合结构或其中单个对象，不必关心处理的是单个对象还是整个组合结 构，简化了客户端代码。</li>
@@ -3105,7 +3105,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <h4 id="5-7-3-案例实现"><a href="#5-7-3-案例实现" class="headerlink" title="5.7.3 案例实现"></a>5.7.3 案例实现</h4><p>【例】俄罗斯方块</p>
 <p>众所周知的俄罗斯方块中的一个个方块，如果在俄罗斯方块这个游戏中，每个不同的方块 都是一个实例对象，这些对象就要占用很多的内存空间，下面利用享元模式进行实现。</p>
 <p><strong>类图：</strong></p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623204425771.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220623204425771.png"></p>
 <p><strong>代码如下：</strong></p>
 <p>俄罗斯方块有不同的形状，我们可以对这些形状向上抽取出AbstractBox，用来定义共性的属性和行 为。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractBox</span> <span class="token punctuation">{</span>
@@ -3294,7 +3294,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 </ul>
 <h4 id="6-1-3-案例实现"><a href="#6-1-3-案例实现" class="headerlink" title="6.1.3 案例实现"></a>6.1.3 案例实现</h4><p>【例】炒菜</p>
 <p>炒菜的步骤是固定的，分为倒油、热油、倒蔬菜、倒调料品、翻炒等步骤。现通过模板方法模式来用代 码模拟。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220624185642361.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220624185642361.png"></p>
 <p>代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractClass</span> <span class="token punctuation">{</span>
 
@@ -3446,7 +3446,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 </ul>
 <h4 id="6-2-3-案例实现"><a href="#6-2-3-案例实现" class="headerlink" title="6.2.3 案例实现"></a>6.2.3 案例实现</h4><p>【例】促销活动</p>
 <p>一家百货公司在定年度的促销活动。针对不同的节日（春节、中秋节、圣诞节）推出不同的促销活动， 由促销员将促销活动展示给客户。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220624192218339.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220624192218339.png"></p>
 <p>代码如下：</p>
 <p>定义百货公司所有促销活动的共同接口</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Strategy</span> <span class="token punctuation">{</span>
@@ -3597,7 +3597,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <p>资深大厨： 就是接收者角色，真正命令执行的对象。</p>
 <p>订单： 命令中包含订单。</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220625091611244.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220625091611244.png"></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Command</span> <span class="token punctuation">{</span>
     <span class="token keyword">void</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//只需要定义一个统一的执行方法</span>
 <span class="token punctuation">}</span>
@@ -3788,7 +3788,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 </ul>
 <h4 id="6-4-3-案例实现"><a href="#6-4-3-案例实现" class="headerlink" title="6.4.3 案例实现"></a>6.4.3 案例实现</h4><p>现需要开发一个请假流程控制系统。请假一天以下的假只需要小组长同意即可；请假1天到3天的假还需 要部门经理同意；请求3天到7天还需要总经理同意才行。</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220625162828534.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220625162828534.png"></p>
 <p>代码如下：    </p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//请假条</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LeaveRequest</span> <span class="token punctuation">{</span>
@@ -4014,7 +4014,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 </ul>
 <h3 id="6-5-状态模式"><a href="#6-5-状态模式" class="headerlink" title="6.5 状态模式"></a>6.5 状态模式</h3><h4 id="6-5-1-概述"><a href="#6-5-1-概述" class="headerlink" title="6.5.1 概述"></a>6.5.1 概述</h4><p>【例】通过按钮来控制一个电梯的状态，一个电梯有开门状态，关门状态，停止状态，运行状态。每一 种状态改变，都有可能要根据其他状态来更新处理。例如，如果电梯门现在处于运行时状态，就不能进 行开门操作，而如果电梯门是停止状态，就可以执行开门操作。</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220625203023709.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220625203023709.png"></p>
 <p><strong>定义：</strong></p>
 <p>对有状态的对象，把复杂的“判断逻辑”提取到不同的状态对象中，允许状态对象在其内部状态发生改变 时改变其行为。</p>
 <h4 id="6-5-2-结构"><a href="#6-5-2-结构" class="headerlink" title="6.5.2 结构"></a>6.5.2 结构</h4><p>状态模式包含以下主要角色。</p>
@@ -4024,7 +4024,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <li>具体状态（Concrete State）角色：实现抽象状态所对应的行为。</li>
 </ul>
 <h4 id="6-5-3-案例实现"><a href="#6-5-3-案例实现" class="headerlink" title="6.5.3 案例实现"></a>6.5.3 案例实现</h4><p>对上述电梯的案例使用状态模式进行改进。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220626092239175.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220626092239175.png"></p>
 <p>代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//抽象状态类</span>
 <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">LiftState</span> <span class="token punctuation">{</span>
@@ -4226,7 +4226,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <h4 id="6-6-3-案例实现"><a href="#6-6-3-案例实现" class="headerlink" title="6.6.3 案例实现"></a>6.6.3 案例实现</h4><p>【例】微信公众号</p>
 <p>在使用微信公众号时，大家都会有这样的体验，当你关注的公众号中有新内容更新的话，它就会推送给 关注公众号的微信用户端。我们使用观察者模式来模拟这样的场景，微信用户就是观察者，微信公众号 是被观察者，有多个的微信用户关注了程序猿这个公众号。</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220626151245722.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220626151245722.png"></p>
 <p>代码如下：</p>
 <p>定义抽象观察者类，里面定义一个更新的方法</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Observer</span> <span class="token punctuation">{</span>
@@ -4382,7 +4382,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <h4 id="6-7-3-案例实现"><a href="#6-7-3-案例实现" class="headerlink" title="6.7.3 案例实现"></a>6.7.3 案例实现</h4><p>【例】租房</p>
 <p>现在租房基本都是通过房屋中介，房主将房屋托管给房屋中介，而租房者从房屋中介获取房屋信息。房 屋中介充当租房者与房屋所有者之间的中介者。</p>
 <p>类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220626164323416.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220626164323416.png"></p>
 <p>代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//抽象中介者</span>
 <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Mediator</span> <span class="token punctuation">{</span>
@@ -4500,7 +4500,7 @@ latte<span class="token operator">=</span>com.itheima.pattern.factory.config_fac
 <li>具体迭代器（Concretelterator）角色：实现抽象迭代器接口中所定义的方法，完成对聚合对 象的遍历，记录遍历的当前位置。</li>
 </ul>
 <h4 id="6-8-3-案例实现"><a href="#6-8-3-案例实现" class="headerlink" title="6.8.3 案例实现"></a>6.8.3 案例实现</h4><p>【例】定义一个可以存储学生对象的容器对象，将遍历该容器的功能交由迭代器实现，涉及到的类如 下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220626174528267.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220626174528267.png"></p>
 <p>代码如下：</p>
 <p>定义迭代器接口，声明hasNext、next方法</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">StudentIterator</span> <span class="token punctuation">{</span>
@@ -4635,7 +4635,7 @@ Iterator<span class="token operator">&lt;</span>String<span class="token operato
 <li>具体元素角色：宠物狗、宠物猫</li>
 <li>结构对象角色：主人家</li>
 </ul>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220626183828952.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220626183828952.png"></p>
 <p>代码如下：</p>
 <p>创建抽象访问者接口</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
@@ -4889,7 +4889,7 @@ Iterator<span class="token operator">&lt;</span>String<span class="token operato
 <li>“黑箱”备忘录模式</li>
 </ul>
 <h5 id="6-10-3-1-“白箱”备忘录模式"><a href="#6-10-3-1-“白箱”备忘录模式" class="headerlink" title="6.10.3.1 “白箱”备忘录模式"></a>6.10.3.1 “白箱”备忘录模式</h5><p>备忘录角色对任何对象都提供一个接口，即宽接口，备忘录角色的内部所存储的状态就对所有对象公 开。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627151330066.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627151330066.png"></p>
 <p>代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//游戏角色类</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GameRole</span> <span class="token punctuation">{</span>
@@ -5014,7 +5014,7 @@ Iterator<span class="token operator">&lt;</span>String<span class="token operato
 </blockquote>
 <h5 id="6-10-3-2-“黑箱”备忘录模式"><a href="#6-10-3-2-“黑箱”备忘录模式" class="headerlink" title="6.10.3.2 “黑箱”备忘录模式"></a>6.10.3.2 “黑箱”备忘录模式</h5><p>备忘录角色对发起人对象提供一个宽接口，而为其他对象提供一个窄接口。在Java语言中，实现双重 接口的办法就是将<strong>备忘录</strong>类设计成<strong>发起人类</strong>的内部成员类。</p>
 <p>将<code>RoleStateMemento</code>设为<code>GameRole</code>的内部类，从而将<code>RoleStateMemento</code>对象封装在<code>GameRole</code>里面；在外面提供一个标识接口<code>Memento</code>给<code>RoleStateCaretaker</code>及其他对象使用。 这样<code>GameRole</code>类看到的是 <code>RoleStateMemento</code>所有的接口，而<code>RoleStateCaretaker</code>及其他对 象看到的仅仅是标识接口<code>Memento</code>所暴露出来的接口，从而维护了封装型。类图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627155037897.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627155037897.png"></p>
 <p>代码如下：</p>
 <p>窄接口<code>Memento</code>，这是一个标识接口，因此没有定义出任何的方法</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Memento</span> <span class="token punctuation">{</span>
@@ -5195,7 +5195,7 @@ value ::<span class="token operator">=</span> integer
 <p><strong>抽象语法树：</strong></p>
 <p>在计算机科学中，抽象语法树（AbstractSyntaxTree，AST），或简称语法树（Syntax tree）， 是源代码语法结构的一种抽象表示。它以树状的形式表现编程语言的语法结构，树上的每个节点都表示 源代码中的一种结构。</p>
 <p>用树形来表示符合文法规则的句子。</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627163106843.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627163106843.png"></p>
 <h4 id="6-11-2-结构"><a href="#6-11-2-结构" class="headerlink" title="6.11.2 结构"></a>6.11.2 结构</h4><ul>
 <li>抽象表达式（Abstract Expression）角色：定义解释器的接口，约定解释器的解释操作，主 要包含解释方法 interpret()。</li>
 <li>终结符表达式（Terminal Expression）角色：是抽象表达式的子类，用来实现文法中与终结 符相关的操作，文法中的每一个终结符都有一个具体终结表达式与之相对应。</li>
@@ -5204,7 +5204,7 @@ value ::<span class="token operator">=</span> integer
 <li>客户端（Client）：主要任务是将需要分析的句子或表达式转换成使用解释器对象描述的抽象语 法树，然后调用解释器的解释方法，当然也可以通过环境角色间接访问解释器的解释方法。</li>
 </ul>
 <h4 id="6-11-3-案例实现"><a href="#6-11-3-案例实现" class="headerlink" title="6.11.3 案例实现"></a>6.11.3 案例实现</h4><p>【例】设计实现加减法的软件</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627163610071.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627163610071.png"></p>
 <p>代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//抽象角色AbstractExpression</span>
 <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractExpression</span> <span class="token punctuation">{</span>
@@ -5415,7 +5415,7 @@ value ::<span class="token operator">=</span> integer
 <p>上面三点体现了Spring框架的IOC（Inversion of Control）和DI（Dependency Injection, DI）</p>
 <h3 id="7-2-spring核心功能结构"><a href="#7-2-spring核心功能结构" class="headerlink" title="7.2 spring核心功能结构"></a>7.2 spring核心功能结构</h3><p>Spring大约有20个模块，由1300多个不同的文件构成。这些模块可以分为:</p>
 <p>核心容器、AOP和设备支持、数据访问与集成、Web组件、通信报文和集成测试等，下面是 Spring 框架的总体架构图：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627181214191.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627181214191.png"></p>
 <p>核心容器由 beans、core、context 和 expression（Spring Expression Language， SpEL）4个模块组成。</p>
 <ul>
 <li><p>spring-beans和spring-core模块是Spring框架的核心模块，包含了控制反转（Inversion of Control，IOC）和依赖注入（Dependency Injection，DI）。BeanFactory使用控制 反转对应用程序的配置和依赖性规范与实际的应用程序代码进行了分离。BeanFactory属于延时 加载，也就是说在实例化容器对象后并不会自动实例化Bean，只有当Bean被使用时， BeanFactory才会对该 Bean 进行实例化与依赖关系的装配。</p>
@@ -5442,7 +5442,7 @@ value ::<span class="token operator">=</span> integer
 <li>bean对象之间的依赖关系在配置文件中体现，并由spring完成。</li>
 </ul>
 <h3 id="7-3-Spring-IOC相关接口分析"><a href="#7-3-Spring-IOC相关接口分析" class="headerlink" title="7.3 Spring IOC相关接口分析"></a>7.3 Spring IOC相关接口分析</h3><h4 id="7-3-1-BeanFactory解析"><a href="#7-3-1-BeanFactory解析" class="headerlink" title="7.3.1 BeanFactory解析"></a>7.3.1 BeanFactory解析</h4><p>Spring中Bean的创建是典型的工厂模式，这一系列的Bean工厂，即IoC容器，为开发者管理对象之间 的依赖关系提供了很多便利和基础服务，在Spring中有许多IoC容器的实现供用户选择，其相互关系 如下图所示。</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627183514102.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627183514102.png"></p>
 <p>其中，BeanFactory作为最顶层的一个接口，定义了IoC容器的基本功能规范，BeanFactory有三个 重要的子接口：ListableBeanFactory、HierarchicalBeanFactory和 AutowireCapableBeanFactory。但是从类图中我们可以发现最终的默认实现类是 DefaultListableBeanFactory，它实现了所有的接口。</p>
 <p>那么为何要定义这么多层次的接口呢？</p>
 <p>每个接口都有它的使用场合，主要是为了区分在Spring内部操作过程中对象的传递和转化，对对象的 数据访问所做的限制。例如，</p>
@@ -5479,7 +5479,7 @@ value ::<span class="token operator">=</span> integer
 </code></pre>
 <p>在BeanFactory里只对IoC容器的基本行为做了定义，根本不关心你的Bean是如何定义及怎样加载 的。正如我们只关心能从工厂里得到什么产品，不关心工厂是怎么生产这些产品的。</p>
 <p>BeanFactory有一个很重要的子接口，就是ApplicationContext接口，该接口主要来规范容器中 的bean对象是非延时加载，即在创建容器对象的时候就对象bean进行初始化，并存储到一个容器中。</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627184504478.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627184504478.png"></p>
 <p>要知道工厂是如何产生对象的，我们需要看具体的IoC容器实现，Spring提供了许多IoC容器实现，比 如：</p>
 <ul>
 <li>ClasspathXmlApplicationContext : 根据类路径加载xml配置文件，并创建IOC容器对 象。</li>
@@ -5493,9 +5493,9 @@ bean标签还有很多属性：
     scope、init-method、destory-method等。
 </code></pre>
 <p>其继承体系如下图所示。</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627184938952.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627184938952.png"></p>
 <h4 id="7-3-3-BeanDefinitionReader解析"><a href="#7-3-3-BeanDefinitionReader解析" class="headerlink" title="7.3.3 BeanDefinitionReader解析"></a>7.3.3 BeanDefinitionReader解析</h4><p>Bean的解析过程非常复杂，功能被分得很细，因为这里需要被扩展的地方很多，必须保证足够的灵活 性，以应对可能的变化。Bean的解析主要就是对Spring配置文件的解析。这个解析过程主要通过 BeanDefinitionReader来完成，看看Spring中BeanDefinitionReader的类结构图，如下图所示。</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627185220055.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627185220055.png"></p>
 <p>看看BeanDefinitionReader接口定义的功能来理解它具体的作用：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">BeanDefinitionReader</span> <span class="token punctuation">{</span>
     
@@ -5535,7 +5535,7 @@ bean标签还有很多属性：
 <span class="token punctuation">}</span>
 </code></pre>
 <p>继承结构图如下：</p>
-<p><img src="/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627203227407.png"></p>
+<p><img src="/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/image-20220627203227407.png"></p>
 <p>从上面类图可以看到BeanDefinitionRegistry接口的子实现类主要有以下几个：</p>
 <ul>
 <li><p>DefaultListableBeanFactory</p>
@@ -5931,7 +5931,7 @@ bean标签还有很多属性：
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://loveQevol.github.io/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">http://loveQevol.github.io/2022/05/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</a>
+                    <a href="http://loveQevol.github.io/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">http://loveQevol.github.io/2022/06/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -6148,6 +6148,55 @@ bean标签还有很多属性：
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/20122/04/23/TCP%E5%8D%8F%E8%AE%AE/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/16.jpg" class="responsive-img" alt="TCP协议">
+                        
+                        <span class="card-title">TCP协议</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>20122-04-23
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/category/%E9%9D%A2%E8%AF%95/" class="post-category">
+                                    面试
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                        <span class="chip bg-color">面试</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2022/06/02/Go%E5%85%A5%E9%97%A8/">
                     <div class="card-image">
                         
@@ -6164,9 +6213,9 @@ bean标签还有很多属性：
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -6184,55 +6233,6 @@ bean标签还有很多属性：
                     
                     <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
                         <span class="chip bg-color">Go语言</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/05/24/%E8%93%9D%E6%A1%A5%E6%9D%AF2022/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="蓝桥杯2022">
-                        
-                        <span class="card-title">蓝桥杯2022</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-24
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/category/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
                     </a>
                     
                 </div>
