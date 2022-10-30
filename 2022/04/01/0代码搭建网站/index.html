@@ -1,0 +1,1535 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="0代快速码搭建网站, 谦谦的个人博客">
+    <meta name="description" content="网站搭建安装hexoHexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
+前提安装 Hexo 相当简单，只需要先安装下列应用程序即可：
+
+Node">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>0代快速码搭建网站 | 谦谦的个人博客</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">谦谦的个人博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">谦谦的个人博客</div>
+        <div class="logo-desc">
+            
+            这唱不尽的风花雪月，只因人间迟早要离别
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">0代快速码搭建网站</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/web/">
+                                <span class="chip bg-color">web</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-04-01
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    13 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="网站搭建"><a href="#网站搭建" class="headerlink" title="网站搭建"></a>网站搭建</h2><h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
+<ul>
+<li>Node.js (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)</li>
+<li>Git<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli
+</code></pre>
+<p>安装以后，可以使用以下两种方式执行 Hexo：</p>
+<ol>
+<li><code>npx hexo</code></li>
+<li>将 Hexo 所在的目录下的 <code>node_modules</code> 添加到环境变量之中即可直接使用 <code>hexo</code>：</li>
+</ol>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">'PATH="<span class="token variable">$PATH</span>:./node_modules/.bin"'</span> <span class="token operator">>></span> ~/.profile
+</code></pre>
+<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
+<pre class=" language-bash"><code class="language-bash">$ hexo init <span class="token operator">&lt;</span>folder<span class="token operator">></span>
+$ <span class="token function">cd</span> <span class="token operator">&lt;</span>folder<span class="token operator">></span>
+$ <span class="token function">npm</span> <span class="token function">install</span>
+</code></pre>
+<p>新建完成后，指定文件夹的目录如下：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">.</span>
+├── _config.yml
+├── package.json
+├── scaffolds
+├── <span class="token function">source</span>
+<span class="token operator">|</span>   ├── _drafts
+<span class="token operator">|</span>   └── _posts
+└── themes
+</code></pre>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>此时，通过 <code>hexo s</code> 命令即可在本地启动您的博客站点了。</p>
+<pre class=" language-bash"><code class="language-bash">~ hexo s
+INFO  Start processing
+INFO  Hexo is running at http://localhost:4000 <span class="token keyword">.</span> Press Ctrl+C to stop.
+</code></pre>
+<p>接下来将安装主题，配置博客托管平台，实现一键发布并刷新<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=CDN&spm=1001.2101.3001.7020">CDN</a>缓存。</p>
+<h3 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h3><h4 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h4><p>hexo-theme-matery 是一个采用 Material Design 和响应式设计的 Hexo 博客主题，点击 这里 可以查看示例效果。点击 这里 下载 master 分支的最新稳定版的代码，解压缩后，将 hexo-theme-matery 的文件夹复制到 Hexo 的 themes 文件夹中即可。</p>
+<h4 id="切换主题"><a href="#切换主题" class="headerlink" title="切换主题"></a>切换主题</h4><p>修改 Hexo 根目录下的 <code>_config.yml</code> 的 <code>theme</code> 的值：<code>theme: hexo-theme-matery</code></p>
+<h4 id="config-yml-文件的其它修改建议"><a href="#config-yml-文件的其它修改建议" class="headerlink" title="_config.yml 文件的其它修改建议:"></a><code>_config.yml</code> 文件的其它修改建议:</h4><ul>
+<li>请修改 _config.yml 的 url 的值为你的网站主 URL（如：<a target="_blank" rel="noopener" href="http://xxx.github.io)./">http://xxx.github.io）。</a></li>
+<li>建议修改两个 per_page 的分页条数值为 6 的倍数，如：12、18 等，这样文章列表在各个屏幕下都能较好的显示。</li>
+<li>如果是中文用户，则建议修改 language 的值为 zh-CN。</li>
+</ul>
+<h3 id="新建分类-categories-页"><a href="#新建分类-categories-页" class="headerlink" title="新建分类 categories 页"></a>新建分类 categories 页</h3><p><code>categories</code> 页是用来展示所有分类的页面，如果 <code>source</code> 目录下还没有 <code>categories/index.md</code> 文件，那么就需要新建一个，命令如下：</p>
+<pre class=" language-bash"><code class="language-bash">hexo new page <span class="token string">"categories"</span>
+</code></pre>
+<p>编辑你刚刚新建的页面文件 <code>/source/categories/index.md</code>，至少需要以下内容：</p>
+<pre class=" language-bash"><code class="language-bash">---
+title: categories
+date: 2018-09-30 17:25:30
+type: <span class="token string">"categories"</span>
+layout: <span class="token string">"categories"</span>
+---
+</code></pre>
+<h3 id="新建标签-tags-页"><a href="#新建标签-tags-页" class="headerlink" title="新建标签 tags 页"></a>新建标签 tags 页</h3><p><code>tags</code> 页是用来展示所有标签的页面，如果 <code>source</code> 目录下还没有 <code>tags/index.md</code> 文件，那么就需要新建一个，命令如下：</p>
+<pre class=" language-bash"><code class="language-bash">hexo new page <span class="token string">"tags"</span>
+</code></pre>
+<p>编辑刚刚新建的页面文件 <code>/source/tags/index.md</code>，至少需要以下内容：</p>
+<pre class=" language-bash"><code class="language-bash">---
+title: tags
+date: 2018-09-30 18:23:38
+type: <span class="token string">"tags"</span>
+layout: <span class="token string">"tags"</span>
+---
+</code></pre>
+<h3 id="新建关于我-about-页"><a href="#新建关于我-about-页" class="headerlink" title="新建关于我 about 页"></a>新建关于我 about 页</h3><p><code>about</code> 页是用来展示<strong>关于我和我的博客</strong>信息的页面，如果 <code>source</code> 目录下还没有 <code>about/index.md</code> 文件，那么就需要新建一个，命令如下：</p>
+<pre class=" language-bash"><code class="language-bash">---
+title: about
+date: 2018-09-30 17:25:30
+type: <span class="token string">"about"</span>
+layout: <span class="token string">"about"</span>
+---
+</code></pre>
+<h3 id="新建友情连接-friends-页（可选的）"><a href="#新建友情连接-friends-页（可选的）" class="headerlink" title="新建友情连接 friends 页（可选的）"></a>新建友情连接 friends 页（可选的）</h3><p><code>friends</code> 页是用来展示<strong>友情连接</strong>信息的页面，如果 <code>source</code> 目录下还没有 <code>friends/index.md</code> 文件，那么就需要新建一个，命令如下：</p>
+<pre class=" language-bash"><code class="language-bash">hexo new page <span class="token string">"friends"</span>
+</code></pre>
+<p>编辑刚刚新建的页面文件 <code>/source/friends/index.md</code>，至少需要以下内容：</p>
+<pre class=" language-bash"><code class="language-bash">---
+title: friends
+date: 2018-12-12 21:25:30
+type: <span class="token string">"friends"</span>
+layout: <span class="token string">"friends"</span>
+---
+</code></pre>
+<p>同时，在 <code>source</code> 目录下新建 <code>_data</code> 目录，在 <code>_data</code> 目录中新建 <code>friends.json</code> 文件，文件内容如下所示：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token string">"avatar"</span><span class="token keyword">:</span> <span class="token string">"https://www.lixl.cn/medias/avatar.jpg"</span>,
+    <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"悟尘记"</span>,
+    <span class="token string">"introduction"</span><span class="token keyword">:</span> <span class="token string">"人生就是一场修行，上善若水，厚德载物。"</span>,
+    <span class="token string">"url"</span><span class="token keyword">:</span> <span class="token string">"https://www.lixl.cn/"</span>,
+    <span class="token string">"title"</span><span class="token keyword">:</span> <span class="token string">"前去参观"</span>
+<span class="token punctuation">}</span>, <span class="token punctuation">{</span>
+    <span class="token string">"avatar"</span><span class="token keyword">:</span> <span class="token string">"https://wiki.hyperledger.org/download/attachments/2392069/fabric?version=1&amp;modificationDate=1540928132000&amp;api=v2"</span>,
+    <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"Fabric"</span>,
+    <span class="token string">"introduction"</span><span class="token keyword">:</span> <span class="token string">"A Blockchain Platform for the Enterprise"</span>,
+    <span class="token string">"url"</span><span class="token keyword">:</span> <span class="token string">"https://hyperledger-fabric.readthedocs.io/en/master/"</span>,
+    <span class="token string">"title"</span><span class="token keyword">:</span> <span class="token string">"前去学习"</span>
+<span class="token punctuation">}</span>, <span class="token punctuation">{</span>
+    <span class="token string">"avatar"</span><span class="token keyword">:</span> <span class="token string">"https://www.bootcdn.cn/assets/img/maoyun.svg"</span>,
+    <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"BootCDN"</span>,
+    <span class="token string">"introduction"</span><span class="token keyword">:</span> <span class="token string">"稳定、快速、免费的前端开源项目 CDN 加速服务。"</span>,
+    <span class="token string">"url"</span><span class="token keyword">:</span> <span class="token string">"https://www.bootcdn.cn/"</span>,
+    <span class="token string">"title"</span><span class="token keyword">:</span> <span class="token string">"前去加速"</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span>
+</code></pre>
+<h3 id="代码高亮"><a href="#代码高亮" class="headerlink" title="代码高亮"></a>代码高亮</h3><p>由于 Hexo 自带的代码高亮主题显示不好看，所以主题中使用到了 <a target="_blank" rel="noopener" href="https://github.com/ele828/hexo-prism-plugin">hexo-prism-plugin</a> 的 Hexo 插件来做代码高亮，安装命令如下：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> i -S hexo-prism-plugin
+</code></pre>
+<p>然后，修改 Hexo 根目录下 <code>_config.yml</code> 文件中 <code>highlight.enable</code> 的值为 <code>false</code>，并新增 <code>prism</code> 插件相关的配置，主要配置如下：</p>
+<pre class=" language-bash"><code class="language-bash">highlight:
+  enable: <span class="token boolean">false</span>
+
+prism_plugin:
+  mode: <span class="token string">'preprocess'</span>    <span class="token comment" spellcheck="true"># realtime/preprocess</span>
+  theme: <span class="token string">'tomorrow'</span>
+  line_number: <span class="token boolean">false</span>    <span class="token comment" spellcheck="true"># default false</span>
+  custom_css:
+</code></pre>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>本主题中还使用到了 <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search">hexo-generator-search</a> 的 Hexo 插件来做内容搜索，安装命令如下：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-generator-search --save
+</code></pre>
+<p>在 Hexo 根目录下的 <code>_config.yml</code> 文件中，新增以下的配置项：</p>
+<pre class=" language-bash"><code class="language-bash">search:
+  path: search.xml
+  field: post
+</code></pre>
+<h3 id="修改页脚"><a href="#修改页脚" class="headerlink" title="修改页脚"></a>修改页脚</h3><p>页脚信息可能需要做定制化修改，而且它不便于做成配置信息，所以可能需要你自己去再修改和加工。修改的地方在主题文件的 <code>/layout/_partial/footer.ejs</code> 文件中，包括站点、使用的主题、访问量等。</p>
+<h3 id="修改社交链接"><a href="#修改社交链接" class="headerlink" title="修改社交链接"></a>修改社交链接</h3><p>在主题的 <code>_config.yml</code> 文件中，默认支持 <code>QQ</code>、<code>GitHub</code> 和邮箱的配置，可以在主题文件的 <code>/layout/_partial/social-link.ejs</code> 文件中，新增、修改需要的社交链接地址，增加链接可参考如下代码：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token operator">&lt;</span>a href<span class="token operator">=</span><span class="token string">"https://github.com/blinkfox"</span> class<span class="token operator">=</span><span class="token string">"tooltipped"</span> target<span class="token operator">=</span><span class="token string">"_blank"</span> data-tooltip<span class="token operator">=</span><span class="token string">"访问我的GitHub"</span> data-position<span class="token operator">=</span><span class="token string">"top"</span> data-delay<span class="token operator">=</span><span class="token string">"50"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>i class<span class="token operator">=</span><span class="token string">"fa fa-github"</span><span class="token operator">></span><span class="token operator">&lt;</span>/i<span class="token operator">></span>
+<span class="token operator">&lt;</span>/a<span class="token operator">></span>
+</code></pre>
+<p>其中，社交图标（如：<code>fa-github</code>）可以在 <a target="_blank" rel="noopener" href="https://fontawesome.com/icons">Font Awesome</a> 中搜索找到。以下是常用社交图标的标识，供参考：</p>
+<ul>
+<li>Facebook: fa-facebook</li>
+<li>Twitter: fa-twitter</li>
+<li>Google-plus: fa-google-plus</li>
+<li>Linkedin: fa-linkedin</li>
+<li>Tumblr: fa-tumblr</li>
+<li>Medium: fa-medium</li>
+<li>Slack: fa-slack</li>
+<li>新浪微博: fa-weibo</li>
+<li>微信: fa-wechat</li>
+<li>QQ: fa-qq</li>
+</ul>
+<h3 id="修改打赏的二维码图片"><a href="#修改打赏的二维码图片" class="headerlink" title="修改打赏的二维码图片"></a>修改打赏的二维码图片</h3><p>在主题文件的 <code>source/medias/reward</code> 文件中，可以替换成你的的微信和支付宝的打赏二维码图片。</p>
+<h3 id="一键部署"><a href="#一键部署" class="headerlink" title="一键部署"></a>一键部署</h3><p>通过 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a> 插件可以实现一键将博客同时部署到多个git仓库中。如同时发布到github及gitee提供的pages服务。安装：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save
+</code></pre>
+<p>修改 Hexo 根目录下的 <code>_config.yml</code> 文件中的如下内容:</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">## Docs: https://hexo.io/docs/deployment.html</span>
+deploy:
+  - type: <span class="token function">git</span>
+    repo: https://github.com/lxl80/blog.git
+    branch: gh-pages
+    ignore_hidden: <span class="token boolean">false</span>
+  - type: <span class="token function">git</span>
+    repo: https://gitee.com/lxl80/lxl80.git
+    branch: master
+    ignore_hidden: <span class="token boolean">false</span>
+</code></pre>
+<p>也可以如本站一样，采用 <a target="_blank" rel="noopener" href="https://github.com/75k/hexo-deployer-cos-enhanced">hexo-deployer-cos-enhanced</a> 插件将静态内容部署到腾讯云对象存储服务中，在DNS配置中将境内线路解析到腾讯云CDN地址，实现加速。部署完成后会自动刷新被更新文件的CDN缓存。</p>
+<p>安装：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-cos-enhanced --save
+</code></pre>
+<p><code>_config.yml</code> 配置如下:</p>
+<pre class=" language-bash"><code class="language-bash">deploy:
+  - type: <span class="token function">git</span>
+    repo: https://github.com/lxl80/blog.git
+    branch: gh-pages
+    ignore_hidden: <span class="token boolean">false</span>
+  - type: cos
+    bucket: lxl80-130****
+    region: ap-beijing
+    secretId: AKIDh9****F8FvL
+    secretKey: Z3IGiur****QZR3PgjXmlVg
+    cdnConfig:
+      enable: <span class="token boolean">true</span>
+      cdnUrl: https://static.lixl.cn
+      bucket: static-130****
+      region: ap-beijing
+      folder: static
+      secretId: AKIDh9****F8FvL
+      secretKey: Z3IGiur****QZR3PgjXmlVg
+</code></pre>
+<p>然后通过 <code>hexo g -d</code> 即可实现一键发布，并更新CDN缓存。</p>
+<h3 id="文章链接转静态短地址（建议安装）"><a href="#文章链接转静态短地址（建议安装）" class="headerlink" title="文章链接转静态短地址（建议安装）"></a>文章链接转静态短地址（建议安装）</h3><p>如果文章名称是中文的，那么 Hexo 默认生成的永久链接也会有中文，这样不利于 SEO，且 gitment 评论对中文链接也不支持。我们可以用 hexo-permalink-pinyin Hexo 插件生成文章时生成中文拼音的永久链接，或者用hexo-abbrlink 生成静态文章链接。以下结合hexo-abbrlink生成类似 &#x2F;yyyy&#x2F;mmdd+随机数.html 的文章链接地址。</p>
+<p>安装命令如下：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-abbrlink --save
+</code></pre>
+<p>在 Hexo 根目录下的 <code>_config.yml</code> 文件中，修改 <code>permalink:</code> ，并在文件末尾新增 <code>abbrlink:</code>配置项：</p>
+<pre class=" language-bash"><code class="language-bash">permalink: :year/:month:day:abbrlink.html
+
+abbrlink: 
+  alg: crc16 <span class="token comment" spellcheck="true">#算法选项：crc16丨crc32</span>
+  rep: dec <span class="token comment" spellcheck="true">#输出进制：dec为十进制，hex为十六进制</span>
+</code></pre>
+<h3 id="CND加速（建议启用）"><a href="#CND加速（建议启用）" class="headerlink" title="CND加速（建议启用）"></a>CND加速（建议启用）</h3><p>放在Github的资源在国内加载速度比较慢，因此需要使用CDN加速来优化网站打开速度，<a target="_blank" rel="noopener" href="https://www.jsdelivr.com/">jsDelivr</a> + Github便是免费且好用的CDN，非常适合博客网站使用。也可以选择主流云服务商提供的对象存储+CDN来获得更快速及稳定的访问效果，费用低到几乎可忽略。</p>
+<p><strong>用法：</strong></p>
+<pre class=" language-bash"><code class="language-bash">https://cdn.jsdelivr.net/gh/你的用户名/你的仓库名@发布的版本号/文件路径
+</code></pre>
+<p><strong>例如：</strong></p>
+<pre class=" language-bash"><code class="language-bash">https://cdn.jsdelivr.net/gh/lxl80/blog@gh-pages/medias/banner/1.jpg
+</code></pre>
+<h3 id="文章字数统计插件（可选的）"><a href="#文章字数统计插件（可选的）" class="headerlink" title="文章字数统计插件（可选的）"></a>文章字数统计插件（可选的）</h3><p>如果你想要在文章中显示文章字数、阅读时长信息，可以安装 <a target="_blank" rel="noopener" href="https://github.com/willin/hexo-wordcount">hexo-wordcount</a>插件。</p>
+<p>安装命令如下：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> i --save hexo-wordcount
+</code></pre>
+<p>然后只需在本主题下的 <code>_config.yml</code> 文件中，激活以下配置项即可：</p>
+<pre class=" language-bash"><code class="language-bash">wordCount:
+  enable: <span class="token boolean">false</span> <span class="token comment" spellcheck="true"># 将这个值设置为 true 即可.</span>
+  postWordCount: <span class="token boolean">true</span>
+  min2read: <span class="token boolean">true</span>
+  totalCount: <span class="token boolean">true</span>
+</code></pre>
+<h3 id="添加-RSS-订阅支持（可选的）"><a href="#添加-RSS-订阅支持（可选的）" class="headerlink" title="添加 RSS 订阅支持（可选的）"></a>添加 RSS 订阅支持（可选的）</h3><p>本主题中还使用到了 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-generator-feed">hexo-generator-feed</a> 的 Hexo 插件来做 <code>RSS</code>，安装命令如下：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-generator-feed --save
+</code></pre>
+<p>在 Hexo 根目录下的 <code>_config.yml</code> 文件中，新增以下的配置项：</p>
+<pre class=" language-bash"><code class="language-bash">feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: <span class="token string">' '</span>
+  order_by: -date
+</code></pre>
+<p>执行 <code>hexo clean &amp;&amp; hexo g</code> 重新生成博客文件，然后在 <code>public</code> 文件夹中即可看到 <code>atom.xml</code> 文件，说明已经安装成功了。</p>
+<h2 id="自定制修改"><a href="#自定制修改" class="headerlink" title="自定制修改"></a>自定制修改</h2><p>在本主题的 <code>_config.yml</code> 中可以修改部分自定义信息，有以下几个部分：</p>
+<ul>
+<li>菜单</li>
+<li>我的梦想</li>
+<li>首页的音乐播放器和视频播放器配置</li>
+<li>是否显示推荐文章名称和按钮配置</li>
+<li>favicon 和 Logo</li>
+<li>个人信息</li>
+<li>TOC 目录</li>
+<li>文章打赏信息</li>
+<li>复制文章内容时追加版权信息</li>
+<li>MathJax</li>
+<li>文章字数统计、阅读时长</li>
+<li>点击页面的’爱心’效果</li>
+<li>我的项目</li>
+<li>我的技能</li>
+<li>我的相册</li>
+<li>Gitalk、Gitment、Valine 和 disqus 评论配置</li>
+<li>不蒜子统计和谷歌分析（Google Analytics）</li>
+<li>默认特色图的集合。当文章没有设置特色图时，本主题会根据文章标题的 hashcode 值取余，来选择展示对应的特色图</li>
+</ul>
+<p>如果本主题中的诸多功能和主题色彩你不满意，可以在主题中自定义修改，很多更自由的功能和细节点的修改难以在主题的 <code>_config.yml</code> 中完成，需要修改源代码才来完成。以下列出了可能有用的地方：</p>
+<h3 id="修改主题颜色"><a href="#修改主题颜色" class="headerlink" title="修改主题颜色"></a>修改主题颜色</h3><p>在主题文件的 <code>/source/css/matery.css</code> 文件中，搜索 <code>.bg-color</code> 来修改背景颜色：</p>
+<pre class=" language-bash"><code class="language-bash">/* 整体背景颜色，包括导航、移动端的导航、页尾、标签页等的背景颜色. */
+.bg-color <span class="token punctuation">{</span>
+    background-image: linear-gradient<span class="token punctuation">(</span>to right, <span class="token comment" spellcheck="true">#4cbf30 0%, #0f9d58 100%);</span>
+<span class="token punctuation">}</span>
+
+@-webkit-keyframes rainbow <span class="token punctuation">{</span>
+   /* 动态切换背景颜色. */
+<span class="token punctuation">}</span>
+
+@keyframes rainbow <span class="token punctuation">{</span>
+    /* 动态切换背景颜色. */
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="修改-banner-图和文章特色图"><a href="#修改-banner-图和文章特色图" class="headerlink" title="修改 banner 图和文章特色图"></a>修改 banner 图和文章特色图</h3><p>可以直接在 &#x2F;source&#x2F;medias&#x2F;banner 文件夹中更换喜欢的 banner 图片，主题代码中是每天动态切换一张，只需 7 张即可。如果会 JavaScript 代码，可以修改成自己喜欢切换逻辑，如：随机切换等，banner 切换的代码位置在 &#x2F;layout&#x2F;_partial&#x2F;bg-cover-content.ejs 文件的 <script></script> 代码中：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">$(</span><span class="token string">'.bg-cover'</span><span class="token punctuation">)</span>.css<span class="token punctuation">(</span><span class="token string">'background-image'</span>, <span class="token string">'url(/medias/banner/'</span> + new Date<span class="token punctuation">(</span><span class="token punctuation">)</span>.getDay<span class="token punctuation">(</span><span class="token punctuation">)</span> + <span class="token string">'.jpg)'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>在 <code>/source/medias/featureimages</code> 文件夹中默认有 24 张特色图片，你可以再增加或者减少，并需要在 <code>_config.yml</code> 做同步修改。</p>
+<h2 id="文章-Front-matter-介绍"><a href="#文章-Front-matter-介绍" class="headerlink" title="文章 Front-matter 介绍"></a>文章 Front-matter 介绍</h2><h3 id="Front-matter-选项详解"><a href="#Front-matter-选项详解" class="headerlink" title="Front-matter 选项详解"></a>Front-matter 选项详解</h3><p><code>Front-matter</code> 选项中的所有内容均为<strong>非必填</strong>的。但仍然建议至少填写 <code>title</code> 和 <code>date</code> 的值。</p>
+<p><img src="/2022/04/01/0%E4%BB%A3%E7%A0%81%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/%22%22C:%5CUsers%5C%E8%96%9B%E4%B9%8B%E8%B0%A6%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220401103401684.png%22%22C:%5CUsers%5C%E8%96%9B%E4%B9%8B%E8%B0%A6%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220401103401684.png%22%22"></p>
+<p>注意:</p>
+<p>如果 img 属性不填写的话，文章特色图会根据文章标题的 hashcode 的值取余，然后选取主题中对应的特色图片，从而达到让所有文章都的特色图各有特色。<br>date 的值尽量保证每篇文章是唯一的，因为本主题中 Gitalk 和 Gitment 识别 id 是通过 date 的值来作为唯一标识的。<br>如果要对文章设置阅读验证密码的功能，不仅要在 Front-matter 中设置采用了 SHA256 加密的 password 的值，还需要在主题的 _config.yml 中激活了配置。有些在线的 SHA256 加密的地址，可供使用：开源中国在线工具、chahuo、站长工具。</p>
+<p>以下为文章的 <code>Front-matter</code> 示例。</p>
+<h3 id="最简示例"><a href="#最简示例" class="headerlink" title="最简示例"></a>最简示例</h3><pre class=" language-bash"><code class="language-bash">---
+title: 基于Hexo的hexo-theme-matery主题搭建博客并优化
+date: 2019-10-03 14:25:00
+---
+</code></pre>
+<h3 id="最全示例"><a href="#最全示例" class="headerlink" title="最全示例"></a>最全示例</h3><pre class=" language-bash"><code class="language-bash">---
+title: 基于Hexo的hexo-theme-matery主题搭建博客并优化
+date: 2019-10-03 14:25:00
+author: 悟尘
+img: /source/images/xxx.jpg
+top: <span class="token boolean">true</span>
+cover: <span class="token boolean">true</span>
+coverImg: /images/1.jpg
+password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+toc: <span class="token boolean">false</span>
+mathjax: <span class="token boolean">false</span>
+summary: 这是你自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要
+categories: 工具
+tags:
+  - blog
+  - hexo
+---
+</code></pre>
+<p>ps：本篇博客非原创，原创博客请见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jspnetcn/article/details/104111651">https://blog.csdn.net/jspnetcn/article/details/104111651</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">谦</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://loveQevol.github.io/2022/04/01/0%E4%BB%A3%E7%A0%81%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/">http://loveQevol.github.io/2022/04/01/0%E4%BB%A3%E7%A0%81%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">谦</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/web/">
+                                    <span class="chip bg-color">web</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/04/01/%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="后端路线">
+                        
+                        <span class="card-title">后端路线</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            谦
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java%E5%90%8E%E7%AB%AF/">
+                        <span class="chip bg-color">java后端</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/06/Mysql%E7%BB%83%E4%B9%A0%E9%A2%98/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/17.jpg" class="responsive-img" alt="Mysql练习">
+                        
+                        <span class="card-title">Mysql练习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            谦
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Mysql/">
+                        <span class="chip bg-color">Mysql</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2022</span>
+            
+            <a href="/about" target="_blank">谦</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/loveQevol" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1716762100@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1716762100" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1716762100" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,1517 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="JVM详解, 谦谦的个人博客">
+    <meta name="description" content="JVM详解：一：JVM的架构模式Java编译器输入的指令流基本上是一种基于栈的指令集架构，另一种指令架构则是基于寄存器的指令集架构。具体来说：这两种架构之间的区别：
+基于栈式架构的特点：
+
+设计和实现更简单，适用于资源受限的系统；
+避开了寄">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>JVM详解 | 谦谦的个人博客</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">谦谦的个人博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">谦谦的个人博客</div>
+        <div class="logo-desc">
+            
+            这唱不尽的风花雪月，只因人间迟早要离别
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/22.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">JVM详解</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+                                <span class="chip bg-color">管理工具</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/category/java/" class="post-category">
+                                java
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-05-08
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    14 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="JVM详解："><a href="#JVM详解：" class="headerlink" title="JVM详解："></a>JVM详解：</h2><h3 id="一：JVM的架构模式"><a href="#一：JVM的架构模式" class="headerlink" title="一：JVM的架构模式"></a>一：JVM的架构模式</h3><h4 id="Java编译器输入的指令流基本上是一种基于栈的指令集架构，另一种指令架构则是基于寄存器的指令集架构。"><a href="#Java编译器输入的指令流基本上是一种基于栈的指令集架构，另一种指令架构则是基于寄存器的指令集架构。" class="headerlink" title="Java编译器输入的指令流基本上是一种基于栈的指令集架构，另一种指令架构则是基于寄存器的指令集架构。"></a>Java编译器输入的指令流基本上是一种基于<font color="red">栈的指令集架构</font>，另一种指令架构则是基于<font color="red">寄存器的指令集架构</font>。</h4><h4 id="具体来说：这两种架构之间的区别："><a href="#具体来说：这两种架构之间的区别：" class="headerlink" title="具体来说：这两种架构之间的区别："></a>具体来说：这两种架构之间的区别：</h4><ul>
+<li><p><strong><font color="red">基于栈式架构的特点：</font></strong></p>
+<ul>
+<li><strong>设计和实现更简单，适用于资源受限的系统；</strong></li>
+<li><strong>避开了寄存器的分布难题：使用零地址指令方式分配。</strong></li>
+<li><strong>指令流中的指令大部分是零地址指令，其执行过程依赖于操作栈。指令集更小，编译器容易实现。</strong></li>
+<li><strong>不需要硬件支持，可移植性更好，更好实现跨平台</strong></li>
+</ul>
+</li>
+<li><p><strong><font color="red">基于寄存器架构的优点</font></strong></p>
+<ul>
+<li><strong>典型的应用是x86的二进制指令集：比如传统的PC以及Android的Davlik虚拟机。</strong></li>
+<li><strong><font color="red">指令集架构则完全依赖硬件，可移植性差</font></strong></li>
+<li><strong><font color="red">性能优秀和执行更高效</font>；</strong></li>
+<li><strong>花费更少的指令去完成一项操作</strong></li>
+<li><strong>在大部分情况下，基于寄存器架构的指令集往往都以一地址指令，二地址指令和三地址指令为主，而基于栈式架构的指令集却是以零地址指令为主。</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a>JVM的生命周期</h3><h4 id="虚拟机启动"><a href="#虚拟机启动" class="headerlink" title="虚拟机启动"></a>虚拟机启动</h4><ul>
+<li><strong>Java虚拟机的启动是通过引导类加载器创建一个初始类来完成的，这个类是由虚拟机的具体实现规定的。</strong></li>
+</ul>
+<h4 id="虚拟机的执行"><a href="#虚拟机的执行" class="headerlink" title="虚拟机的执行"></a>虚拟机的执行</h4><ul>
+<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
+<li><strong>程序开始执行时它才执行，程序结束时他就停止。</strong></li>
+<li><strong><font color="red">执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程</font></strong></li>
+</ul>
+<h4 id="虚拟机的退出："><a href="#虚拟机的退出：" class="headerlink" title="虚拟机的退出："></a>虚拟机的退出：</h4><p><strong>有如下的几种情况：</strong></p>
+<ul>
+<li><strong>程序正常执行结束</strong></li>
+<li><strong>程序在执行过程中遇到了异常或错误而异常终止。</strong></li>
+<li><strong>由于操作系统出现错误而导致Java虚拟机进程终止。</strong></li>
+<li><strong>某线程调用Runtime类或System类中的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
+<li><strong>除此之外，JNI（Java Native Interface）描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出i情况。</strong></li>
+</ul>
+<h3 id="二：类加载子系统："><a href="#二：类加载子系统：" class="headerlink" title="二：类加载子系统："></a>二：类加载子系统：</h3><h4 id="内存图："><a href="#内存图：" class="headerlink" title="内存图："></a>内存图：</h4><p><img src="/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/image-20220511162211169.png"></p>
+<h4 id="2-类加载器与类加载过程"><a href="#2-类加载器与类加载过程" class="headerlink" title="2- 类加载器与类加载过程"></a>2- 类加载器与类加载过程</h4><h5 id="有三个阶段：加载阶段，链接阶段，初始化阶段"><a href="#有三个阶段：加载阶段，链接阶段，初始化阶段" class="headerlink" title="有三个阶段：加载阶段，链接阶段，初始化阶段"></a>有三个阶段：加载阶段，链接阶段，初始化阶段</h5><ul>
+<li><strong>类加载器子系统负责从文件系统或者网络中加载Class文件，class文件在文件开头有特定的文件标识。</strong></li>
+<li><strong>ClassLoader只负责class文件的加载，至于它是否可以运行，则由ExecutionEngine决定</strong></li>
+<li><strong>加载的类信息存放于一块称为方法区的内存空间。除了类的信息外，方法区还会存放运行时常量池信息，可能还包括字符串字面量和数字常量。</strong></li>
+</ul>
+<h5 id="类的加载过程："><a href="#类的加载过程：" class="headerlink" title="类的加载过程："></a>类的加载过程：</h5><p><img src="/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/image-20220511165853129.png"></p>
+<h5 id="加载："><a href="#加载：" class="headerlink" title="加载："></a>加载：</h5><ul>
+<li><strong>1.通过一个类的全限定类名获取定义此类的二进制字节流</strong></li>
+<li><strong>2.将这个字节流所代表的的静态存储结构转化为方法区的运行时数据结构</strong></li>
+<li><strong>3.<font color="red">在内存中生成有一个代表这个类的java.lang.Class对象，</font>作为方法区这个类的各种数据的访问入口。</strong></li>
+</ul>
+<h5 id="链接："><a href="#链接：" class="headerlink" title="链接："></a>链接：</h5><h5 id="验证（Verify）："><a href="#验证（Verify）：" class="headerlink" title="验证（Verify）："></a>验证（Verify）：</h5><ul>
+<li><strong>目的在于确保Class文件的字节流中包含信息符合当前虚拟机要求，保证被加载类的正确性，不会危害虚拟机自身安全。</strong></li>
+<li><strong>主要包括四种验证，文件格式验证，元数据验证，字节码验证，符号引用验证。</strong></li>
+</ul>
+<h5 id="准备（Perpare）："><a href="#准备（Perpare）：" class="headerlink" title="准备（Perpare）："></a>准备（Perpare）：</h5><ul>
+<li><strong>为类变量分配内存并且设置该类变量的默认初始值，即零值。</strong></li>
+<li><strong><font color="red">这里不包含用final修饰的static，因为final在编译的时候就会分配了，准备阶段会显示初始化；</font></strong></li>
+<li><strong><font color="red">这里不会为实例变量分配初始化，</font>类变量会分配在方法区中，而实例变量是会随着对象一起分配到Java堆中。</strong></li>
+</ul>
+<h5 id="解析（Resolve）："><a href="#解析（Resolve）：" class="headerlink" title="解析（Resolve）："></a>解析（Resolve）：</h5><ul>
+<li><strong>将常量池内的符号引用转换为直接引用的过程。</strong></li>
+<li><strong>事实上，解析操作往往会伴随JVM在执行完初始化之后再执行。</strong></li>
+</ul>
+<h5 id="初始化："><a href="#初始化：" class="headerlink" title="初始化："></a>初始化：</h5><ul>
+<li><strong>初始化阶段就是执行类构造器方法<clinit>（）的过程。</clinit></strong></li>
+<li><strong>此方法不需要定义，是 javac 编译器自动收集类中的所有类变量的赋值动作和静态代码块中的语句合并而来。</strong></li>
+<li><strong>构造器方法中指令是按语句在源文件中出现的顺序执行的。</strong></li>
+<li><strong><clinit>（）不同于类的构造器。（关联：构造器是虚拟机视角下的<init>（））</init></clinit></strong></li>
+<li><strong>若该类具有父类，JVM会保证子类的<clinit>（）执行前，父类的<clinit>（）已经执行完毕。</clinit></clinit></strong></li>
+<li><strong>虚拟机必须保证一个类的<clinit>（）方法在多线程下被同步加锁。</clinit></strong></li>
+</ul>
+<h4 id="3-类加载器分类"><a href="#3-类加载器分类" class="headerlink" title="3.类加载器分类"></a>3.类加载器分类</h4><ul>
+<li><strong>JVM支持两种类型的类加载器，分别为<font color="red">引导类加载器（Bootstrap ClassLoader）</font>和<font color="red">自定义类加载器（User-Defined ClassLoader）</font>。</strong></li>
+<li><strong>从概念上来讲，自定义加载器一般指的是程序中由开发人员自定义的一类类加载器，但是Java虚拟机规范却没有这么定义，而是<font color="red">将所有派生于抽象类ClassLLoader的类加载器都划分为自定义类加载器</font>。</strong></li>
+<li><strong>无论类加载器的类型如何划分，在程序中我们最常见的类加载器始终只有3个。</strong></li>
+</ul>
+<p><img src="/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/image-20220517102913207.png"></p>
+<p><img src="/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/image-20220517103249555.png"></p>
+<h4 id="类加载器的分类："><a href="#类加载器的分类：" class="headerlink" title="类加载器的分类："></a>类加载器的分类：</h4><h5 id="虚拟机自带的加载器"><a href="#虚拟机自带的加载器" class="headerlink" title="虚拟机自带的加载器"></a>虚拟机自带的加载器</h5><ul>
+<li><p><strong>启动类加载器（引导类加载器，Bootstrap ClassLoader）</strong></p>
+<ul>
+<li><p><strong>这个类加载使用 c&#x2F;c++ 语言实现的，嵌套在JVM内部。</strong></p>
+</li>
+<li><p><strong>它用来加载 Java 的核心库（JAVA_HOME&#x2F;jre&#x2F;llib&#x2F;rt.jar、redources.jar 或 sun.boot.class.path路径下的内容），用于提供JVM自身需要的类</strong></p>
+</li>
+<li><p><strong>并不继承自java.lang.ClassLoader，没有父加载器。</strong></p>
+</li>
+<li><p><strong>加载扩展类和应用程序类加载器，并指定为他们的父类加载器。</strong></p>
+</li>
+<li><p><strong>出于安全考虑，Bootstrap启动类加载器只加载包名为java、javax、sun等开头的类。</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>扩展类加载器（Extension ClassLoader）</strong></p>
+<ul>
+<li><p><strong>Java语言编写，由sun.misc。Launcher$ExtClassLoader实现。</strong></p>
+</li>
+<li><p><strong><font color="red">派生于ClassLoader类</font></strong></p>
+</li>
+<li><p><strong>父类加载器为启动类加载器</strong></p>
+</li>
+<li><p><strong>从java.ext.dirs系统属性所指定的目录中加载类库，或从JDK的安装目录的jre&#x2F;lib&#x2F;ext自目录（扩展目录）下加载类库。<font color="red">如果用户创建的JAR放在此目录下，也会自动由扩展类加载器加载。</font></strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>应用程序类加载器（系统类加载器，AppClassLoader）</strong></p>
+<ul>
+<li><p><strong>java语言编写，由sun.misc.Launcher$AppClassLoader实现</strong></p>
+</li>
+<li><p><strong>派生于ClassLoader类</strong></p>
+</li>
+<li><p><strong>父类加载器为扩展类加载器</strong></p>
+</li>
+<li><p><strong>它负责加载环境变量classpath或系统属性 java.class.path 指定路径下的类库</strong></p>
+</li>
+<li><p><strong><font color="red">该类加载是程序中默认的类加载器，</font>一般来说，Java 应用的类都是由它来完成加载</strong></p>
+</li>
+<li><p><strong>通过Classoader#getSystemClassLoader（）方法考研获取到该类加载器</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ClassLoaderTest</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token comment" spellcheck="true">//获取系统类加载器</span>
+        ClassLoader systemClassLoader <span class="token operator">=</span> ClassLoader<span class="token punctuation">.</span><span class="token function">getSystemClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>systemClassLoader<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//sun.misc.Launcher$AppClassLoader@18b4aac2</span>
+
+        <span class="token comment" spellcheck="true">//获取其上层：扩展类加载器</span>
+        ClassLoader extClassLoader <span class="token operator">=</span> systemClassLoader<span class="token punctuation">.</span><span class="token function">getParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>extClassLoader<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//sun.misc.Launcher$ExtClassLoader@7f31245a</span>
+
+        <span class="token comment" spellcheck="true">//获取其上层 ：获取不到引导类加载器</span>
+        ClassLoader bootstrapClassLoader <span class="token operator">=</span> extClassLoader<span class="token punctuation">.</span><span class="token function">getParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>bootstrapClassLoader<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//null</span>
+
+        <span class="token comment" spellcheck="true">//对于用户自定义类来说：使用系统类加载器进行加载</span>
+        ClassLoader classLoader <span class="token operator">=</span> ClassLoaderTest<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>classLoader<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//sun.misc.Launcher$AppClassLoader@18b4aac2</span>
+
+        <span class="token comment" spellcheck="true">//String类是使用引导类加载器加载的。---> Java的核心类库都是使用引用类加载器进行加载的。</span>
+        ClassLoader classLoader1 <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>classLoader1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//null</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="用户自定义类加载器"><a href="#用户自定义类加载器" class="headerlink" title="用户自定义类加载器"></a>用户自定义类加载器</h5><ul>
+<li><strong>在java的日常应用程序开发中，类的加载几乎是由上述3种类加载器相互配合执行的，在必要时，我们还可以自定义类加载器，来定义类的加载方式。</strong></li>
+<li><strong>为什么要自定义类加载器？</strong><ul>
+<li><strong>隔离加载类</strong></li>
+<li><strong>修改类加载的方式</strong></li>
+<li><strong>扩展加载源</strong></li>
+<li><strong>防止源码泄漏</strong></li>
+</ul>
+</li>
+</ul>
+<h5 id="用户自定义类加载器实现步骤："><a href="#用户自定义类加载器实现步骤：" class="headerlink" title="用户自定义类加载器实现步骤："></a>用户自定义类加载器实现步骤：</h5><ul>
+<li><strong>1、开发人员可以通过继承抽象类java.lang.ClassLoader类的方式，实现自己的类加载器，以满足一些特殊的需求</strong></li>
+<li><strong>2、在JDK1.2之前，在自定义类加载器时，总会去继承ClassLoader类并重写loadClass（）方法，从而实现自定义的类加载，但是在JDK1.2之后已不再建议用户去覆盖loadClass（）方法，而是建议把自定义的类加载逻辑写在findClass（）方法中</strong></li>
+<li><strong>3、在编写自定义类加载器时，如果没有太过于复杂的需求，可以直接继承URLClassLoader类，这样就跨域避免自己去编写findClass（）方法及其获取字节流的方式，使自定义类加载器编写更加简洁。</strong></li>
+</ul>
+<h4 id="关于ClassLoader"><a href="#关于ClassLoader" class="headerlink" title="关于ClassLoader"></a>关于ClassLoader</h4><h5 id="ClassLoader类，它是一个抽象类，其后所有的类加载器都继承自ClassLoader（不包括启动类加载器）"><a href="#ClassLoader类，它是一个抽象类，其后所有的类加载器都继承自ClassLoader（不包括启动类加载器）" class="headerlink" title="ClassLoader类，它是一个抽象类，其后所有的类加载器都继承自ClassLoader（不包括启动类加载器）"></a>ClassLoader类，它是一个抽象类，其后所有的类加载器都继承自ClassLoader（不包括启动类加载器）</h5><h5 id="方式1：获取当前类的ClassLoader"><a href="#方式1：获取当前类的ClassLoader" class="headerlink" title="方式1：获取当前类的ClassLoader"></a>方式1：获取当前类的ClassLoader</h5><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h5 id="方式2：获取当前线程上下文的ClassLoader"><a href="#方式2：获取当前线程上下文的ClassLoader" class="headerlink" title="方式2：获取当前线程上下文的ClassLoader"></a>方式2：获取当前线程上下文的ClassLoader</h5><pre class=" language-java"><code class="language-java">Thread<span class="token punctuation">.</span>currentThread<span class="token punctuation">.</span><span class="token function">getContextClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h5 id="方式3：获取系统的ClassLoader"><a href="#方式3：获取系统的ClassLoader" class="headerlink" title="方式3：获取系统的ClassLoader"></a>方式3：获取系统的ClassLoader</h5><pre class=" language-java"><code class="language-java">ClassLoader<span class="token punctuation">.</span><span class="token function">getSystemClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h5 id="方式4：获取调用者的ClassLoader"><a href="#方式4：获取调用者的ClassLoader" class="headerlink" title="方式4：获取调用者的ClassLoader"></a>方式4：获取调用者的ClassLoader</h5><pre class=" language-java"><code class="language-java">DriverManager<span class="token punctuation">.</span><span class="token function">getCallerClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h4 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h4><ul>
+<li><p><strong><font color="red">工作原理</font></strong></p>
+</li>
+<li><p><strong>1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行；</strong></p>
+</li>
+<li><p><strong>2）如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器；</strong></p>
+</li>
+<li><p><strong>3）如果父类加载器可以完成类加载任务，就成功返回，倘若父类加载器无法完成此任务，子加载器才会尝试自己去加载，这就是双亲委派模式。</strong><br><img src="/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/image-20220517171516647.png"></p>
+</li>
+<li><p><strong><font color="red">优势</font></strong></p>
+<ul>
+<li><strong>避免类的重复加载</strong></li>
+<li><strong>保护程序安全，防止核心API被随意篡改</strong><ul>
+<li><strong>自定义类：java.lang.String</strong></li>
+<li><strong>自定义类：java.lang.ShKStart</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="沙箱安全机制"><a href="#沙箱安全机制" class="headerlink" title="沙箱安全机制"></a>沙箱安全机制</h4><h5 id="自定义String类，但是在加载自定义String类的时候会率先使用引导类加载器加载，而引导类加载器在加载过程中会先加载jdk自带的文件，报错信息说没有main方法，就是因为加载的是rt-jar包中的String类。这样可以保证对java核心源代码的保护，这就是沙箱安全机制。"><a href="#自定义String类，但是在加载自定义String类的时候会率先使用引导类加载器加载，而引导类加载器在加载过程中会先加载jdk自带的文件，报错信息说没有main方法，就是因为加载的是rt-jar包中的String类。这样可以保证对java核心源代码的保护，这就是沙箱安全机制。" class="headerlink" title="自定义String类，但是在加载自定义String类的时候会率先使用引导类加载器加载，而引导类加载器在加载过程中会先加载jdk自带的文件，报错信息说没有main方法，就是因为加载的是rt.jar包中的String类。这样可以保证对java核心源代码的保护，这就是沙箱安全机制。"></a>自定义String类，但是在加载自定义String类的时候会率先使用引导类加载器加载，而引导类加载器在加载过程中会先加载jdk自带的文件，报错信息说没有main方法，就是因为加载的是rt.jar包中的String类。这样可以保证对java核心源代码的保护，这就是<font color="red">沙箱安全机制</font>。</h5><h4 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h4><ul>
+<li><p><strong>在JVM中表示两个class对象是否为同一个累存在两个必要条件：</strong></p>
+<ul>
+<li><strong>类的完整类名必须一致，包括包名。</strong></li>
+<li><strong>加载这个类的ClassLoader（指ClassLoader实例对象）必须相同。</strong></li>
+</ul>
+</li>
+<li><p><strong>换句话说，在JVM中，即使这两个类对象（class对象）来源同一个Class文件，被同一个虚拟机锁加载，但只要加载它们的ClassLoadershillings对象不同，那么这两个类对象也是不相等的。</strong></p>
+</li>
+</ul>
+<h5 id="对类加载器的引用"><a href="#对类加载器的引用" class="headerlink" title="对类加载器的引用"></a>对类加载器的引用</h5><ul>
+<li><strong>JVM必须知道这一个类型是由启动加载器加载的还是由用户类加载器加载的。如果一个类型是由用户类加载器加载的，那么JVM会<font color="red">将这个类加载器的一个引用作为类型信息的一部分保存在方法区中。</font>当解析一个类型到另一个类型的引用的时候，JVM需要保证这两个类型的类加载是相同的。</strong></li>
+</ul>
+<h5 id="类的主动使用和被动使用"><a href="#类的主动使用和被动使用" class="headerlink" title="类的主动使用和被动使用"></a>类的主动使用和被动使用</h5><ul>
+<li><p><strong>Java程序对类的使用方式分为：主动使用和被动使用。</strong></p>
+<ul>
+<li><strong>主动使用，又分为7种情况：</strong><ul>
+<li><strong>创建类的实例</strong></li>
+<li><strong>访问某个类或接口的静态变量，或者对该静态变量赋值</strong></li>
+<li><strong>调用类的静态方法</strong></li>
+<li><strong>反射（比如：Class.forName（”com.atguigu.Test“））</strong></li>
+<li><strong>初始化一个类的子类</strong></li>
+<li><strong>Java虚拟机启动时被标明为启动类的类</strong></li>
+<li><strong>JDK 7 开始提供的动态语言支持：</strong><ul>
+<li><strong>java.lang.invoke.MethodHandle实例的解析结果  REF_getStatic、REF_putStatic、REF_invokeStatic句柄对应的类没有初始化，则初始化</strong>*</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>除了以上七种情况，其他使用Java类的方式都被看作是对<font color="red">类的被动使用，都不会导致类的初始化</font></strong></p>
+</li>
+</ul>
+<h3 id="3-运行时数据区概述及线程"><a href="#3-运行时数据区概述及线程" class="headerlink" title="3.运行时数据区概述及线程"></a>3.运行时数据区概述及线程</h3><p><img src="/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/image-20220523192407374.png"></p>
+<h5 id="内存是非常重要的系统资源，是硬盘和cpu的中间仓库及桥梁，承载着操作系统和应用程序的实时运行。JVM内存布局规定了Java在运行过程中内存申请、分配、管理机制存在着部分差异。结合JVM虚拟机规范，来探讨一下经典的JVM内存布局。"><a href="#内存是非常重要的系统资源，是硬盘和cpu的中间仓库及桥梁，承载着操作系统和应用程序的实时运行。JVM内存布局规定了Java在运行过程中内存申请、分配、管理机制存在着部分差异。结合JVM虚拟机规范，来探讨一下经典的JVM内存布局。" class="headerlink" title="内存是非常重要的系统资源，是硬盘和cpu的中间仓库及桥梁，承载着操作系统和应用程序的实时运行。JVM内存布局规定了Java在运行过程中内存申请、分配、管理机制存在着部分差异。结合JVM虚拟机规范，来探讨一下经典的JVM内存布局。"></a>内存是非常重要的系统资源，是硬盘和cpu的中间仓库及桥梁，承载着操作系统和应用程序的实时运行。JVM内存布局规定了Java在运行过程中内存申请、分配、管理机制存在着部分差异。结合JVM虚拟机规范，来探讨一下经典的JVM内存布局。</h5><p><img src="/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/image-20220523194104852.png"></p>
+<p><img src="/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/image-20220523194254482.png"></p>
+<h5 id="Java虚拟机定义了若干种程序运行期间会使用到的运行时数据区，其中有一些会随着虚拟机启动而创建，随着虚拟机退出而销毁。另外一些则是与线程一一对应的，这些与线程对应的数据区域会随着线程开始和结束而创建和销毁。"><a href="#Java虚拟机定义了若干种程序运行期间会使用到的运行时数据区，其中有一些会随着虚拟机启动而创建，随着虚拟机退出而销毁。另外一些则是与线程一一对应的，这些与线程对应的数据区域会随着线程开始和结束而创建和销毁。" class="headerlink" title="Java虚拟机定义了若干种程序运行期间会使用到的运行时数据区，其中有一些会随着虚拟机启动而创建，随着虚拟机退出而销毁。另外一些则是与线程一一对应的，这些与线程对应的数据区域会随着线程开始和结束而创建和销毁。"></a>Java虚拟机定义了若干种程序运行期间会使用到的运行时数据区，其中有一些会随着虚拟机启动而创建，随着虚拟机退出而销毁。另外一些则是与线程一一对应的，这些与线程对应的数据区域会随着线程开始和结束而创建和销毁。</h5><h5 id="灰色的为单独线程私有，红色的为多个线程共享。即："><a href="#灰色的为单独线程私有，红色的为多个线程共享。即：" class="headerlink" title="灰色的为单独线程私有，红色的为多个线程共享。即："></a>灰色的为单独线程私有，红色的为多个线程共享。即：</h5><ul>
+<li><strong>每个线程：独立包括程序计数器、栈、本地栈。</strong></li>
+<li><strong>线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></li>
+</ul>
+<h4 id="2-线程"><a href="#2-线程" class="headerlink" title="2-线程"></a>2-线程</h4><ul>
+<li><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个并行的执行。</strong></li>
+<li><strong>在Hotspot JVM里，每个线程都与操作系统的本地线程直接映射。</strong><ul>
+<li><strong>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</strong></li>
+</ul>
+</li>
+<li><strong>操作系统负责所有线程的安排调度到任何一个可用的CPU上。一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></li>
+</ul>
+<h4 id="3-JVM系统线程"><a href="#3-JVM系统线程" class="headerlink" title="3-JVM系统线程"></a>3-JVM系统线程</h4><ul>
+<li><p><strong>如果你使用jconsole或者是任何一个调试工具，都能看到在后台有许多线程在运行。这些后台线程不包括调用public static void main(String[])的main线程以及所有这个main线程自己创建的线程。</strong></p>
+</li>
+<li><p><strong>这些主要的后台系统线程在Hotspot JVM里主要是以下几个：</strong></p>
+<ul>
+<li><strong>虚拟线程： 这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的类型包括”stop-the-world“的垃圾收集，线程收集，线程挂起以及偏向锁撤销。</strong></li>
+<li><strong>周期任务线程： 这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</strong></li>
+<li><strong>GC线程： 这种相册对在JVM里不同种类的垃圾收集行为提供了支持。</strong></li>
+<li><strong>信号调度线程： 这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="4-程序计数器"><a href="#4-程序计数器" class="headerlink" title="4-程序计数器"></a>4-程序计数器</h4><p><img src="/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/image-20220523203315213.png"></p>
+<h5 id="作用：PC寄存器用来存储指向下一条指令的地址，也即将要执行的指令代码。由执行引擎读取下一条指令。"><a href="#作用：PC寄存器用来存储指向下一条指令的地址，也即将要执行的指令代码。由执行引擎读取下一条指令。" class="headerlink" title="作用：PC寄存器用来存储指向下一条指令的地址，也即将要执行的指令代码。由执行引擎读取下一条指令。"></a>作用：PC寄存器用来存储指向下一条指令的地址，也即将要执行的指令代码。由执行引擎读取下一条指令。</h5><h5 id="PC存储器："><a href="#PC存储器：" class="headerlink" title="PC存储器："></a>PC存储器：</h5><ul>
+<li><p><strong>它是一块很小的内存空间，几乎可以忽略不记。也是运行速度最快的存储区域。</strong></p>
+</li>
+<li><p><strong>在JVM规范中，每个线程都有它自己的程序计数器，是线程私有的，有生命周期与线程生命周期保持一致。</strong></p>
+</li>
+<li><p><strong>任何时间一个线程都只有一个方法在执行，也就是所谓的当前方法。程序计数器会存储当前线程正在执行的Java方法的JVM指令地址；或者，如果是在执行native方法，则是未指定指（undefned）</strong></p>
+</li>
+<li><p><strong>它是程序控制流的指示器，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</strong></p>
+</li>
+<li><p><strong>字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令。</strong></p>
+</li>
+<li><p><strong>它是唯一一个在 Java 虚拟机规范中没有规定任何OutOtMemoryError情况的区域。</strong></p>
+</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">谦</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://loveQevol.github.io/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/">http://loveQevol.github.io/2022/05/08/JVM%E8%AF%A6%E8%A7%A3/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">谦</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+                                    <span class="chip bg-color">管理工具</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/05/09/FastDFS%E6%95%99%E7%A8%8B/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/7.jpg" class="responsive-img" alt="FastDFS教程">
+                        
+                        <span class="card-title">FastDFS教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-09
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/category/java/" class="post-category">
+                                    java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">管理工具</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/04/20/Cookie%E5%92%8CSession/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/22.jpg" class="responsive-img" alt="Cookie和Session">
+                        
+                        <span class="card-title">Cookie和Session</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/category/%E9%9D%A2%E8%AF%95/" class="post-category">
+                                    面试
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">
+                        <span class="chip bg-color">面试题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2022</span>
+            
+            <a href="/about" target="_blank">谦</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/loveQevol" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1716762100@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1716762100" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1716762100" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
