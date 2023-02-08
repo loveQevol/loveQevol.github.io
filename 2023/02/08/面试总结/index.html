@@ -4,8 +4,19 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="vo和dto区别以及联系, 谦谦的个人博客">
-    <meta name="description" content="Vo和Dto区别以及联系一篇文章讲清楚VO，BO，PO，DO，DTO的区别随着编程工业化水平的不断加深，各种编程模型层出不穷（比如MVC，MVP等等），伴随着这些编程模型，又有一大批新的概念蜂拥而至，什么VO，BO，PO，DO，DTO之类的">
+    <meta name="keywords" content="面试总结, 谦谦的个人博客">
+    <meta name="description" content="面试总结
+2月8号面试(凉面(哭哭))
+
+1.自我介绍(2分钟)
+
+2.项目介绍(差不多5分钟)
+
+问问题(差不多20分钟)
+
+1.项目中使用了token，token的结构是什么，你的token是怎样生成的？
+
+token由三部分组成：由头">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +30,7 @@
 
     
 
-    <title>vo和dto区别以及联系 | 谦谦的个人博客</title>
+    <title>面试总结 | 谦谦的个人博客</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/awesome/css/all.min.css">
@@ -309,12 +320,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">vo和dto区别以及联系</h1>
+                    <h1 class="description center-align post-title">面试总结</h1>
                 </div>
             </div>
         </div>
@@ -430,14 +441,23 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/java%E5%90%8E%E7%AB%AF/">
-                                <span class="chip bg-color">java后端</span>
+                            <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                                <span class="chip bg-color">面试</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/category/%E6%88%91%E7%9A%84%E9%9D%A2%E8%AF%95/" class="post-category">
+                                我的面试
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -446,7 +466,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-01-16
+                    2023-02-08
                 </div>
                 
 
@@ -455,14 +475,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    7 分
                 </div>
                 
 
@@ -482,46 +502,97 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Vo和Dto区别以及联系"><a href="#Vo和Dto区别以及联系" class="headerlink" title="Vo和Dto区别以及联系"></a>Vo和Dto区别以及联系</h2><h3 id="一篇文章讲清楚VO，BO，PO，DO，DTO的区别"><a href="#一篇文章讲清楚VO，BO，PO，DO，DTO的区别" class="headerlink" title="一篇文章讲清楚VO，BO，PO，DO，DTO的区别"></a>一篇文章讲清楚VO，BO，PO，DO，DTO的区别</h3><p>随着编程工业化水平的不断加深，各种编程模型层出不穷（比如MVC，MVP等等），伴随着这些编程模型，又有一大批新的概念蜂拥而至，什么VO，BO，PO，DO，DTO之类的，这些新的概念一直以来都是云里雾里，网上虽然也有不少文章来区分这些概念，但看下来基本都是几篇相同的文章转载来转载去，这些文章本身也说的不明，有些还互相矛盾，再加上有些文章在简化系统里面来使用这些概念，让人越看越迷糊</p>
-<p>什么原因造成了这种混乱的状态，就不深究了，感觉也很难究出所以然来因此让我们立足这些概念本身，达成对概念理解的一致性，就足够了，术语太抽象，不利于理解，看完其实没解决啥疑惑，我会尽量用大白话(人话)来做解释，争取让大家都能看明白</p>
-<p>废话不多说，先来看张图</p>
-<p>看完图估计大部分人就已经有了一个直观的感受了</p>
-<p><img src="/2023/01/16/vo%E5%92%8Cdto%E5%8C%BA%E5%88%AB%E4%BB%A5%E5%8F%8A%E8%81%94%E7%B3%BB/image-20230116121136599.png" alt="image-20230116121136599"></p>
-<p>面对这个图，让我们先从承上启下的DTO开始入手</p>
-<p><strong>DTO（Data Transfer Object）数据传输对象</strong></p>
-<p>这个传输通常指的前后端之间的传输</p>
-<p>DTO是一个比较特殊的对象，他有两种存在形式：</p>
-<p>在后端，他的存在形式是java对象，也就是在controller里面定义的那个东东，通常在后端不需要关心怎么从json转成java对象的，这个都是由一些成熟的框架帮你完成啦，比如spring框架</p>
-<p>在前端，他的存在形式通常是js里面的对象（也可以简单理解成json），也就是通过ajax请求的那个数据体</p>
-<p>这也是为什么把他画成横跨两层的原因</p>
-<p>这里可能会遇到个问题，现在微服务盛行，服务和服务之间调用的传输对象能叫DTO吗？<br>我的理解是看情况<br>DTO本身的一个隐含的意义是要能够完整的表达一个业务模块的输出<br>如果服务和服务之间相对独立，那就可以叫DTO<br>如果服务和服务之间不独立，每个都不是一个完整的业务模块，拆开可能仅仅是因为计算复杂度或者性能的问题，那这就不能够叫做DTO，只能是BO</p>
-<p><strong>VO（Value Object）值对象</strong></p>
-<p>VO就是展示用的数据，不管展示方式是网页，还是客户端，还是APP，只要是这个东西是让人看到的，这就叫VO<br>VO主要的存在形式就是js里面的对象（也可以简单理解成json）</p>
-<p><strong>VO和DTO的区别</strong><br>主要有两个区别<br>一个是字段不一样，VO根据需要会删减一些字段<br>另一个是值不一样，VO会根据需要对DTO中的值进行展示业务的解释<br>举个简单的例子<br>DTO可能是这样的</p>
-<pre class=" language-java"><code class="language-java"><span class="token punctuation">{</span>
-    <span class="token string">"gender"</span><span class="token operator">:</span><span class="token string">"男"</span><span class="token punctuation">,</span> 
-    <span class="token string">"age"</span><span class="token operator">:</span><span class="token number">35</span> 
-<span class="token punctuation">}</span>
+                <h2 id="面试总结"><a href="#面试总结" class="headerlink" title="面试总结"></a>面试总结</h2><ul>
+<li><p>2月8号面试(凉面(哭哭))</p>
+<ul>
+<li><p>1.自我介绍(2分钟)</p>
+</li>
+<li><p>2.项目介绍(差不多5分钟)</p>
+</li>
+<li><p>问问题(差不多20分钟)</p>
+<ul>
+<li><p>1.项目中使用了token，token的结构是什么，你的token是怎样生成的？</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">token由三部分组成：由头部<span class="token punctuation">(</span>header<span class="token punctuation">)</span>，有效载荷<span class="token punctuation">(</span>palyload<span class="token punctuation">)</span> 和 签名<span class="token punctuation">(</span>signature<span class="token punctuation">)</span>组成.
+header 由 typ 和 alg 组成，alg 是 HS256，表示token是使用 HS256 算法进行加密的。
+playload 里面是承载要传递的数据。
+signature 是把header，payload 分别进行 base64 编码，然后拼接在一起，作为分隔符。
+我的token是用用户的唯一id和 username 生成的。
 </code></pre>
-<p>对于业务一来说只需要性别，而且因为是一个古风聊天室，也不能直接展示男，因此经过业务解释业务一的VO是</p>
-<pre class=" language-java"><code class="language-java"><span class="token punctuation">{</span> 
-    <span class="token string">"gender"</span><span class="token operator">:</span><span class="token string">"公子"</span> 
-<span class="token punctuation">}</span> 
+</li>
+<li><p>2.为什么使用token？token为什么安全，我拿到你的token，是不是就可以登录？</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">使用Token的目的是为了验证用户登录情况以及减轻服务器的压力，减少频繁的查询数据库，使服务器更加健壮。
+如果涉及到修改数据导致token发生改变，那么拿到改变后的token，与之前存储的token进行对比，发现与之前存储的token不相同，则不会进行下一步的操作。
 </code></pre>
-<p><strong>PO（Persistant Object）持久对象</strong></p>
-<p>PO比较好理解<br>简单说PO就是数据库中的记录，一个PO的数据结构对应着库中表的结构，表中的一条记录就是一个PO对象<br>通常PO里面除了get，set之外没有别的方法<br>对于PO来说，数量是相对固定的，一定不会超过数据库表的数量<br>等同于Entity，这俩概念是一致的</p>
-<p><strong>BO（Business Object）业务对象</strong></p>
-<p>BO就是PO的组合<br>简单的例子比如说PO是一条交易记录，BO是一个人全部的交易记录集合对象<br>复杂点儿的例子PO1是交易记录，PO2是登录记录，PO3是商品浏览记录，PO4是添加购物车记录，PO5是搜索记录，BO是个人网站行为对象<br>BO是一个业务对象，一类业务就会对应一个BO，数量上没有限制，而且BO会有很多业务操作，也就是说除了get，set方法以外，BO会有很多针对自身数据进行计算的方法<br>为什么BO也画成横跨两层呢？原因是现在很多持久层框架自身就提供了数据组合的功能，因此BO有可能是在业务层由业务来拼装PO而成，也有可能是在数据库访问层由框架直接生成<br>很多情况下为了追求查询的效率，框架跳过PO直接生成BO的情况非常普遍，PO只是用来增删改使用</p>
-<p><strong>BO和DTO的区别</strong></p>
-<p>这两个的区别主要是就是字段的删减<br>BO对内，为了进行业务计算需要辅助数据，或者是一个业务有多个对外的接口，BO可能会含有很多接口对外所不需要的数据，因此DTO需要在BO的基础上，只要自己需要的数据，然后对外提供<br>在这个关系上，通常不会有数据内容的变化，内容变化要么在BO内部业务计算的时候完成，要么在解释VO的时候完成</p>
-<p>OK，到这里这些关系基本就理清楚了</p>
-<p><strong>最后，让我们再说说实际应用</strong></p>
-<ol>
-<li>PO这个没法省，不管叫PO还是Entity，怎么着都得有</li>
-<li>一些工具类的系统和一些业务不是很复杂的系统DTO是可以和BO合并成一个，当业务扩展的时候注意拆分就行</li>
-<li>VO是可以第一个优化掉的，展示业务不复杂的可以压根儿不要，直接用DTO</li>
-<li>简单来说，就是前端需要传的参数，习惯叫做vo，对应数据库的实体类叫做pojo，由于业务需求，可能实体类的数据不需要一次性全部查出，所以，查出的数据叫做dto，dto之间可以相互组装，返回数据给前端。</li>
-</ol>
+</li>
+<li><p>3.项目中使用到了redis，那redis有哪些数据结构？**(这个问题要回答5种数据结构的底层实现原理)**</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">最常用的有5种:字符串<span class="token punctuation">(</span>String<span class="token punctuation">)</span>，哈希<span class="token punctuation">(</span>Hash<span class="token punctuation">)</span>，列表<span class="token punctuation">(</span>list<span class="token punctuation">)</span>，集合<span class="token punctuation">(</span>set<span class="token punctuation">)</span>，有序集合<span class="token punctuation">(</span>ZSET<span class="token punctuation">)</span>
+2.Hash（HashMap，哈希映射表）
+Hash 对应的 Value 实际上内部是一个HashMap，有两种不同的实现：这个Hash的成员比较少的时候，就会采用类似一维数组的方式来存储，而不会使用HashMap的结构，当成员数量增大时会自动转成真正的 HashMap。
+3.list<span class="token punctuation">(</span>双向链表<span class="token punctuation">)</span>
+list 的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销，Redis 内部的很多实现，包括发送缓冲队列等也都是用的这个数据结构
+4.set（HashSet）
+<span class="token keyword">set</span> 的内部实现是一个 value 永远为 null 的 HashMap，实际就是通过计算 <span class="token function">hash</span> 的方式来快速排重的，这也是 <span class="token keyword">set</span> 能提供判断一个成员是否在集合内的原因。
+5.ZSET（插入有序Set集合）
+内部使用 HashMap 和跳跃表（SkipList）来保证数据的存储和有序
+</code></pre>
+</li>
+<li><p>4.redis是如果进行存储数据的？</p>
+</li>
+<li><p>5.项目使用的是mysql嘛？</p>
+</li>
+<li><p>6.说说mysql的三范式</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">第一范式：强调的是列的原子性，即数据库表的每列都是不可分割的原子数据项。
+第二范式：非主键列完全依赖于主键，而不能是依赖于主键的一部分。
+第三范式：在第二范式的基础上，非主键列只依赖于主键，不依赖于其他非主键。
+</code></pre>
+</li>
+<li><p>7.说说mysql是如何执行sql语句的</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">1.首先需要在 MySQL 客户端登陆才能使用，所以需要 个连接器 来连接用户和 MySQL 数据库，
+我们 一般是使用 mysql-u 用户名-p 密码来进行 MySQL 登陆，和服务端建立连接。在完成 TCP 握手后，连接器会根据你输入的用户名和密码验证你的登录身份。如果用户名或者密码错误，MySQL 就会提示 Access denied <span class="token keyword">for</span> user，来结束执行。如果登录成功后，MySQL 会根据权限表中的记录来判定你的权限。
+2.连接完成后，你就可以执行 SQL 语句了，这行逻辑就会来到第二步:查询缓存。MySQL 在得到一个执行请求后，会首先去查询缓存 中查找，是否执行过这条 SQL 语句，之前执行过的语句以及结果会以 key-value 对的形式，被直接放在内存中。key 是查询语句，value 是查询的结果。如果通过 key 能够查找到这条 SQL 语句，就直接妾返回 SQL 的执行结果。如果语句不在查询缓存中，就会继续后面的执行阶段。执行完成后，执行结果就会被放入查询缓存中。可以看到，如果查询命中缓存，MySQL 不需要执行后面的复杂操作，就可以直接返回结果，效率会很高。
+3.如果没有命中查询，就开始执行真正的 SQL 语句。首先，MySQL 会根据你写的 SQL 语句进行解析，分析器会先做词法分析，你写的 SQL 就是由多个字符串和空格组成的一条 SQL 语句，MySQL 需要识别出里面的字符串是什么，代表什么。然后进行语法分析，根据词法分析的结果，语法分析器会根据语法规则，判断你输入的这个 SQL语句是否满足 MySQL 语法。如果 SQL 语句不正确，就会提示 You have an error <span class="token keyword">in</span> yourSQL syntax。
+4.经过分析器的词法分析和语法分析后，你这条 SQL 就合法了，MySQL 就知道你要做什么了。但是在执行前，还需要进行优化器的处理，优化器会判断你使用了哪种索引，使用了何种连接，优化器的作用就是确定效率最高的执行方案。
+5.MySQL 通过分析器知道了你的 SQL 语句是否合法，你想要做什么操作，通过优化器知道了该怎么做效率最高，然后就进入了执行阶段，开始执行这条 SQL 语句在执行阶段，MySQL 首先会判断你有没有执行这条语句的权限，没有权限的话，就会返回没有权限的错误。如果有权限，就打开表继续执行。打开表的时候，执行器就会根据表的引擎定义，去使用这个引擎提供的接口。对于有索引的表，执行的逻辑也差不多。
+</code></pre>
+</li>
+<li><p>8.讲一下springboot的执行流程</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">1.通过 SpringFactoriesLoader 加载 META-INF/spring.factories 文件，获取并创建 SpringApplicationRunListener 对象
+2.然后由 SpringApplicationRunListener 来发出 starting 消息
+3.创建参数，并配置当前 SpringBoot 应用将要使用的 Environment
+4.完成之后，依然由 SpringApplicationRunListener 来发出 environmentPrepared 消息
+5.创建 ApplicationContext
+6.初始化 ApplicationContext，并设置 Environment，加载相关配置等
+7.由 SpringApplicationRunListener 来发出 contextPrepared 消息，告知Spring Boot 应用使用的 ApplicationContext 已准备OK
+8.将各种 beans 装载入 ApplicationContext，继续由 SpringApplicationRunListener 来发出 contextLoaded 消息，告知 Spring Boot 应用使用的 ApplicationContext 已装填OK
+9.refresh ApplicationContext，完成IoC容器可用的最后一步
+10.由 SpringApplicationRunListener 来发出 started 消息
+11.调用callRunners<span class="token punctuation">(</span><span class="token punctuation">..</span>.<span class="token punctuation">)</span>方法，让实现了ApplicationRunner和CommandLineRunner接口类的run 方法得以执行，用于在 Spring 应用上下文准备完毕后，执行一些额外操作。从而完成最终的程序的启动。
+12.由 SpringApplicationRunListener 来发出 running 消息，告知程序已运行起来了
+</code></pre>
+</li>
+<li><p>9.解释 Spring 框架中 Bean 的生命周期</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">1.Spring 容器 从 XML 文件中读取 bean 的定义，并实例化 bean。
+2.Spring 根据 bean 的定义填充所有的属性
+3.如 果 bean 实 现 了 BeanNameAware 接 口 ， Spring 传递 bean 的 ID 到setBeanName 方法。
+4.如 果 Bean 实 现 了 BeanFactoryAware 接 口 ， Spring 传递 beanfactory 给setBeanFactory 方法。
+5.如 果 有 任 何 与 bean 相 关 联 的 BeanPostProcessors ， Spring 会在 postProcesserBeforeInitialization()方法内调用它们。
+6.如果 bean 实现 IntializingBean 了，调用它的 afterPropertySet 方法，如果 bean 声明了初始化方法，调用此初始化方法
+7.如果有 BeanPostProcessors 和 bean 关联，这些 bean 的 postProcessAfterInitialization() 方法将被调用。
+8. 如果 bean 实现了 DisposableBean，它将调用 destroy()方法。
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
                 
             </div>
@@ -548,7 +619,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://loveQevol.github.io/2023/01/16/vo%E5%92%8Cdto%E5%8C%BA%E5%88%AB%E4%BB%A5%E5%8F%8A%E8%81%94%E7%B3%BB/">http://loveQevol.github.io/2023/01/16/vo%E5%92%8Cdto%E5%8C%BA%E5%88%AB%E4%BB%A5%E5%8F%8A%E8%81%94%E7%B3%BB/</a>
+                    <a href="http://loveQevol.github.io/2023/02/08/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/">http://loveQevol.github.io/2023/02/08/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -586,8 +657,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/java%E5%90%8E%E7%AB%AF/">
-                                    <span class="chip bg-color">java后端</span>
+                                <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                                    <span class="chip bg-color">面试</span>
                                 </a>
                             
                         </div>
@@ -761,9 +832,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/02/08/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/">
                     <div class="card-image">
@@ -781,9 +853,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -796,6 +868,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -814,13 +887,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/01/06/java8%E6%96%B0%E7%89%B9%E6%80%A7/">
+                <a href="/2023/01/16/vo%E5%92%8Cdto%E5%8C%BA%E5%88%AB%E4%BB%A5%E5%8F%8A%E8%81%94%E7%B3%BB/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="java8新特性">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="vo和dto区别以及联系">
                         
-                        <span class="card-title">java8新特性</span>
+                        <span class="card-title">vo和dto区别以及联系</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -831,7 +904,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-16
                             </span>
                         <span class="publish-author">
                             
@@ -844,8 +917,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%90%8E%E7%AB%AF/">
-                        <span class="chip bg-color">后端</span>
+                    <a href="/tags/java%E5%90%8E%E7%AB%AF/">
+                        <span class="chip bg-color">java后端</span>
                     </a>
                     
                 </div>
