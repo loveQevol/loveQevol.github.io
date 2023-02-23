@@ -552,7 +552,7 @@ list 的实现为一个双向链表，即可以支持反向查找和遍历，更
 </li>
 <li><p>7.说说mysql是如何执行sql语句的</p>
 </li>
-<li><pre class=" language-bash"><code class="language-bash">1.首先需要在 MySQL 客户端登陆才能使用，所以需要 个连接器 来连接用户和 MySQL 数据库，
+<li><pre class=" language-bash"><code class="language-bash">1.连接器：首先需要在 MySQL 客户端登陆才能使用，所以需要 连接器 来连接用户和 MySQL 数据库，
 我们 一般是使用 mysql-u 用户名-p 密码来进行 MySQL 登陆，和服务端建立连接。在完成 TCP 握手后，连接器会根据你输入的用户名和密码验证你的登录身份。如果用户名或者密码错误，MySQL 就会提示 Access denied <span class="token keyword">for</span> user，来结束执行。如果登录成功后，MySQL 会根据权限表中的记录来判定你的权限。
 2.连接完成后，你就可以执行 SQL 语句了，这行逻辑就会来到第二步:查询缓存。MySQL 在得到一个执行请求后，会首先去查询缓存 中查找，是否执行过这条 SQL 语句，之前执行过的语句以及结果会以 key-value 对的形式，被直接放在内存中。key 是查询语句，value 是查询的结果。如果通过 key 能够查找到这条 SQL 语句，就直接妾返回 SQL 的执行结果。如果语句不在查询缓存中，就会继续后面的执行阶段。执行完成后，执行结果就会被放入查询缓存中。可以看到，如果查询命中缓存，MySQL 不需要执行后面的复杂操作，就可以直接返回结果，效率会很高。
 3.如果没有命中查询，就开始执行真正的 SQL 语句。首先，MySQL 会根据你写的 SQL 语句进行解析，分析器会先做词法分析，你写的 SQL 就是由多个字符串和空格组成的一条 SQL 语句，MySQL 需要识别出里面的字符串是什么，代表什么。然后进行语法分析，根据词法分析的结果，语法分析器会根据语法规则，判断你输入的这个 SQL语句是否满足 MySQL 语法。如果 SQL 语句不正确，就会提示 You have an error <span class="token keyword">in</span> yourSQL syntax。
@@ -580,12 +580,12 @@ list 的实现为一个双向链表，即可以支持反向查找和遍历，更
 </li>
 <li><pre class=" language-bean"><code class="language-bean">1.Spring 容器 从 XML 文件中读取 bean 的定义，并实例化 bean。
 2.Spring 根据 bean 的定义填充所有的属性
-3.如 果 bean 实 现 了 BeanNameAware 接 口 ， Spring 传递 bean 的 ID 到setBeanName 方法。
-4.如 果 Bean 实 现 了 BeanFactoryAware 接 口 ， Spring 传递 beanfactory 给setBeanFactory 方法。
-5.如 果 有 任 何 与 bean 相 关 联 的 BeanPostProcessors ， Spring 会在 postProcesserBeforeInitialization()方法内调用它们。
+3.如果 bean 实现 了 BeanNameAware 接口 ， Spring 传递 bean 的 ID 到setBeanName 方法。
+4.如果 Bean 实现 了 BeanFactoryAware 接口 ， Spring 传递 beanfactory 给setBeanFactory 方法。
+5.如果有任何与 bean 相关联的 BeanPostProcessors ， Spring 会 postProcesserBeforeInitialization()方法内调用它们。
 6.如果 bean 实现 IntializingBean 了，调用它的 afterPropertySet 方法，如果 bean 声明了初始化方法，调用此初始化方法
 7.如果有 BeanPostProcessors 和 bean 关联，这些 bean 的 postProcessAfterInitialization() 方法将被调用。
-8. 如果 bean 实现了 DisposableBean，它将调用 destroy()方法。
+8.如果 bean 实现了 DisposableBean，它将调用 destroy()方法。
 </code></pre>
 </li>
 </ul>
@@ -832,18 +832,17 @@ list 的实现为一个双向链表，即可以支持反向查找和遍历，更
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/08/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/">
+                <a href="/2023/02/22/juc%E9%9D%A2%E8%AF%95/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/19.jpg" class="responsive-img" alt="面试总结">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/11.jpg" class="responsive-img" alt="juc面试">
                         
-                        <span class="card-title">面试总结</span>
+                        <span class="card-title">juc面试</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -853,27 +852,26 @@ list 的实现为一个双向链表，即可以支持反向查找和遍历，更
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-08
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-22
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/category/%E6%88%91%E7%9A%84%E9%9D%A2%E8%AF%95/" class="post-category">
-                                    我的面试
+                            <a href="/category/%E9%9D%A2%E8%AF%95/" class="post-category">
+                                    面试
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                        <span class="chip bg-color">面试</span>
+                    <a href="/tags/juc%E9%9D%A2%E8%AF%95/">
+                        <span class="chip bg-color">juc面试</span>
                     </a>
                     
                 </div>
