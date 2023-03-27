@@ -475,14 +475,14 @@ token由三部分组成：由头">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    6.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    23 分
                 </div>
                 
 
@@ -524,20 +524,23 @@ signature 是把header，payload 分别进行 base64 编码，然后拼接在一
 </li>
 <li><pre class=" language-bash"><code class="language-bash">使用Token的目的是为了验证用户登录情况以及减轻服务器的压力，减少频繁的查询数据库，使服务器更加健壮。
 如果涉及到修改数据导致token发生改变，那么拿到改变后的token，与之前存储的token进行对比，发现与之前存储的token不相同，则不会进行下一步的操作。
+可以使用ip进行限制，如果ip不同了，先提示是否在xxx地，本人进行登录以达到限制登录的功能
 </code></pre>
 </li>
 <li><p>3.项目中使用到了redis，那redis有哪些数据结构？**(这个问题要回答5种数据结构的底层实现原理)**</p>
-</li>
-<li><pre class=" language-bash"><code class="language-bash">最常用的有5种:字符串<span class="token punctuation">(</span>String<span class="token punctuation">)</span>，哈希<span class="token punctuation">(</span>Hash<span class="token punctuation">)</span>，列表<span class="token punctuation">(</span>list<span class="token punctuation">)</span>，集合<span class="token punctuation">(</span>set<span class="token punctuation">)</span>，有序集合<span class="token punctuation">(</span>ZSET<span class="token punctuation">)</span>
-2.Hash（HashMap，哈希映射表）
-Hash 对应的 Value 实际上内部是一个HashMap，有两种不同的实现：这个Hash的成员比较少的时候，就会采用类似一维数组的方式来存储，而不会使用HashMap的结构，当成员数量增大时会自动转成真正的 HashMap。
-3.list<span class="token punctuation">(</span>双向链表<span class="token punctuation">)</span>
-list 的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销，Redis 内部的很多实现，包括发送缓冲队列等也都是用的这个数据结构
-4.set（HashSet）
-<span class="token keyword">set</span> 的内部实现是一个 value 永远为 null 的 HashMap，实际就是通过计算 <span class="token function">hash</span> 的方式来快速排重的，这也是 <span class="token keyword">set</span> 能提供判断一个成员是否在集合内的原因。
-5.ZSET（插入有序Set集合）
-内部使用 HashMap 和跳跃表（SkipList）来保证数据的存储和有序
+<ul>
+<li><pre class=" language-bash"><code class="language-bash">  最常用的有5种:字符串<span class="token punctuation">(</span>String<span class="token punctuation">)</span>，哈希<span class="token punctuation">(</span>Hash<span class="token punctuation">)</span>，列表<span class="token punctuation">(</span>list<span class="token punctuation">)</span>，集合<span class="token punctuation">(</span>set<span class="token punctuation">)</span>，有序集合<span class="token punctuation">(</span>ZSET<span class="token punctuation">)</span>
+  2.Hash（HashMap，哈希映射表）
+  Hash 对应的 Value 实际上内部是一个HashMap，有两种不同的实现：这个Hash的成员比较少的时候，就会采用类似一维数组的方式来存储，而不会使用HashMap的结构，当成员数量增大时会自动转成真正的 HashMap。
+  3.list<span class="token punctuation">(</span>双向链表<span class="token punctuation">)</span>
+  list 的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销，Redis 内部的很多实现，包括发送缓冲队列等也都是用的这个数据结构
+  4.set（HashSet）
+  <span class="token keyword">set</span> 的内部实现是一个 value 永远为 null 的 HashMap，实际就是通过计算 <span class="token function">hash</span> 的方式来快速排重的，这也是 <span class="token keyword">set</span> 能提供判断一个成员是否在集合内的原因。
+  5.ZSET（插入有序Set集合）
+  内部使用 HashMap 和跳跃表（SkipList）来保证数据的存储和有序
 </code></pre>
+</li>
+</ul>
 </li>
 <li><p>4.redis是如果进行存储数据的？</p>
 </li>
@@ -589,6 +592,295 @@ list 的实现为一个双向链表，即可以支持反向查找和遍历，更
 </code></pre>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+<li><p>3月6号~3月10号面试</p>
+<ul>
+<li><p>hash冲突的4种解决方案：</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">1.链地址法：对于相同的哈希值，使用链表进行连接。
+2.再哈希法：提供多个哈希函数，如果第一个哈希函数计算出来的key的哈希值冲突了，则使用第二个哈希函数计算key的哈希值。
+3.建立公共溢出区：将哈希表分为基本表和溢出表两部分，凡是和基本表发生冲突的元素，一律填入溢出表。
+4.开发定址法：当关键字key的哈希地址p =H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，若p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi ，将相应元素存入其中。
+</code></pre>
+</li>
+<li><p>redis的持久缓存机制是什么？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">Redis 提供两种持久化机制 RDB 和 AOF 机制：
+RDBRedis DataBase)持久化方式：
+是指用数据集快照的方式半持久化模式)记录 redis 数据库的所有键值对,在某 个时间点将数据
+写入一个临时文件，持久化结束后，用这个临时文件替换上次 持久化的文件，达到数据恢复。
+
+AOFAppend-only file)持久化方式：
+是指所有的命令行记录以 redis 命令请求协议的格式完全持久化存储)保存为 aof 文件。
+</code></pre>
+</li>
+<li><p>什么是mybatis？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">Mybatis 是一个半 ORM（对象关系映射）框架，它内部封装了 JDBC，开发时只需要关
+注 SQL 语句本身，不需要花费精力去处理加载驱动、创建连接、创建 statement 等繁杂
+的过程。程序员直接编写原生态 sql，可以严格控制 sql 执行性能，灵活度高
+</code></pre>
+</li>
+<li><p>说一下jdbc连接数据库的流程?</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">1.注册数据库驱动
+2.获取数据库连接
+3.获取传输器
+4.传输sql获取结果
+5.处理结果集 获取数据
+6.关闭资源
+</code></pre>
+</li>
+<li><p>mybatis中#{}和${}有什么区别？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">mybatis在处理#{}时，会将sql语句中的#{}替换为？号，调用PreParedStatement的set方法来赋值。
+mybatis在处理${}时，会将${}替换为变量的值。使用#{}可以有效防止sql注入
+</code></pre>
+</li>
+<li><p>什么是sql注入？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">就是攻击者把 SQL 命令插入到 Web 表单的输入域或页面请求的查询字符串，欺骗服务器执行恶意的 SQL 命令
+</code></pre>
+</li>
+<li><p>mysql中常见的查询类型有哪几种？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">1.普通查询：select 要查询的字段 from 表名
+2.去重查询(distinct)：seelct distinct 要查询的字段 from 表名
+3.排序查询(order by): 升序：asc 降序：desc，一搬不加desc默认为升序排列
+4.分组查询(group by)：select xxx from 表名 group by xxx
+5.等值查询
+6.外连接查询：左外连接(左表过滤的结果全在)，右外查询(右表过滤的结果全在)
+7.全外连接查询
+</code></pre>
+</li>
+<li><p>mysql中有几种锁？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">三种锁：
+1.表级锁：加锁快，消耗小，不支持高并发，发生锁冲突的概率最高
+2.行级锁：加锁慢，消耗大，支持高并发，发生冲突的概率最低，会发生死锁，可以解决脏读的问题。
+3.页面锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般
+</code></pre>
+</li>
+<li><p>什么是脏读？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据
+</code></pre>
+</li>
+<li><p>还有哪些情况？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">1.不可重复读：
+是指在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两 次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不 可重复读。
+2.幻读：
+是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。 同时，第二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象 发生了幻觉一样。
+</code></pre>
+</li>
+<li><p>冒泡排序需要多少个循环实现，循环了多少次呢？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">冒泡排序需要2个for循环实现，循环了n+(n-1)+(n-2)+...+3+2+1次
+</code></pre>
+</li>
+<li><p>String中有哪些常见的方法：</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">indexOf()：获取字符串对象中第一次出现的索引
+substring()：从start开始截取字符串
+equals()：比较字符串的内容是否相同
+equalsIgnoreCase()：比较字符串对象内容是否相同，忽略大小写
+startsWith()：判断字符串对象是否以指定字符开头
+endsWith()：判断字符串对象是否以指定的字符结尾
+isEmpty()：判断指定字符串是否为空
+toCharArray()：把字符串转换为字符数组
+toLowerCase()：把字符串转换为小写字符串
+toUpperCase()：把字符串转换为大写字符串
+split()：去除字符串中指定的的字符，然后返回一个新的字符串
+replace():将指定字符替换成另一个指定的字符
+charAt():获取指定索引处的字符
+length():获取字符串的长度，其实也就是字符个数
+</code></pre>
+</li>
+<li><p>SpringMvc的执行流程：</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">1.用户点击某个请求路径，发起一个HTTP request请求，该请求会被提交到Dispatcher Servlet（前端控制器）；
+2.由Dispatcher Servlet请求一个或多个Handler Mapping(处理器映射器)，并返回一个执行链（Handler Execution Chain）；
+3.Dispatcher Servlet将Handler Mapping返回的执行链中的Handler信息发送给Handler Adapter（处理器适配器）；
+4.HandlerAdapter 根据 Handler 信息找到并执行相应的 Handler（常称为 Controller）；
+5.Handler 执行完毕后会返回给 HandlerAdapter 一个 ModelAndView 对象（Spring MVC的底层对象，包括 Model 数据模型和 View 视图信息）；
+6.HandlerAdapter 接收到 ModelAndView 对象后，将其返回给 DispatcherServlet ；
+7.DispatcherServlet 接收到 ModelAndView 对象后，会请求 ViewResolver（视图解析器）对视图进行解析；
+8.ViewResolver 根据 View 信息匹配到相应的视图结果，并返回给 DispatcherServlet；
+9.DispatcherServlet 接收到具体的 View 视图后，进行视图渲染，将 Model 中的模型数据填充到 View 视图中的 request 域，生成最终的 View（视图）；
+10.视图负责将结果显示到浏览器（客户端）
+</code></pre>
+</li>
+<li><p>当我们打开百度，输入，Helloword点击回车，会发生什么？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">TCP协议的3次握手：
+第一次握手：是由客户端向服务端发起的，用来申请建立连接的。
+第二次握手：是由服务器回复客户端的，用来确认并接受连接请求的。
+第三次握手：仍然是客户端发送给服务器端的，用来确认服务端的回复消息。
+TCP协议的4次挥手：
+第1次挥手：客户端发送一个FIN，用来关闭客户端到服务端的数据传送，客户端进入FIN_WAIT_1状态；
+第2次挥手：服务端收到FIN后，发送一个ACK给客户端，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号），服务端进入CLOSE_WAIT状态；
+第3次挥手：服务端发送一个FIN，用来关闭服务端到客户端的数据传送，服务端进入LAST_ACK状态；
+第4次挥手：客户端收到FIN后，客户端t进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为收到序号+1，服务端进入CLOSED状态，完成四次挥手。
+</code></pre>
+</li>
+<li><p>关于I&#x2F;O，了解哪些？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">NIO/AIO/BIO
+BIO：同步阻塞I/O模型，数据的读取写入必须阻塞在一个线程内等待其完成。
+NIO：是一种同步非阻塞I/O模型。提供了Channel、Selector、Buffer，是支持面向缓冲的
+</code></pre>
+</li>
+<li><p>线程与进程的区别？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">进程是操作系统分配资源的最小单元，线程是操作系统调度的最小单元。一个程序至少有一个进程,一个进程至少有一个线程。
+</code></pre>
+</li>
+<li><p>ArrayList和LinkList的区别？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">1.ArrayList 和 LinkedList 都是不同步的，也就是不保证线程安全；
+2.Arraylist 底层使用的是 Object 数组；LinkedList 底层使用的是双向链表数据结构
+3.ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。
+4.LinkedList 不支持高效的随机元素访问，而 ArrayList 支持。
+</code></pre>
+</li>
+<li><p>说一下关于链表？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">首先，链表分为单链表和双链表，单链表的每一个节点由保存的元素和一个前驱节点组成，如果前驱节点为null，那么这个节点为头节点。如果是双向链表，每个节点都有一个数据元，一个前驱节点，一个后继节点，如果一个节点的前驱节点为null，那么这个节点就是头节点，如果一个节点的后继节点为null，那么这个节点就是尾节点。
+</code></pre>
+</li>
+<li><p>慢sql如何定位并解决？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">可以通过 show variables like 'long_query_time'来查看具体是哪一条sql造成了慢查询。
+大部分的慢sql可以通过加索引，或者分库分表的方式进行解决。
+索引又可以分为聚簇索引和非聚簇索引，聚簇索引是值把索引和数据放到一起进行存储，非聚簇索引就是将数据和索引分开存储，索引结构的叶子节点指向了对应行。
+</code></pre>
+</li>
+<li><p>说说你对Spring的理解？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">Spring主要是IOC和AOP，IOC是控制反转的思想，用依赖注入去是实现，把对象交给容器去管理。
+AOP是面向切面编程的意思，就是把在不改变代码逻辑的情况下，把公共的行为封装为一个模块，对代码进行增强。
+AOP通过动态代理实现：
+动态代理又分为jdk动态代理和cgLib动态代理
+jdk动态代理有限制，必须实现一个或者多个接口，cgLib不需要实现接口。
+</code></pre>
+</li>
+<li><p>Spring事务传播行为</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">1.TransactionDefinition.PROPAGATION_REQUIRED：如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新的事务。这是默认值。
+2.TransactionDefinition.PROPAGATION_REQUIRES NEW：创建一个新的事务，如果当前线程存在事务，则把当前事务挂起。
+3.TransactionDefinition.PROPAGATION_SUPPORTS：如果当前存在事务，则加入该事务;如果当前没有事务，则以非事务的方式继续运行。
+4.TransactionDefinition.PROPAGATION_NOT_SUPPORTED：以非事务方式运行，如果当前存在事务，就把当前事务挂起。
+</code></pre>
+</li>
+<li><p>Spring使用事务注解为什么会失效？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">使用事务注解事务到底在什么时候提交呢?该方法没有抛出异常的情况下就会自动提交事务。
+我们在代码当中做了try操作 没有将异常往外抛，所以 事务注解对应的aop就没有拦截，认为方法是没有异常的则直接提交事务。
+解决方法：需要在我们的catch中手动回滚事务。
+TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+</code></pre>
+</li>
+<li><p>动态代理和静态代理的区别是？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">静态代理在程序编译时就会生成一个class文件，动态代理是在编译时无法生成class文件，在运行时才能生成class文件，动态代理通过反射获取类来生成class文件。
+</code></pre>
+</li>
+<li><p>说一下单例模式的代码实现？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">单例模式分为饿汉式和懒汉式
+1.
+</code></pre>
+</li>
+<li><p>对象的组成：</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">对象的组成有3个部分：对象头；实例数据；对齐填充字节。其中对象头包含3个部分：Mark Word；指向类的指针；数组长度（如果当前对象不是数组则没有此部分）
+</code></pre>
+</li>
+<li><p>Synchronized锁升级原理：</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">在锁对象的对象头里面，有一个threadId字段，在的、第一次访问的时候，threadId为空，jvm让其有偏向锁，把threadId设置为线程id，再次进入就会先判断threadId和线程id是否一致，如果一致，就直接使用此对象，如果不一致，则升级偏向锁为轻量锁，通过自旋循环来获取锁,执行一定次数后，要是还获取不到锁，就升级轻量锁为重量锁。
+</code></pre>
+</li>
+<li><p>Synchronized锁的底层原理：</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">Synchronized底层是通过monitorenter和monitorexit指令进行的，其内部有一个计数器，当计数器为0时，表示可以获取锁，执行monitorenter之后，计数器+1，执行monitorexit之后，计数器-1，释放锁。当一个线程进来之后，发现计数器不为0，则会阻塞。
+</code></pre>
+</li>
+<li><p>Synchronized为什么锁升级？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">因为Synchronized是重量级锁，加锁开锁的开销比较大，所以需要对锁进行升级，有轻量级锁，偏向锁，重量级锁。
+</code></pre>
+</li>
+<li><p>Synchronized和Lock锁有什么区别？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">Synchronized可以给类，方法，代码块进行加锁；Lock只能给代码块加锁；
+Synchronized不需要手动获取锁和释放锁，发生异常会自动释放锁，不会造成死锁问题。Lock需要自己加锁和释放锁。如果使用不当unLock()就会发生死锁问题。
+通过Lock可以知道是否成功加锁，Synchronized无法知道。
+</code></pre>
+</li>
+<li><p>Synchronized和Volatile的区别？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">Volatile使用的是缓存一致性协议
+</code></pre>
+</li>
+<li><p>CAS锁了解嘛？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">CAS是自旋锁的意思，没有获取到锁的时候不会阻塞，而是循环一直不断得获取锁。
+CAS有3个操作数：内存值，旧的预期值，新的值，当旧的值和内存值相同时，就会把内存值修改为新的值，，否则什么都不会改变。
+</code></pre>
+</li>
+<li><p>如何配置线程池参数？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">cpu密集型：核心线程数 = cpu数量+1
+IO密集型：核心线程数 = 2 * cpu 
+</code></pre>
+</li>
+<li><p>AQS的组件</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">信号量，
+</code></pre>
+</li>
+<li><p>I&#x2F;O多路复用</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">什么是多路复用？
+多路线程复用是指一个进程/线程维护多个socket，它的实现方式有3种：
+select：客户端操作服务器时会产生3种文件描述符(fd文件)：select监控fd，有数据、可读、可写、出现异常，或超时时就会返回；再把fd拷贝回用户态中，然后通过遍历整个数组找到就绪的socket，进行对应的IO操作。
+poll：原理和select一致，区别是poll使用链表的方式存储fd文件。
+epoll：是在内核里使用红黑树来跟踪，增删查的时间复杂度是O(logn),把需要监控的socket通过epoll_ctl()函数加入到红黑树中，这样就不用传入所有的socket了，减少了从内核态到用户态的拷贝。
+</code></pre>
+</li>
+<li><p>redis的主从复制原理？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">
+</code></pre>
+</li>
+<li><p>Spring是如何解决循环依赖的？</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">首先是spring内部的三级缓存：
+第一级缓存：singletonObjects，用于保存实例化、注入、初始化完成的bean实例；
+第二级缓存：earlySingletonObjects，用于保存实例化完成的bean实例；
+第三级缓存：singletonFactories，用于保存bean创建工厂，以便后面有机会创建代理对象。
+</code></pre>
+</li>
+<li><p>Mysql事务，锁和Mvcc</p>
+</li>
+<li><pre class=" language-bean"><code class="language-bean">你是怎么理解事务的？
+首先：事务是可以是一组操作，要么全部成功，要么全部失败，事务的目的是为了保证数据的一致性。
+事务的4大特征是：
+就是ACID，分别是原子性，一致性，隔离性，持久性。
+原子性是指当前事务要么成功，要么失败。原子性由undo log日志来保证，因为undo log记录着之前的值。如果出现异常，通过undo log记录的数据进行恢复。
+隔离性是指当事务并发时，他们内部操作不能互相干扰。如果多个事务同时操作一个数据，就会出现脏读，重复读，幻读的问题。然后就有四种隔离级别：分别是读未提交，读已提交，可重复读，串行。
+读未提交：就是读到未提交数据，产生脏读。如果读也加锁，就会降低性能，所以有了MVCC的解决方案，其中读已提交就是在读取的时候生成一个版本号，等到提交了事务，就会读取到最新的版本号的数据。
+读已提交：
+可重复读：当事务被修改，仍然会读取到修改前的数据，存在幻读的问题。MVCC解决了这个问题，用版本来控制。
+串行：
+持久性是指提交了事务之后，它对数据库的改变是永久的，会将数据持久化在硬盘上，持久化由redo log日志来保证。即使mysql挂掉了，也可以通过redo log来进行数据的恢复。
+一致性是指我们使用事务的目的，需要通过应用程序的代码来保证。
+在innoDB中，分为行锁和表锁，行锁是作用在索引上的，如果命中了索引，那么就是行锁，如果没命中索引，就是表锁，行锁分为读锁和写锁，读锁是共享锁，多个事务可以读取同一个资源，但是不允许其他事务修改，写锁是会阻塞其他的写锁和读锁。
+</code></pre>
 </li>
 </ul>
 </li>

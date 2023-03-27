@@ -5,18 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Mysql练习, 谦谦的个人博客">
-    <meta name="description" content="1、取得每个部门最高薪水的人员名称第一步：取得每个部门最高薪水select deptno,max(sal) as maxal from emp group by deptno;
+    <meta name="description" content="MySql练习题1、取得每个部门最高薪水的人员名称
+第一步：取得每个部门最高薪水(按照部门编号分组，找出每一组的最大值)
 
-
-
-
-deptno
-maxsal
-
-
-
-10
-5000.00">
+select deptno,max(sal) as maxal from emp group by deptno;
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -466,14 +459,14 @@ maxsal
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    49
+                    894
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -493,7 +486,10 @@ maxsal
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1、取得每个部门最高薪水的人员名称"><a href="#1、取得每个部门最高薪水的人员名称" class="headerlink" title="1、取得每个部门最高薪水的人员名称"></a>1、取得每个部门最高薪水的人员名称</h3><h4 id="第一步：取得每个部门最高薪水"><a href="#第一步：取得每个部门最高薪水" class="headerlink" title="第一步：取得每个部门最高薪水"></a>第一步：取得每个部门最高薪水</h4><pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> deptno<span class="token punctuation">,</span><span class="token function">max</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> maxal <span class="token keyword">from</span> emp <span class="token keyword">group</span> <span class="token keyword">by</span> deptno<span class="token punctuation">;</span>
+                <h2 id="MySql练习题"><a href="#MySql练习题" class="headerlink" title="MySql练习题"></a>MySql练习题</h2><h3 id="1、取得每个部门最高薪水的人员名称"><a href="#1、取得每个部门最高薪水的人员名称" class="headerlink" title="1、取得每个部门最高薪水的人员名称"></a>1、取得每个部门最高薪水的人员名称</h3><ul>
+<li><strong>第一步：取得每个部门最高薪水(按照部门编号分组，找出每一组的最大值)</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> deptno<span class="token punctuation">,</span><span class="token function">max</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> maxal <span class="token keyword">from</span> emp <span class="token keyword">group</span> <span class="token keyword">by</span> deptno<span class="token punctuation">;</span>
 </code></pre>
 <table>
 <thead>
@@ -515,6 +511,277 @@ maxsal
 <td><strong>2850</strong></td>
 </tr>
 </tbody></table>
+<ul>
+<li><strong>第二步:将以上的查询结果当做一-张临时表t, t和emp表连接，条件: t.deptno &#x3D; e .deptno and t.maxsal &#x3D; e.sal</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span>
+    <span class="token number">e</span><span class="token punctuation">.</span>ename<span class="token punctuation">,</span>t<span class="token punctuation">.</span><span class="token operator">*</span>
+<span class="token keyword">from</span>
+    emp <span class="token number">e</span>
+<span class="token keyword">join</span>
+     <span class="token punctuation">(</span><span class="token keyword">select</span> deptno<span class="token punctuation">,</span><span class="token function">max</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> maxal <span class="token keyword">from</span> emp <span class="token keyword">group</span> <span class="token keyword">by</span> deptno<span class="token punctuation">)</span> t
+ <span class="token keyword">on</span>
+     t<span class="token punctuation">.</span>deptno <span class="token operator">=</span> <span class="token number">e</span> <span class="token punctuation">.</span>deptno <span class="token operator">and</span> t<span class="token punctuation">.</span>maxal <span class="token operator">=</span> <span class="token number">e</span><span class="token punctuation">.</span>sal
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>ename</th>
+<th>deptno</th>
+<th>maxal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BLAKE</td>
+<td>30</td>
+<td>2850.00</td>
+</tr>
+<tr>
+<td>SCOTT</td>
+<td>20</td>
+<td>3000.00</td>
+</tr>
+<tr>
+<td>KING</td>
+<td>10</td>
+<td>5000.00</td>
+</tr>
+<tr>
+<td>FORD</td>
+<td>20</td>
+<td>3000.00</td>
+</tr>
+</tbody></table>
+<h3 id="2、哪些人的薪水在部门的平均薪水之上"><a href="#2、哪些人的薪水在部门的平均薪水之上" class="headerlink" title="2、哪些人的薪水在部门的平均薪水之上"></a>2、哪些人的薪水在部门的平均薪水之上</h3><ul>
+<li><strong>找出每个部门的平均薪水</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> deptno<span class="token punctuation">,</span><span class="token function">avg</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> avgsal <span class="token keyword">from</span> emp <span class="token keyword">group</span> <span class="token keyword">by</span> deptno
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>deptno</th>
+<th>avgsal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>2916.666667</td>
+</tr>
+<tr>
+<td>20</td>
+<td>2175.000000</td>
+</tr>
+<tr>
+<td>30</td>
+<td>1566.666667</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>第二步:将以上查询结果当做t表，t和emp表连接 条件:部门编号相同，并且emp的sal大于t表的avgsal</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> 
+    t<span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">,</span><span class="token number">e</span><span class="token punctuation">.</span>sal<span class="token punctuation">,</span><span class="token number">e</span><span class="token punctuation">.</span>ename
+<span class="token keyword">from</span>
+    emp <span class="token number">e</span>
+<span class="token keyword">join</span> 
+    <span class="token punctuation">(</span><span class="token keyword">select</span> deptno<span class="token punctuation">,</span><span class="token function">avg</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> avgsal <span class="token keyword">from</span> emp <span class="token keyword">group</span> <span class="token keyword">by</span> deptno<span class="token punctuation">)</span> t
+<span class="token keyword">on</span>
+    <span class="token number">e</span><span class="token punctuation">.</span>deptno <span class="token operator">=</span> t<span class="token punctuation">.</span>deptno <span class="token operator">and</span> <span class="token number">e</span><span class="token punctuation">.</span>sal <span class="token operator">></span> t<span class="token punctuation">.</span>avgsal
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>depton</th>
+<th>avgsal</th>
+<th>ename</th>
+<th>sal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>30</td>
+<td>1 566.666667</td>
+<td>ALLEN</td>
+<td>1 600.00</td>
+</tr>
+<tr>
+<td>20</td>
+<td>2175.000000</td>
+<td>JONES</td>
+<td>2975.00</td>
+</tr>
+<tr>
+<td>30</td>
+<td>1566.6666671</td>
+<td>BLAKE</td>
+<td>2850. 00</td>
+</tr>
+<tr>
+<td>20</td>
+<td>21 75.000000</td>
+<td>SCOTT</td>
+<td>3000.00</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2916.6666671</td>
+<td>KING</td>
+<td>5000.0</td>
+</tr>
+<tr>
+<td>20</td>
+<td>21 75.000000</td>
+<td>FORD</td>
+<td>3000.0</td>
+</tr>
+</tbody></table>
+<h3 id="3、取得部门中-所有人的-平均的薪水等级"><a href="#3、取得部门中-所有人的-平均的薪水等级" class="headerlink" title="3、取得部门中(所有人的)平均的薪水等级"></a>3、取得部门中(所有人的)平均的薪水等级</h3><ul>
+<li><strong>第一步:找出每个人的薪水等级    emp  e  和  salgrade  s 表连接   连接条件：e.sal  between  s.losal and s.hisal</strong></li>
+<li><strong>第二步:基于以上的结果继续按照deptno分组，求grade的平均值。</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span>
+    <span class="token number">e</span><span class="token punctuation">.</span>deptno<span class="token punctuation">,</span><span class="token function">avg</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>grade<span class="token punctuation">)</span>
+<span class="token keyword">from</span>
+    emp <span class="token number">e</span>
+<span class="token keyword">join</span>
+    salgrade s
+<span class="token keyword">on</span>
+    <span class="token number">e</span><span class="token punctuation">.</span>sal <span class="token operator">between</span> s<span class="token punctuation">.</span>losal <span class="token operator">and</span> s<span class="token punctuation">.</span>hisal <span class="token keyword">order</span> <span class="token keyword">by</span> deptno<span class="token punctuation">;</span>
+<span class="token keyword">group</span> <span class="token keyword">by</span>
+    <span class="token number">e</span><span class="token punctuation">.</span>deptno<span class="token punctuation">;</span>
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>deptno</th>
+<th>avg(s.grade)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>3.6667</td>
+</tr>
+<tr>
+<td>20</td>
+<td>2.8000</td>
+</tr>
+<tr>
+<td>30</td>
+<td>2.5000</td>
+</tr>
+</tbody></table>
+<h3 id="4、不准用组函数-Max-，取得最高薪水"><a href="#4、不准用组函数-Max-，取得最高薪水" class="headerlink" title="4、不准用组函数(Max)，取得最高薪水"></a>4、不准用组函数(Max)，取得最高薪水</h3><ul>
+<li><strong>第一种：sal降序，limit1</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> ename<span class="token punctuation">,</span>sal <span class="token keyword">from</span> emp <span class="token keyword">order</span> <span class="token keyword">by</span> sal <span class="token keyword">desc</span> <span class="token keyword">limit</span> <span class="token number">1</span>
+</code></pre>
+<ul>
+<li><strong>第二种方案：</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token function">max</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">from</span> emp<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li><strong>第三种方案：表的自连接</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> sal <span class="token keyword">from</span> emp <span class="token keyword">where</span> sal <span class="token operator">not</span> <span class="token operator">in</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token keyword">distinct</span> <span class="token number">a</span><span class="token punctuation">.</span> sal <span class="token keyword">from</span> emp <span class="token number">a</span> <span class="token keyword">join</span> emp <span class="token number">b</span> <span class="token keyword">on</span> <span class="token number">a</span><span class="token punctuation">.</span>sal <span class="token operator">&lt;</span> <span class="token number">b</span><span class="token punctuation">.</span> sal<span class="token punctuation">)</span>
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>sal</th>
+<th>sal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5000.00</td>
+<td>5000.00</td>
+</tr>
+</tbody></table>
+<h3 id="5-取得平均薪水最高的部门的部门编号-至少给出两种解决方案"><a href="#5-取得平均薪水最高的部门的部门编号-至少给出两种解决方案" class="headerlink" title="5.取得平均薪水最高的部门的部门编号(至少给出两种解决方案)"></a>5.取得平均薪水最高的部门的部门编号(至少给出两种解决方案)</h3><ul>
+<li><strong>第一种方案：降序取第一个</strong></li>
+<li><strong>第一步:找出每个部门的平均薪水</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> deptno<span class="token punctuation">,</span><span class="token function">avg</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> avgsal <span class="token keyword">from</span> emp <span class="token keyword">group</span> <span class="token keyword">by</span> deptno<span class="token punctuation">;</span>
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>deptno</th>
+<th>avgsal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>2916.666667</td>
+</tr>
+<tr>
+<td>20</td>
+<td>2175 .000000</td>
+</tr>
+<tr>
+<td>30</td>
+<td>1566.666667</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>降序选</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> deptno<span class="token punctuation">,</span><span class="token function">avg</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> avgsal <span class="token keyword">from</span> emp <span class="token keyword">group</span> <span class="token keyword">by</span> deptno <span class="token keyword">order</span> <span class="token keyword">by</span> avgsal <span class="token keyword">desc</span> <span class="token keyword">limit</span> <span class="token number">1</span><span class="token punctuation">;</span>
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>deptno</th>
+<th>avgsal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>2916.666667</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>第二种方案：max</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token function">max</span> <span class="token punctuation">(</span>t<span class="token punctuation">.</span> avgsal<span class="token punctuation">)</span> <span class="token keyword">from</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">avg</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> avgsal <span class="token keyword">from</span> emp <span class="token keyword">group</span> <span class="token keyword">by</span> deptno<span class="token punctuation">)</span> t<span class="token punctuation">;</span>
+</code></pre>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> deptno<span class="token punctuation">,</span><span class="token function">avg</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> avgsal <span class="token keyword">from</span> emp 
+<span class="token keyword">group</span> <span class="token keyword">by</span> deptno 
+<span class="token keyword">having</span> avgsal <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">max</span> <span class="token punctuation">(</span>t<span class="token punctuation">.</span> avgsal<span class="token punctuation">)</span> <span class="token keyword">from</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">avg</span><span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> avgsal <span class="token keyword">from</span> emp <span class="token keyword">group</span> <span class="token keyword">by</span> deptno<span class="token punctuation">)</span> t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="6、取得平均薪水最高的部门的部门名称"><a href="#6、取得平均薪水最高的部门的部门名称" class="headerlink" title="6、取得平均薪水最高的部门的部门名称"></a>6、取得平均薪水最高的部门的部门名称</h3><pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span>
+    <span class="token number">d</span><span class="token punctuation">.</span>dname <span class="token punctuation">,</span><span class="token function">avg</span><span class="token punctuation">(</span><span class="token number">e</span><span class="token punctuation">.</span>sal<span class="token punctuation">)</span> <span class="token keyword">as</span> avgsal
+<span class="token keyword">from</span>
+    emp <span class="token number">e</span>
+<span class="token keyword">join</span>
+    dept <span class="token number">d</span>
+<span class="token keyword">on</span>
+    <span class="token number">e</span><span class="token punctuation">.</span> deptno <span class="token operator">=</span> <span class="token number">d</span><span class="token punctuation">.</span> deptno
+<span class="token keyword">group</span> <span class="token keyword">by</span>
+    <span class="token number">d</span><span class="token punctuation">.</span>dname
+<span class="token keyword">order</span> <span class="token keyword">by</span>
+    avgsal <span class="token keyword">desc</span>
+l imit
+    <span class="token number">1</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="8-取得比普通员工的最高薪水还要高的领导人姓名"><a href="#8-取得比普通员工的最高薪水还要高的领导人姓名" class="headerlink" title="8.取得比普通员工的最高薪水还要高的领导人姓名"></a>8.取得比普通员工的最高薪水还要高的领导人姓名</h3><pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token keyword">distinct</span> mgr <span class="token keyword">from</span> emp<span class="token punctuation">;</span>
+</code></pre>
+<p>员工编号没有在以上范围内的都是普通员工。</p>
+<ul>
+<li><strong>第一步：找出普通员工的最高薪水</strong></li>
+</ul>
+<p>not  in 使用的时候，后面小括号中记得排除NULL</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token function">max</span> <span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">from</span> emp <span class="token keyword">where</span> empno <span class="token operator">not</span> <span class="token operator">in</span> <span class="token punctuation">(</span><span class="token keyword">select</span> di stinct mgr <span class="token keyword">from</span> emp <span class="token keyword">where</span> mgr <span class="token operator">is</span> <span class="token operator">not</span> <span class="token boolean">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li><strong>第二步：找出高于1600的</strong></li>
+</ul>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> ename<span class="token punctuation">,</span>sal <span class="token keyword">from</span> emp <span class="token keyword">where</span> sal <span class="token operator">></span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">max</span> <span class="token punctuation">(</span>sal<span class="token punctuation">)</span> <span class="token keyword">from</span> emp <span class="token keyword">where</span> empno <span class="token operator">not</span> <span class="token operator">in</span> <span class="token punctuation">(</span><span class="token keyword">select</span> di stinct mgr <span class="token keyword">from</span> emp <span class="token keyword">where</span> mgr <span class="token operator">is</span> <span class="token operator">not</span> <span class="token boolean">null</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="9-取得薪水最高的前五名员工"><a href="#9-取得薪水最高的前五名员工" class="headerlink" title="9.取得薪水最高的前五名员工"></a>9.取得薪水最高的前五名员工</h3><pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> ename<span class="token punctuation">,</span>sal <span class="token keyword">from</span> emp <span class="token keyword">order</span> <span class="token keyword">by</span> sal <span class="token keyword">desc</span> <span class="token keyword">limit</span> <span class="token number">5</span>
+</code></pre>
+<h3 id="10、取得薪水最高的第六到第十名员工"><a href="#10、取得薪水最高的第六到第十名员工" class="headerlink" title="10、取得薪水最高的第六到第十名员工"></a>10、取得薪水最高的第六到第十名员工</h3><pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> ename<span class="token punctuation">,</span>sal <span class="token keyword">from</span> emp <span class="token keyword">order</span> <span class="token keyword">by</span> sal <span class="token keyword">desc</span> limit5<span class="token punctuation">,</span><span class="token number">5</span>
+</code></pre>
 
                 
             </div>

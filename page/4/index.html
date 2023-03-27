@@ -589,18 +589,11 @@ Node
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1、取得每个部门最高薪水的人员名称第一步：取得每个部门最高薪水select deptno,max(sal) as maxal from emp group by deptno;
+                                MySql练习题1、取得每个部门最高薪水的人员名称
+第一步：取得每个部门最高薪水(按照部门编号分组，找出每一组的最大值)
 
+select deptno,max(sal) as maxal from emp group by deptno;
 
-
-
-deptno
-maxsal
-
-
-
-10
-5000.00
                             
                         </div>
                         <div class="publish-info">
