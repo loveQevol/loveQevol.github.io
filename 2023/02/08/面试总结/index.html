@@ -475,14 +475,14 @@ token由三部分组成：由头">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.5k
+                    6.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    23 分
+                    24 分
                 </div>
                 
 
@@ -790,15 +790,17 @@ TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 </li>
 <li><p>说一下单例模式的代码实现？</p>
 </li>
-<li><pre class=" language-bean"><code class="language-bean">单例模式分为饿汉式和懒汉式
-1.
+<li><p>&#96;&#96;&#96;bean<br>单例模式是防止一个对象被多次加载和创建，来造成不必要的资源消耗，他们都是线程安全的。<br>单例模式分为饿汉式和懒汉式<br>1.饿汉式单例，通过虚拟机只加载一次class对象来实现线程安全</p>
+</li>
+</ul>
+<p>2.懒汉式单例，在进行创建时，会优先进行判断是否为空，若不为空就使用，为空则创建后使用。</p>
+<pre><code>
+* 对象的组成：
+
+* ```bean
+对象的组成有3个部分：对象头；实例数据；对齐填充字节。其中对象头包含3个部分：Mark Word；指向类的指针；数组长度（如果当前对象不是数组则没有此部分）
 </code></pre>
-</li>
-<li><p>对象的组成：</p>
-</li>
-<li><pre class=" language-bean"><code class="language-bean">对象的组成有3个部分：对象头；实例数据；对齐填充字节。其中对象头包含3个部分：Mark Word；指向类的指针；数组长度（如果当前对象不是数组则没有此部分）
-</code></pre>
-</li>
+<ul>
 <li><p>Synchronized锁升级原理：</p>
 </li>
 <li><pre class=" language-bean"><code class="language-bean">在锁对象的对象头里面，有一个threadId字段，在的、第一次访问的时候，threadId为空，jvm让其有偏向锁，把threadId设置为线程id，再次进入就会先判断threadId和线程id是否一致，如果一致，就直接使用此对象，如果不一致，则升级偏向锁为轻量锁，通过自旋循环来获取锁,执行一定次数后，要是还获取不到锁，就升级轻量锁为重量锁。
@@ -846,7 +848,7 @@ IO密集型：核心线程数 = 2 * cpu
 <li><p>I&#x2F;O多路复用</p>
 </li>
 <li><pre class=" language-bean"><code class="language-bean">什么是多路复用？
-多路线程复用是指一个进程/线程维护多个socket，它的实现方式有3种：
+多路线程复用是指一个进程/线程维护多个socket，它的实现方式有3种：                                               
 select：客户端操作服务器时会产生3种文件描述符(fd文件)：select监控fd，有数据、可读、可写、出现异常，或超时时就会返回；再把fd拷贝回用户态中，然后通过遍历整个数组找到就绪的socket，进行对应的IO操作。
 poll：原理和select一致，区别是poll使用链表的方式存储fd文件。
 epoll：是在内核里使用红黑树来跟踪，增删查的时间复杂度是O(logn),把需要监控的socket通过epoll_ctl()函数加入到红黑树中，这样就不用传入所有的socket了，减少了从内核态到用户态的拷贝。
@@ -854,7 +856,13 @@ epoll：是在内核里使用红黑树来跟踪，增删查的时间复杂度是
 </li>
 <li><p>redis的主从复制原理？</p>
 </li>
-<li><pre class=" language-bean"><code class="language-bean">
+<li><pre class=" language-bean"><code class="language-bean">redis全量复制一般发生在Slave阶段，此时Slave需要将Master上的所有的数据都复制一份：
+首先从服务器连接主服务器，发送SYNC命令；
+主服务器接收到命令后，开始生成RDB文件并使用缓冲区记录之后的所有的写命令；
+主服务器执行完之后，向所有服务器发送快照文件，并在发送期间继续记录执行的写命令；
+从服务器收到快照文件之后丢弃所有的旧数据，载入快照；
+主服务器快照发送完毕之后开始向从服务器发送缓冲区中的写命令；
+从服务器完成快照的载入，开始接收请求，并执行主服务器缓存区的写命令。
 </code></pre>
 </li>
 <li><p>Spring是如何解决循环依赖的？</p>
