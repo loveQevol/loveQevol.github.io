@@ -528,28 +528,24 @@ signature 是把header，payload 分别进行 base64 编码，然后拼接在一
 </code></pre>
 </li>
 <li><p>3.项目中使用到了redis，那redis有哪些数据结构？**(这个问题要回答5种数据结构的底层实现原理)**</p>
-<ul>
-<li><pre class=" language-bash"><code class="language-bash">  最常用的有5种:字符串<span class="token punctuation">(</span>String<span class="token punctuation">)</span>，哈希<span class="token punctuation">(</span>Hash<span class="token punctuation">)</span>，列表<span class="token punctuation">(</span>list<span class="token punctuation">)</span>，集合<span class="token punctuation">(</span>set<span class="token punctuation">)</span>，有序集合<span class="token punctuation">(</span>ZSET<span class="token punctuation">)</span>
-  1.String<span class="token punctuation">(</span>String 字符串<span class="token punctuation">)</span>
-  String是简单的 key-value 键值对，value 不仅可以是 String，也可以是数字。它是Redis最基本的数据类型，一个redis中字符串value最多可以是512M
-  2.Hash（HashMap，哈希映射表）
-  Hash 对应的 Value 实际上内部是一个HashMap，有两种不同的实现：这个Hash的成员比较少的时候，就会采用类似一维数组的方式来存储，而不会使用HashMap的结构，当成员数量增大时会自动转成真正的 HashMap。
-  3.list<span class="token punctuation">(</span>双向链表<span class="token punctuation">)</span>
-  list 的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销，Redis 内部的很多实现，包括发送缓冲队列等也都是用的这个数据结构
-  4.set（HashSet）
-  <span class="token keyword">set</span> 的内部实现是一个 value 永远为 null 的 HashMap，实际就是通过计算 <span class="token function">hash</span> 的方式来快速排重的，这也是 <span class="token keyword">set</span> 能提供判断一个成员是否在集合内的原因。
-  5.ZSET（插入有序Set集合）
-  内部使用 HashMap 和跳跃表（SkipList）来保证数据的存储和有序
-</code></pre>
 </li>
-</ul>
+<li><pre class=" language-bean"><code class="language-bean">最常用的有5种:字符串(String)，哈希(Hash)，列表(list)，集合(set)，有序集合(ZSET)
+1.String(String 字符串)
+String是简单的 key-value 键值对，value 不仅可以是 String，也可以是数字。它是Redis最基本的数据类型，一个redis中字符串value最多可以是512M
+2.Hash（HashMap，哈希映射表）
+Hash 对应的 Value 实际上内部是一个HashMap，有两种不同的实现：这个Hash的成员比较少的时候，就会采用类似一维数组的方式来存储，而不会使用HashMap的结构，当成员数量增大时会自动转成真正的 HashMap。
+3.list(双向链表)
+list 的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销，Redis 内部的很多实现，包括发送缓冲队列等也都是用的这个数据结构
+4.set（HashSet）
+set 的内部实现是一个 value 永远为 null 的 HashMap，实际就是通过计算 hash 的方式来快速排重的，这也是 set 能提供判断一个成员是否在集合内的原因。
+5.ZSET（插入有序Set集合）
+内部使用 HashMap 和跳跃表（SkipList）来保证数据的存储和有序
+</code></pre>
 </li>
 <li><p>4.redis是如果进行存储数据的？</p>
-<ul>
+</li>
 <li><pre class=" language-bean"><code class="language-bean">Redis是一种基于内存的Key-Value存储系统，它将所有的数据存储在内存中，因此具有非常快的读写速度。
 </code></pre>
-</li>
-</ul>
 </li>
 <li><p>5.项目使用的是mysql嘛？</p>
 </li>
@@ -562,15 +558,17 @@ signature 是把header，payload 分别进行 base64 编码，然后拼接在一
 </li>
 <li><p>7.说说mysql是如何执行sql语句的</p>
 </li>
-<li><p>&#96;&#96;&#96;bash<br>1.连接器：首先需要在 MySQL 客户端登陆才能使用，所以需要 连接器 来连接用户和 MySQL 数据库，<br>我们 一般是使用 mysql-u 用户名-p 密码来进行 MySQL 登陆，和服务端建立连接。在完成 TCP 握手后，连接器会根据你输入的用户名和密码验证你的登录身份。如果用户名或者密码错误，MySQL 就会提示 Access denied for user，来结束执行。如果登录成功后，MySQL 会根据权限表中的记录来判定你的权限。<br>2.连接完成后，你就可以执行 SQL 语句了，这行逻辑就会来到第二步:查询缓存。MySQL 在得到一个执行请求后，会首先去查询缓存 中查找，是否执行过这条 SQL 语句，之前执行过的语句以及结果会以 key-value 对的形式，被直接放在内存中。key 是查询语句，value 是查询的结果。如果通过 key 能够查找到这条 SQL 语句，就直接妾返回 SQL 的执行结果。如果语句不在查询缓存中，就会继续后面的执行阶段。执行完成后，执行结果就会被放入查询缓存中。可以看到，如果查询命中缓存，MySQL 不需要执行后面的复杂操作，就可以直接返回结果，效率会很高。</p>
+<li><pre class=" language-bash"><code class="language-bash">1.连接器：首先需要在 MySQL 客户端登陆才能使用，所以需要 连接器 来连接用户和 MySQL 数据库，
+我们 一般是使用 mysql-u 用户名-p 密码来进行 MySQL 登陆，和服务端建立连接。在完成 TCP 握手后，连接器会根据你输入的用户名和密码验证你的登录身份。如果用户名或者密码错误，MySQL 就会提示 Access denied <span class="token keyword">for</span> user，来结束执行。如果登录成功后，MySQL 会根据权限表中的记录来判定你的权限。
+2.连接完成后，你就可以执行 SQL 语句了，这行逻辑就会来到第二步:查询缓存。MySQL 在得到一个执行请求后，会首先去查询缓存 中查找，是否执行过这条 SQL 语句，之前执行过的语句以及结果会以 key-value 对的形式，被直接放在内存中。key 是查询语句，value 是查询的结果。如果通过 key 能够查找到这条 SQL 语句，就直接妾返回 SQL 的执行结果。如果语句不在查询缓存中，就会继续后面的执行阶段。执行完成后，执行结果就会被放入查询缓存中。可以看到，如果查询命中缓存，MySQL 不需要执行后面的复杂操作，就可以直接返回结果，效率会很高。
+3.如果没有命中查询，就开始执行真正的 SQL 语句。首先，MySQL 会根据你写的 SQL 语句进行解析，分析器会先做词法分析，你写的 SQL 就是由多个字符串和空格组成的一条 SQL 语句，MySQL 需要识别出里面的字符串是什么，代表什么。然后进行语法分析，根据词法分析的结果，语法分析器会根据语法规则，判断你输入的这个 SQL语句是否满足 MySQL 语法。如果 SQL 语句不正确，就会提示 You have an error <span class="token keyword">in</span> yourSQL syntax。
+4.经过分析器的词法分析和语法分析后，你这条 SQL 就合法了，MySQL 就知道你要做什么了。但是在执行前，还需要进行优化器的处理，优化器会判断你使用了哪种索引，使用了何种连接，优化器的作用就是确定效率最高的执行方案。
+5.MySQL 通过分析器知道了你的 SQL 语句是否合法，你想要做什么操作，通过优化器知道了该怎么做效率最高，然后就进入了执行阶段，开始执行这条 SQL 语句在执行阶段，MySQL 首先会判断你有没有执行这条语句的权限，没有权限的话，就会返回没有权限的错误。如果有权限，就打开表继续执行。打开表的时候，执行器就会根据表的引擎定义，去使用这个引擎提供的接口。对于有索引的表，执行的逻辑也差不多。
+</code></pre>
 </li>
-</ul>
-<p>3.如果没有命中查询，就开始执行真正的 SQL 语句。首先，MySQL 会根据你写的 SQL 语句进行解析，分析器会先做词法分析，你写的 SQL 就是由多个字符串和空格组成的一条 SQL 语句，MySQL 需要识别出里面的字符串是什么，代表什么。然后进行语法分析，根据词法分析的结果，语法分析器会根据语法规则，判断你输入的这个 SQL语句是否满足 MySQL 语法。如果 SQL 语句不正确，就会提示 You have an error in yourSQL syntax。<br>  4.经过分析器的词法分析和语法分析后，你这条 SQL 就合法了，MySQL 就知道你要做什么了。但是在执行前，还需要进行优化器的处理，优化器会判断你使用了哪种索引，使用了何种连接，优化器的作用就是确定效率最高的执行方案。<br>  5.MySQL 通过分析器知道了你的 SQL 语句是否合法，你想要做什么操作，通过优化器知道了该怎么做效率最高，然后就进入了执行阶段，开始执行这条 SQL 语句在执行阶段，MySQL 首先会判断你有没有执行这条语句的权限，没有权限的话，就会返回没有权限的错误。如果有权限，就打开表继续执行。打开表的时候，执行器就会根据表的引擎定义，去使用这个引擎提供的接口。对于有索引的表，执行的逻辑也差不多。</p>
-<pre><code>
-* 8.讲一下springboot的执行流程
-
-* ```bash
-1.通过 SpringFactoriesLoader 加载 META-INF/spring.factories 文件，获取并创建 SpringApplicationRunListener 对象
+<li><p>8.讲一下springboot的执行流程</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">1.通过 SpringFactoriesLoader 加载 META-INF/spring.factories 文件，获取并创建 SpringApplicationRunListener 对象
 2.然后由 SpringApplicationRunListener 来发出 starting 消息
 3.创建参数，并配置当前 SpringBoot 应用将要使用的 Environment
 4.完成之后，依然由 SpringApplicationRunListener 来发出 environmentPrepared 消息
@@ -580,10 +578,10 @@ signature 是把header，payload 分别进行 base64 编码，然后拼接在一
 8.将各种 beans 装载入 ApplicationContext，继续由 SpringApplicationRunListener 来发出 contextLoaded 消息，告知 Spring Boot 应用使用的 ApplicationContext 已装填OK
 9.refresh ApplicationContext，完成IoC容器可用的最后一步
 10.由 SpringApplicationRunListener 来发出 started 消息
-11.调用callRunners(...)方法，让实现了ApplicationRunner和CommandLineRunner接口类的run 方法得以执行，用于在 Spring 应用上下文准备完毕后，执行一些额外操作。从而完成最终的程序的启动。
+11.调用callRunners<span class="token punctuation">(</span><span class="token punctuation">..</span>.<span class="token punctuation">)</span>方法，让实现了ApplicationRunner和CommandLineRunner接口类的run 方法得以执行，用于在 Spring 应用上下文准备完毕后，执行一些额外操作。从而完成最终的程序的启动。
 12.由 SpringApplicationRunListener 来发出 running 消息，告知程序已运行起来了
 </code></pre>
-<ul>
+</li>
 <li><p>9.解释 Spring 框架中 Bean 的生命周期</p>
 </li>
 <li><pre class=" language-bean"><code class="language-bean">1.Spring 容器 从 XML 文件中读取 bean 的定义，并实例化 bean。
