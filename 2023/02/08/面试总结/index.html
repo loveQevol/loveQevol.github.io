@@ -475,14 +475,14 @@ token由三部分组成：由头">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8.4k
+                    10.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    30 分
+                    36 分
                 </div>
                 
 
@@ -624,43 +624,39 @@ list 的实现为一个双向链表，即可以支持反向查找和遍历，更
 </li>
 <li><p>redis的持久缓存机制是什么？</p>
 </li>
-<li><pre class=" language-bash"><code class="language-bash">Redis 提供两种持久化机制 RDB 和 AOF 机制：
-RDB<span class="token punctuation">(</span>Redis DataBase<span class="token punctuation">)</span>持久化方式：
-是指用数据集快照的方式<span class="token punctuation">(</span>半持久化模式<span class="token punctuation">)</span>记录 redis 数据库的所有键值对,在某个时间点将数据
-写入一个临时文件，持久化结束后，用这个临时文件替换上次持久化的文件，达到数据恢复。
-
-AOF<span class="token punctuation">(</span>Append-only file<span class="token punctuation">)</span>持久化方式：
-是指所有的命令行记录以 redis 命令请求协议的格式<span class="token punctuation">(</span>完全持久化存储<span class="token punctuation">)</span>保存为 aof 文件。
-</code></pre>
+<li><p>&#96;&#96;&#96;bash<br>Redis 提供两种持久化机制 RDB 和 AOF 机制：<br>RDB(Redis DataBase)持久化方式：<br>是指用数据集快照的方式(半持久化模式)记录 redis 数据库的所有键值对,在某个时间点将数据<br>写入一个临时文件，持久化结束后，用这个临时文件替换上次持久化的文件，达到数据恢复。<br>优点是快速，紧凑；缺点是可能会丢失最近的一部分数据。</p>
+<p>AOF(Append-only file)持久化方式：<br>是指所有的命令行记录以 redis 命令请求协议的格式(完全持久化存储)保存为 aof 文件。</p>
 </li>
+</ul>
+</li>
+</ul>
+<p>优点是数据更加可靠，缺点是相对于RDB更加耗时和占用更多的磁盘空间。<br>    &#96;&#96;&#96;</p>
+<ul>
 <li><p>什么是mybatis？</p>
 </li>
 <li><pre class=" language-bash"><code class="language-bash">Mybatis 是一个半 ORM（对象关系映射）框架，它内部封装了 JDBC，开发时只需要关
 注 SQL 语句本身，不需要花费精力去处理加载驱动、创建连接、创建 statement 等繁杂
-的过程。程序员直接编写原生态 sql，可以严格控制 sql 执行性能，灵活度高。
+  的过程。程序员直接编写原生态 sql，可以严格控制 sql 执行性能，灵活度高。
 </code></pre>
 </li>
 <li><p>说一下jdbc连接数据库的流程?</p>
 </li>
-<li><pre class=" language-bash"><code class="language-bash">1.注册数据库驱动
-2.获取数据库连接
-3.获取传输器
-4.传输sql获取结果
-5.处理结果集 获取数据
-6.关闭资源
-</code></pre>
+<li><p>&#96;&#96;&#96;bash<br>1.注册数据库驱动<br>2.获取数据库连接<br>3.获取传输器<br>4.传输sql获取结果<br>5.处理结果集 获取数据</p>
 </li>
+</ul>
+<p>  6.关闭资源<br>    &#96;&#96;&#96;</p>
+<ul>
 <li><p>mybatis中#{}和${}有什么区别？</p>
 </li>
 <li><pre class=" language-bash"><code class="language-bash">mybatis在处理<span class="token comment" spellcheck="true">#{}时，会将sql语句中的#{}替换为？号，调用PreParedStatement的set方法来赋值。</span>
-mybatis在处理$<span class="token punctuation">{</span><span class="token punctuation">}</span>时，会将$<span class="token punctuation">{</span><span class="token punctuation">}</span>替换为变量的值。使用<span class="token comment" spellcheck="true">#{}可以有效防止sql注入</span>
+  mybatis在处理$<span class="token punctuation">{</span><span class="token punctuation">}</span>时，会将$<span class="token punctuation">{</span><span class="token punctuation">}</span>替换为变量的值。使用<span class="token comment" spellcheck="true">#{}可以有效防止sql注入</span>
 </code></pre>
 </li>
 <li><p>说一下MyBatis的缓存机制？</p>
 </li>
-<li><pre class=" language-bash"><code class="language-bash">MyBatis 的缓存机制是指将查询结果缓存在内存中，以提高 SQL 执行效率的机制。MyBatis 的缓存机制可以分为一级缓存和二级缓存两种。
+<li><pre class=" language-bash"><code class="language-bash">  MyBatis 的缓存机制是指将查询结果缓存在内存中，以提高 SQL 执行效率的机制。MyBatis 的缓存机制可以分为一级缓存和二级缓存两种。
 1.一级缓存
-一级缓存是 MyBatis 默认开启的缓存机制，它是基于 SqlSession 的缓存，即在同一个 SqlSession 中，如果执行了相同的 SQL 语句，那么第二次执行时会从缓存中获取结果，而不会再次发送 SQL 到数据库。一级缓存的生命周期与 SqlSession 相同，也就是在 SqlSession 关闭之前都有效。
+  一级缓存是 MyBatis 默认开启的缓存机制，它是基于 SqlSession 的缓存，即在同一个 SqlSession 中，如果执行了相同的 SQL 语句，那么第二次执行时会从缓存中获取结果，而不会再次发送 SQL 到数据库。一级缓存的生命周期与 SqlSession 相同，也就是在 SqlSession 关闭之前都有效。
 2.二级缓存
 二级缓存是指将查询结果缓存到一个独立的缓存区域中，以便于多次 SqlSession 共享缓存，提高查询效率。二级缓存需要手动开启，并且需要在 MyBatis 配置文件中进行配置。开启二级缓存后，每次查询都会先从缓存中获取结果，如果缓存中不存在结果，则会去数据库中查询，并将查询结果缓存到缓存区域中。二级缓存的生命周期与整个应用程序相同，即在应用程序重启前都有效。
 </code></pre>
@@ -681,22 +677,25 @@ InnoDB是MySQL的5之后的存储引擎，它支持事务和外键，使用的�
 <li><p>&#96;&#96;&#96;bash</p>
 </li>
 </ul>
-<p>1.普通查询：select 要查询的字段 from 表名<br>  2.去重查询(distinct)：select distinct 要查询的字段 from 表名<br>3.排序查询(order by): 升序：asc 降序：desc，一搬不加desc默认为升序排列<br>  4.分组查询(group by)：select xxx from 表名 group by xxx<br>  5.等值查询<br>  6.外连接查询：左外连接(左表过滤的结果全在)，右外查询(右表过滤的结果全在)<br>7.全外连接查询</p>
+<p>  1.普通查询：select 要查询的字段 from 表名<br>    2.去重查询(distinct)：select distinct 要查询的字段 from 表名<br>    3.排序查询(order by): 升序：asc 降序：desc，一搬不加desc默认为升序排列<br>    4.分组查询(group by)：select xxx from 表名 group by xxx<br>  5.等值查询<br>    6.外连接查询：左外连接(左表过滤的结果全在)，右外查询(右表过滤的结果全在)<br>  7.全外连接查询<br>    &#96;&#96;&#96;</p>
+<ul>
+<li><p>mysql索引为什么需要遵循最左前缀原则？</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">MySQL索引需要遵循最左前缀原则的原因是因为，在使用索引进行查询时，MySQL只能利用索引中的最左前缀来执行查询。如果查询条件没有使用索引的最左前缀，那么MySQL就无法使用索引进行查询，而需要进行全表扫描，效率会大大降低。
+</code></pre>
+</li>
+<li><p>mysql中有几种锁？</p>
+<ul>
+<li>&#96;&#96;&#96;bash<br>三种锁：</li>
+</ul>
+<p>1.表级锁：加锁快，消耗小，不支持高并发，发生锁冲突的概率最高<br>  2.行级锁：加锁慢，消耗大，支持高并发，发生冲突的概率最低，会发生死锁，可以解决脏读的问题。<br>3.页面锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般</p>
 <pre><code>
-* mysql中有几种锁？
+* mysql为什么使用B+树而不是使用B树？
 
 * ```bash
-三种锁：
-1.表级锁：加锁快，消耗小，不支持高并发，发生锁冲突的概率最高
-2.行级锁：加锁慢，消耗大，支持高并发，发生冲突的概率最低，会发生死锁，可以解决脏读的问题。
-3.页面锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般
+主要原因是：B+树在范围查找和遍历时更加高效。因为与B树不同，B+树只在叶子节点存储数据，而非叶子节点只存储索引信息，这样可以减少非叶子节点的存储空间，使得更多的叶子节点能够存储数据。同时，由于叶子节点之间构成了双向链表，因此在进行范围查找或遍历时，只需要遍历叶子节点就可以，而不需要像B树那样跳转到非叶子节点，这样就可以提高查询效率，减少IO次数。
 </code></pre>
 <ul>
-<li><p>mysql为什么使用B+树而不是使用B树？</p>
-</li>
-<li><pre class=" language-bash"><code class="language-bash">主要原因是：B+树在范围查找和遍历时更加高效。因为与B树不同，B+树只在叶子节点存储数据，而非叶子节点只存储索引信息，这样可以减少非叶子节点的存储空间，使得更多的叶子节点能够存储数据。同时，由于叶子节点之间构成了双向链表，因此在进行范围查找或遍历时，只需要遍历叶子节点就可以，而不需要像B树那样跳转到非叶子节点，这样就可以提高查询效率，减少IO次数。
-</code></pre>
-</li>
 <li><p>什么是脏读？</p>
 </li>
 <li><pre class=" language-bash"><code class="language-bash">是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据。
@@ -704,12 +703,14 @@ InnoDB是MySQL的5之后的存储引擎，它支持事务和外键，使用的�
 </li>
 <li><p>还有哪些情况？</p>
 </li>
-<li><pre class=" language-bash"><code class="language-bash">1.不可重复读：
-是指在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两 次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不可重复读。
-2.幻读：
-是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。 同时，第二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象 发生了幻觉一样。
-</code></pre>
+</ul>
 </li>
+<li><pre class=" language-bash"><code class="language-bash">  1.不可重复读：
+是指在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两 次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不可重复读。
+  2.幻读：
+  是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。 同时，第二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象 发生了幻觉一样。
+</code></pre>
+<ul>
 <li><p>冒泡排序需要多少个循环实现，循环了多少次呢？</p>
 </li>
 <li><pre class=" language-bash"><code class="language-bash">冒泡排序需要2个for循环实现，循环了n+<span class="token punctuation">(</span>n-1<span class="token punctuation">)</span>+<span class="token punctuation">(</span>n-2<span class="token punctuation">)</span>+<span class="token punctuation">..</span>.+3+2+1次
@@ -717,22 +718,24 @@ InnoDB是MySQL的5之后的存储引擎，它支持事务和外键，使用的�
 </li>
 <li><p>String中有哪些常见的方法：</p>
 </li>
-<li><pre class=" language-bash"><code class="language-bash">indexOf<span class="token punctuation">(</span><span class="token punctuation">)</span>：获取字符串对象中第一次出现的索引
+</ul>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">  indexOf<span class="token punctuation">(</span><span class="token punctuation">)</span>：获取字符串对象中第一次出现的索引
 substring<span class="token punctuation">(</span><span class="token punctuation">)</span>：从start开始截取字符串
-equals<span class="token punctuation">(</span><span class="token punctuation">)</span>：比较字符串的内容是否相同
-equalsIgnoreCase<span class="token punctuation">(</span><span class="token punctuation">)</span>：比较字符串对象内容是否相同，忽略大小写
-startsWith<span class="token punctuation">(</span><span class="token punctuation">)</span>：判断字符串对象是否以指定字符开头
-endsWith<span class="token punctuation">(</span><span class="token punctuation">)</span>：判断字符串对象是否以指定的字符结尾
-isEmpty<span class="token punctuation">(</span><span class="token punctuation">)</span>：判断指定字符串是否为空
-toCharArray<span class="token punctuation">(</span><span class="token punctuation">)</span>：把字符串转换为字符数组
-toLowerCase<span class="token punctuation">(</span><span class="token punctuation">)</span>：把字符串转换为小写字符串
-toUpperCase<span class="token punctuation">(</span><span class="token punctuation">)</span>：把字符串转换为大写字符串
-split<span class="token punctuation">(</span><span class="token punctuation">)</span>：去除字符串中指定的的字符，然后返回一个新的字符串
-replace<span class="token punctuation">(</span><span class="token punctuation">)</span>:将指定字符替换成另一个指定的字符
-charAt<span class="token punctuation">(</span><span class="token punctuation">)</span>:获取指定索引处的字符
+  equals<span class="token punctuation">(</span><span class="token punctuation">)</span>：比较字符串的内容是否相同
+  equalsIgnoreCase<span class="token punctuation">(</span><span class="token punctuation">)</span>：比较字符串对象内容是否相同，忽略大小写
+  startsWith<span class="token punctuation">(</span><span class="token punctuation">)</span>：判断字符串对象是否以指定字符开头
+  endsWith<span class="token punctuation">(</span><span class="token punctuation">)</span>：判断字符串对象是否以指定的字符结尾
+  isEmpty<span class="token punctuation">(</span><span class="token punctuation">)</span>：判断指定字符串是否为空
+  toCharArray<span class="token punctuation">(</span><span class="token punctuation">)</span>：把字符串转换为字符数组
+  toLowerCase<span class="token punctuation">(</span><span class="token punctuation">)</span>：把字符串转换为小写字符串
+  toUpperCase<span class="token punctuation">(</span><span class="token punctuation">)</span>：把字符串转换为大写字符串
+  split<span class="token punctuation">(</span><span class="token punctuation">)</span>：去除字符串中指定的的字符，然后返回一个新的字符串
+  replace<span class="token punctuation">(</span><span class="token punctuation">)</span>:将指定字符替换成另一个指定的字符
+  charAt<span class="token punctuation">(</span><span class="token punctuation">)</span>:获取指定索引处的字符
 length<span class="token punctuation">(</span><span class="token punctuation">)</span>:获取字符串的长度，其实也就是字符个数
 </code></pre>
-</li>
+<ul>
 <li><p>当我们打开百度，输入，Helloword点击回车，会发生什么？</p>
 </li>
 <li><pre class=" language-bash"><code class="language-bash">TCP协议的3次握手：
@@ -748,56 +751,53 @@ TCP协议的4次挥手：
 </li>
 <li><p>关于I&#x2F;O，了解哪些？</p>
 </li>
-<li><p>&#96;&#96;&#96;bash<br>NIO&#x2F;AIO&#x2F;BIO<br>BIO：同步阻塞I&#x2F;O模型，也就是我们常用的I&#x2F;O，特点是模式简单使用方便，数据的读取写入必须阻塞在一个线程内等待其完成，并发能力低。<br>NIO：是一种同步非阻塞I&#x2F;O模型。是传统I&#x2F;O的升级，它提供了Channel、Selector、Buffer，是支持面向缓冲的，实现了I&#x2F;O的多路复用。<br>AIO：是对NIO的升级，实现了异步非阻塞式IO，异步IO的操作是基于事件和回调机制。</p>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>    
-  * 线程与进程的区别？
-  
-  * ```bash
-    进程是操作系统分配资源的最小单元，线程是操作系统调度的最小单元。一个程序至少有一个进程,一个进程至少有一个线程。
-    ```
-
-  * ArrayList和LinkList的区别？
-
-  * ```bash
-    1.ArrayList 和 LinkedList 都是不同步的，也就是不保证线程安全；
-    2.Arraylist 底层使用的是 Object 数组；LinkedList 底层使用的是双向链表数据结构
-  3.ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。
-    4.LinkedList 不支持高效的随机元素访问，而 ArrayList 支持。
+<li><pre class=" language-bash"><code class="language-bash">NIO/AIO/BIO
+BIO：同步阻塞I/O模型，也就是我们常用的I/O，特点是模式简单使用方便，数据的读取写入必须阻塞在一个线程内等待其完成，并发能力低。
+NIO：是一种同步非阻塞I/O模型。是传统I/O的升级，它提供了Channel、Selector、Buffer，是支持面向缓冲的，实现了I/O的多路复用。
+AIO：是对NIO的升级，实现了异步非阻塞式IO，异步IO的操作是基于事件和回调机制。
 </code></pre>
-<ul>
-<li><p>说一下关于链表？</p>
 </li>
-<li><pre class=" language-bash"><code class="language-bash">首先，链表分为单链表和双链表，单链表的每一个节点由保存的元素和一个前驱节点组成，如果前驱节点为null，那么这个节点为头节点。如果是双向链表，每个节点都有一个数据元，一个前驱节点，一个后继节点，如果一个节点的前驱节点为null，那么这个节点就是头节点，如果一个节点的后继节点为null，那么这个节点就是尾节点。
+<li><p>线程与进程的区别？</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">进程是操作系统分配资源的最小单元，线程是操作系统调度的最小单元。一个程序至少有一个进程,一个进程至少有一个线程。
+</code></pre>
+</li>
+<li><p>ArrayList和LinkList的区别？</p>
+</li>
+<li><p>&#96;&#96;&#96;bash<br>1.ArrayList 和 LinkedList 都是不同步的，也就是不保证线程安全；<br>2.Arraylist 底层使用的是 Object 数组；LinkedList 底层使用的是双向链表数据结构</p>
+</li>
+</ul>
+<p>3.ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。<br>  4.LinkedList 不支持高效的随机元素访问，而 ArrayList 支持。</p>
+<pre><code>
+* 说一下关于链表？
+
+* ```bash
+  首先，链表分为单链表和双链表，单链表的每一个节点由保存的元素和一个前驱节点组成，如果前驱节点为null，那么这个节点为头节点。如果是双向链表，每个节点都有一个数据元，一个前驱节点，一个后继节点，如果一个节点的前驱节点为null，那么这个节点就是头节点，如果一个节点的后继节点为null，那么这个节点就是尾节点。
 </code></pre>
 </li>
 <li><p>慢sql如何定位并解决？</p>
-<ul>
-<li><pre class=" language-bash"><code class="language-bash">可以通过 show variables like <span class="token string">'long_query_time'</span>来查看具体是哪一条sql造成了慢查询。
-首先用EXPLAIN查询盖语句索引是否生效，如果未生效，可能是全表扫描，导致效率很低<span class="token punctuation">;</span>
-大部分的慢sql可以通过加索引，或者分库分表的方式进行解决。
-索引又可以分为聚簇索引和非聚簇索引，聚簇索引是值把索引和数据放到一起进行存储，非聚簇索引就是将数据和索引分开存储，索引结构的叶子节点指向了对应行。
+</li>
+<li><pre class=" language-bash"><code class="language-bash">  可以通过 show variables like <span class="token string">'long_query_time'</span>来查看具体是哪一条sql造成了慢查询。
+  首先用EXPLAIN查询盖语句索引是否生效，如果未生效，可能是全表扫描，导致效率很低<span class="token punctuation">;</span>
+  大部分的慢sql可以通过加索引，或者分库分表的方式进行解决。
+  索引又可以分为聚簇索引和非聚簇索引，聚簇索引是值把索引和数据放到一起进行存储，非聚簇索引就是将数据和索引分开存储，索引结构的叶子节点指向了对应行。
 </code></pre>
 </li>
 <li><p>说说你对Spring的理解？</p>
 </li>
-<li><pre class=" language-bash"><code class="language-bash">Spring主要是IOC和AOP，IOC是控制反转的思想，用依赖注入去是实现，把对象交给容器去管理。
-AOP是面向切面编程的意思，就是把在不改变代码逻辑的情况下，把公共的行为封装为一个模块，对代码进行增强。
-AOP通过动态代理实现：
-动态代理又分为jdk动态代理和cgLib动态代理
-jdk动态代理有限制，必须实现一个或者多个接口，cgLib不需要实现接口。
+<li><pre class=" language-bash"><code class="language-bash">  Spring主要是IOC和AOP，IOC是控制反转的思想，用依赖注入去是实现，把对象交给容器去管理。
+  AOP是面向切面编程的意思，就是把在不改变代码逻辑的情况下，把公共的行为封装为一个模块，对代码进行增强。
+  AOP通过动态代理实现：
+  动态代理又分为jdk动态代理和cgLib动态代理
+  jdk动态代理有限制，必须实现一个或者多个接口，cgLib不需要实现接口。
 </code></pre>
-</li>
-</ul>
-</li>
-<li><p>说一下Spring的底层结构？</p>
 <ul>
-<li>&#96;&#96;&#96;bash<br>Spring 框架的底层结构主要包括以下几个部分：<br>1.核心容器：包括 BeanFactory 和 ApplicationContext，是 Spring 框架的核心部分，提供了依赖注入（DI）和控制反转（IOC）等功能。<br>2.AOP框架：Spring 提供了 AOP 框架，可以在不修改源代码的情况下，实现横切关注点的功能，如事务处理、日志记录、性能监控等。<br>3.数据访问：Spring 提供了一系列的数据访问技术，包括 JDBC、ORM、事务等。Spring 的 JDBC 模块提供了 JDBC 技术的封装，简化了数据库操作。Spring 的 ORM 模块支持多种 ORM 框架，如 Hibernate、MyBatis 等。Spring 的事务模块提供了事务管理的支持，可以在不同的事务管理器之间进行切换。</li>
+<li><p>说一下Spring的底层结构？</p>
+</li>
+<li><p>&#96;&#96;&#96;bash<br>Spring 框架的底层结构主要包括以下几个部分：<br>1.核心容器：包括 BeanFactory 和 ApplicationContext，是 Spring 框架的核心部分，提供了依赖注入（DI）和控制反转（IOC）等功能。</p>
+</li>
 </ul>
-<p>4.Web 框架：Spring 提供了一系列的 Web 框架，包括 Spring MVC、Spring WebFlux、Spring Web Services 等，可以用于构建 Web 应用程序。<br>  5.测试框架：Spring 提供了一系列的测试框架，如 Spring Test、Spring Boot Test 等，可以帮助开发人员编写单元测试、集成测试等。<br>6.其他模块：Spring 还提供了一些其他的模块，如 Spring Security、Spring Integration、Spring Batch 等，可以用于实现安全性、集成性、批处理等功能。</p>
+<p>2.AOP框架：Spring 提供了 AOP 框架，可以在不修改源代码的情况下，实现横切关注点的功能，如事务处理、日志记录、性能监控等。<br>  3.数据访问：Spring 提供了一系列的数据访问技术，包括 JDBC、ORM、事务等。Spring 的 JDBC 模块提供了 JDBC 技术的封装，简化了数据库操作。Spring 的 ORM 模块支持多种 ORM 框架，如 Hibernate、MyBatis 等。Spring 的事务模块提供了事务管理的支持，可以在不同的事务管理器之间进行切换。<br>4.Web 框架：Spring 提供了一系列的 Web 框架，包括 Spring MVC、Spring WebFlux、Spring Web Services 等，可以用于构建 Web 应用程序。<br>  5.测试框架：Spring 提供了一系列的测试框架，如 Spring Test、Spring Boot Test 等，可以帮助开发人员编写单元测试、集成测试等。<br>  6.其他模块：Spring 还提供了一些其他的模块，如 Spring Security、Spring Integration、Spring Batch 等，可以用于实现安全性、集成性、批处理等功能。</p>
 <pre><code>
 * Spring事务传播行为
 
@@ -816,81 +816,88 @@ jdk动态代理有限制，必须实现一个或者多个接口，cgLib不需要
 TransactionAspectSupport.currentTransactionStatus<span class="token punctuation">(</span><span class="token punctuation">)</span>.setRollbackOnly<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 </li>
-</ul>
-</li>
 <li><p>动态代理和静态代理的区别是？</p>
-<ul>
-<li><pre class=" language-bean"><code class="language-bean">静态代理在程序编译时就会生成一个class文件，动态代理是在编译时无法生成class文件，在运行时才能生成class文件，动态代理通过反射获取类来生成class文件。
-</code></pre>
 </li>
 </ul>
 </li>
-<li><p>Spring中事务的默认隔离级别是？</p>
-<ul>
-<li><pre class=" language-bash"><code class="language-bash">Spring事务的默认隔离级别是Isolation.READ_COMMITTED（读已提交）。这个隔离级别表示一个事务只能读取到已经提交的数据，避免了脏读现象的发生。在该级别下，一个事务只有在另一个事务提交后才能读取到其所做的修改
+<li><pre class=" language-bean"><code class="language-bean">  静态代理在程序编译时就会生成一个class文件，动态代理是在编译时无法生成class文件，在运行时才能生成class文件，动态代理通过反射获取类来生成class文件。
 </code></pre>
-</li>
+<ul>
+<li>Spring中事务的默认隔离级别是？</li>
 </ul>
 </li>
+<li><pre class=" language-bash"><code class="language-bash">  Spring事务的默认隔离级别是Isolation.READ_COMMITTED（读已提交）。这个隔离级别表示一个事务只能读取到已经提交的数据，避免了脏读现象的发生。在该级别下，一个事务只有在另一个事务提交后才能读取到其所做的修改
+</code></pre>
+<ul>
 <li><p>说一下单例模式的代码实现？</p>
-<ul>
-<li>&#96;&#96;&#96;bash<br>单例模式是防止一个对象被多次加载和创建，来造成不必要的资源消耗，他们都是线程安全的。<br>单例模式分为饿汉式和懒汉式<br>1.饿汉式单例，通过虚拟机只加载一次class对象来实现线程安全</li>
+</li>
+<li><p>&#96;&#96;&#96;bash<br>单例模式是防止一个对象被多次加载和创建，来造成不必要的资源消耗，他们都是线程安全的。<br>单例模式分为饿汉式和懒汉式<br>1.饿汉式单例，通过虚拟机只加载一次class对象来实现线程安全</p>
+</li>
 </ul>
 </li>
 </ul>
 <p>2.懒汉式单例，在进行创建时，会优先进行判断是否为空，若不为空就使用，为空则创建后使用。<br>    &#96;&#96;&#96;</p>
 <ul>
-<li><p>对象的组成：</p>
+<li><p>除了单例模式，还了解其他的设计模式嘛？</p>
 </li>
-<li><pre class=" language-bash"><code class="language-bash">  对象的组成有3个部分：对象头；实例数据；对齐填充字节。其中对象头包含3个部分：Mark Word；指向类的指针；数组长度（如果当前对象不是数组则没有此部分）
-</code></pre>
-</li>
-<li><p>Synchronized锁升级原理：</p>
-</li>
-<li><pre class=" language-bash"><code class="language-bash">  在锁对象的对象头里面，有一个threadId字段，在第一次访问的时候，threadId为空，jvm让其有偏向锁，把threadId设置为线程id，再次进入就会先判断threadId和线程id是否一致，如果一致，就直接使用此对象，如果不一致，则升级偏向锁为轻量锁，通过自旋循环来获取锁,执行一定次数后，要是还获取不到锁，就升级轻量锁为重量锁。
-</code></pre>
-</li>
-<li><p>Synchronized锁的底层原理：</p>
-</li>
-<li><pre class=" language-bash"><code class="language-bash">Synchronized底层是通过monitorenter和monitorexit指令进行的，其内部有一个计数器，当计数器为0时，表示可以获取锁，执行monitorenter之后，计数器+1，执行monitorexit之后，计数器-1，释放锁。当一个线程进来之后，发现计数器不为0，则会阻塞。
-</code></pre>
-</li>
-<li><p>Synchronized为什么锁升级？</p>
-<ul>
-<li><pre class=" language-bash"><code class="language-bash">因为Synchronized是重量级锁，加锁开锁的开销比较大，所以需要对锁进行升级，有轻量级锁，偏向锁，重量级锁。
-</code></pre>
-</li>
-<li><p>Synchronized和Lock锁有什么区别？</p>
-</li>
-<li><pre class=" language-bash"><code class="language-bash">Synchronized可以给类，方法，代码块进行加锁；Lock只能给代码块加锁；
-Synchronized不需要手动获取锁和释放锁，发生异常会自动释放锁，不会造成死锁问题。Lock需要自己加锁和释放锁。如果使用不当unLock<span class="token punctuation">(</span><span class="token punctuation">)</span>就会发生死锁问题。
-通过Lock可以知道是否成功加锁，Synchronized无法知道。
-</code></pre>
-</li>
-<li><p>Synchronized和Volatile的区别？</p>
-</li>
-<li><pre class=" language-bash"><code class="language-bash">Synchronized关键字用于实现线程之间的同步，可以将代码块或方法声明为同步方法，以保证在同一时刻只有一个线程可以访问共享资源。
-Volatile关键字用于实现多个线程之间的变量可见性，当一个线程修改了一个被Volatile修饰的变量时，其他线程可以立即看到这个变量的最新值。
-</code></pre>
+<li><p>&#96;&#96;&#96;bash</p>
 </li>
 </ul>
-</li>
+<p>  1.工厂模式：定义一个用于创建对象的接口，让子类决定实例化哪个类;<br>    2.观察者模式：定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象;<br>    3.适配器模式：将一个类的接口转换成客户希望的另一个接口;<br>    4.策略模式：定义了一系列算法，并将每个算法封装起来，使它们可以相互替换;<br>    5.装饰器模式：动态地给一个对象添加一些额外的职责;</p>
+<pre><code>
+* 对象的组成：
+
+* ```bash
+  对象的组成有3个部分：对象头；实例数据；对齐填充字节。其中对象头包含3个部分：Mark Word；指向类的指针；数组长度（如果当前对象不是数组则没有此部分）
+  ```
+
+* Synchronized锁升级原理：
+
+* ```bash
+  在锁对象的对象头里面，有一个threadId字段，在第一次访问的时候，threadId为空，jvm让其有偏向锁，把threadId设置为线程id，再次进入就会先判断threadId和线程id是否一致，如果一致，就直接使用此对象，如果不一致，则升级偏向锁为轻量锁，通过自旋循环来获取锁,执行一定次数后，要是还获取不到锁，就升级轻量锁为重量锁。
+  ```
+
+* Synchronized锁的底层原理：
+
+* ```bash
+  Synchronized底层是通过monitorenter和monitorexit指令进行的，其内部有一个计数器，当计数器为0时，表示可以获取锁，执行monitorenter之后，计数器+1，执行monitorexit之后，计数器-1，释放锁。当一个线程进来之后，发现计数器不为0，则会阻塞。
+  ```
+
+* Synchronized为什么锁升级？
+
+* ```bash
+因为Synchronized是重量级锁，加锁开锁的开销比较大，所以需要对锁进行升级，有轻量级锁，偏向锁，重量级锁。
+  ```
+
+* Synchronized和Lock锁有什么区别？
+
+* ```bash
+  Synchronized可以给类，方法，代码块进行加锁；Lock只能给代码块加锁；
+  Synchronized不需要手动获取锁和释放锁，发生异常会自动释放锁，不会造成死锁问题。Lock需要自己加锁和释放锁。如果使用不当unLock()就会发生死锁问题。
+  通过Lock可以知道是否成功加锁，Synchronized无法知道。
+  ```
+
+* Synchronized和Volatile的区别？
+
+* ```bash
+Synchronized关键字用于实现线程之间的同步，可以将代码块或方法声明为同步方法，以保证在同一时刻只有一个线程可以访问共享资源。
+  Volatile关键字用于实现多个线程之间的变量可见性，当一个线程修改了一个被Volatile修饰的变量时，其他线程可以立即看到这个变量的最新值。
+</code></pre>
+<ul>
 <li><p>CAS锁了解嘛？</p>
 </li>
 <li><pre class=" language-bash"><code class="language-bash">  CAS是自旋锁的意思，没有获取到锁的时候不会阻塞，而是循环一直不断得获取锁。
-  CAS有3个操作数：内存值，旧的预期值，新的值，当旧的值和内存值相同时，就会把内存值修改为新的值，，否则什么都不会改变。
+CAS有3个操作数：内存值，旧的预期值，新的值，当旧的值和内存值相同时，就会把内存值修改为新的值，，否则什么都不会改变。
 </code></pre>
-<ul>
+</li>
 <li><p>如何配置线程池参数？</p>
 </li>
 <li><pre class=" language-bash"><code class="language-bash">cpu密集型：核心线程数 <span class="token operator">=</span> cpu数量+1
 IO密集型：核心线程数 <span class="token operator">=</span> 2 * cpu 
 </code></pre>
 </li>
-</ul>
-</li>
 <li><p>AQS的组件</p>
-<ul>
+</li>
 <li><pre class=" language-bash"><code class="language-bash">信号量，
 </code></pre>
 </li>
@@ -907,7 +914,7 @@ epoll：是在内核里使用红黑树来跟踪，增删查的时间复杂度是
 </li>
 <li><pre class=" language-bash"><code class="language-bash">redis全量复制一般发生在Slave阶段，此时Slave需要将Master上的所有的数据都复制一份：
 首先从服务器连接主服务器，发送SYNC命令；
-主服务器接收到命令后，开始生成RDB文件并使用缓冲区记录之后的所有的写命令；
+  主服务器接收到命令后，开始生成RDB文件并使用缓冲区记录之后的所有的写命令；
 主服务器执行完之后，向所有服务器发送快照文件，并在发送期间继续记录执行的写命令；
 从服务器收到快照文件之后丢弃所有的旧数据，载入快照；
 主服务器快照发送完毕之后开始向从服务器发送缓冲区中的写命令；
@@ -921,7 +928,7 @@ epoll：是在内核里使用红黑树来跟踪，增删查的时间复杂度是
 第一级缓存：singletonObjects，用于保存实例化、注入、初始化完成的bean实例；
 第二级缓存：earlySingletonObjects，用于保存实例化完成的bean实例；
 第三级缓存：singletonFactories，用于保存bean创建工厂，以便后面有机会创建代理对象。
-当Spring在创建Bean时发现循环依赖时，它会将正在创建的Bean放入第一级缓存中，然后立即返回一个ObjectFactory，这个ObjectFactory会在Bean创建完成后返回Bean实例，以解决循环依赖问题。
+  当Spring在创建Bean时发现循环依赖时，它会将正在创建的Bean放入第一级缓存中，然后立即返回一个ObjectFactory，这个ObjectFactory会在Bean创建完成后返回Bean实例，以解决循环依赖问题。
 然后Spring会继续创建Bean，并将正在创建的Bean放入第二级缓存中。当Bean创建完成后，Spring会将其属性注入，并将其放入第三级缓存中，然后再从第三级缓存中取出Bean，并返回给ObjectFactory。
 这样，Spring就能够在循环依赖时保证Bean的正确创建和注入，同时还能避免循环依赖导致的死锁问题。但是，如果循环依赖的链条过长，或者存在多个构造器、多个Setter方法等复杂情况，仍然可能会导致Bean创建失败。因此，在使用Spring时还需注意避免复杂的循环依赖问题。
 </code></pre>
@@ -938,12 +945,50 @@ epoll：是在内核里使用红黑树来跟踪，增删查的时间复杂度是
 读已提交：
 可重复读：当事务被修改，仍然会读取到修改前的数据，存在幻读的问题。MVCC解决了这个问题，用版本来控制。
 串行：
-持久性是指提交了事务之后，它对数据库的改变是永久的，会将数据持久化在硬盘上，持久化由redo log日志来保证。即使mysql挂掉了，也可以通过redo log来进行数据的恢复。
+  持久性是指提交了事务之后，它对数据库的改变是永久的，会将数据持久化在硬盘上，持久化由redo log日志来保证。即使mysql挂掉了，也可以通过redo log来进行数据的恢复。
 一致性是指我们使用事务的目的，需要通过应用程序的代码来保证。
 在innoDB中，分为行锁和表锁，行锁是作用在索引上的，如果命中了索引，那么就是行锁，如果没命中索引，就是表锁，行锁分为读锁和写锁，读锁是共享锁，多个事务可以读取同一个资源，但是不允许其他事务修改，写锁是会阻塞其他的写锁和读锁。
 </code></pre>
 </li>
-</ul>
+<li><p>Map的使用场景</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">Map是一种常用的数据结构，用于存储键值对。它的主要作用是将一组键映射到一组值上，使得通过键可以快速地查找对应的值。Map的使用场景如下：
+1.数据缓存：Map可以用于缓存一些需要反复访问的数据，例如Web应用中的Session、页面缓存等。
+2.数据查询：Map可以用于快速地查找数据，例如通过ID来查找对象等。
+3.数据统计：Map可以用于对某些数据进行统计，例如统计某个单词在文本中出现的次数。
+4.数据分组：Map可以用于将数据按照某个属性进行分组，例如按照城市分组统计销售额等。
+5.数据存储：Map可以用于存储一些需要按照键值对进行存储的数据，例如配置文件等。
+</code></pre>
+</li>
+<li><p>ConcurrentHashMap在JDK1.7和JDK1.8中的区别？</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">在JDK1.7中，ConcurrentHashMap使用分段锁实现并发控制，即将整个Map分成多个Segment，每个Segment拥有自己的锁，只对该Segment进行加锁，不会影响其他Segment的并发性能。但是，在高并发情况下，由于Segment的数量是固定的，可能会导致某些Segment被频繁访问而出现热点的问题，从而影响整个Map的并发性能。
+而在JDK1.8中，ConcurrentHashMap的实现方式进行了重构，使用了CAS操作和synchronized来实现并发控制。相比于分段锁，在高并发情况下，JDK1.8中的ConcurrentHashMap可以更好地实现负载均衡，减少热点问题的发生，从而提高整个Map的并发性能。此外，JDK1.8中还添加了一些新的API，如forEach<span class="token punctuation">(</span><span class="token punctuation">)</span>和reduce<span class="token punctuation">(</span><span class="token punctuation">)</span>方法，方便对Map进行遍历和聚合操作。
+</code></pre>
+</li>
+<li><p>ConcurrentHashMap的底层实现原理？</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">ConcurrentHashMap在jdk1.8中是由数组，单向链表和红黑树构成的，当我们初始化一个ConcurrentHashMap实例的时候，默认会初始化一个长度为16的数组，由于核心依然是Hash表，所以依然会存在Hash冲突的问题，所以用链式寻址的方式来解决Hash冲突的问题，当Hash冲突比较多的时候，会造成链表长度较长的问题，这种情况下会导致Map中的数组元素查询复杂度增加。
+其功能和HashMap是一样的，ConcurrentHashMap在HashMap的基础上提供了一个并发安全的一个实现，主要是通过对Node节点加锁来保证数据更新的安全性
+</code></pre>
+</li>
+<li><p>线程池中提交一个任务的流程是怎么样的？</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">1.在使用execute<span class="token punctuation">(</span><span class="token punctuation">)</span>方法提交一个Runnable对象时
+2.会先判断当前线程池中的线程数是否小于corePoolSize
+3.如果小于，则创建新线程并执行Runnable
+4.如果大于等于，则尝试将Runnable加入到workQueue中
+5.如果workQueue没满，则将Runnable正常入队， 等待执行
+6.如果workQueue满了，则会入队失败，那么会尝试继续增加线程
+7.如果当前线程池中的线程数是否小于maximumPoolSize
+8.如果小于，则创建新线程并执行任务
+9.如果大于等于，则执行拒绝策略，拒绝此Runnable
+</code></pre>
+</li>
+<li><p>说说分布式事务的理解和解决方案</p>
+</li>
+<li><pre class=" language-bash"><code class="language-bash">分布式事务是指事务的参与者，支持事务的服务器，资源服务器以及事务管理器分别位与分布式系统的不同节点之上。分布式事务是为了不同数据库的数据一致性，基于CAP定理，我们要么采用强一致性方案，要么采用弱一致性方案。而强一致性方案是指通过第三方事务管理器来协调多个节点的事务性，保证每一个节点的事务达到同时成功或者同时失败，为了实现这样一个需求，会引入X/Open DTP模型提供的XA协议基于2阶段提交或者3阶段提交的方式去实现，但是如果全局事务管理器中的多个节点任意一个节点在进行事务提交确认的时候，由于网络通信延迟导致了阻塞就会影响到所有节点的事务提交，而这个阻塞的过程也会影响到用户的请求线程，这对于用户体验以及整体的性能影响比较大，而弱一致性的方案就是针对强一致性方案所衍出来的性能和数据一致性平衡的一个方案，就是损失掉强一致性，数据在某一个时刻会存在不一致的状态，但是最终这些数据会达成一致，这样的好处就是提升了系统的性能，在弱一致性方案中，常见的解决方案有第一个使用分布式消息队列来实现最终的一致性，第二个是基于TCC事务通过演讲版本的第二阶段提交实现最终一致性，第三个是使用Seata事务框架，它提供了多种事务模型，比如AT，XA，Saga，TCC等不同的模型，提供的是强一致性或者弱一致性的支持。
+</code></pre>
 </li>
 </ul>
 
