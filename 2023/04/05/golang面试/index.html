@@ -1,0 +1,2341 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="GoLang面试题, 谦谦的个人博客">
+    <meta name="description" content="基础make 与 new 的区别1）作用变量类型不同，new给string,int和数组分配内存，make给切片，map，channel分配内存；
+2）返回类型不一样，new返回指向变量的指针，make返回变量本身；
+3）new 分配的空间">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>GoLang面试题 | 谦谦的个人博客</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">谦谦的个人博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">谦谦的个人博客</div>
+        <div class="logo-desc">
+            
+            这唱不尽的风花雪月，只因人间迟早要离别
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">GoLang面试题</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
+                                <span class="chip bg-color">Go语言</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/category/%E8%AF%AD%E8%A8%80/" class="post-category">
+                                语言
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-04-05
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    14.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    55 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a><strong>基础</strong></h2><h3 id="make-与-new-的区别"><a href="#make-与-new-的区别" class="headerlink" title="make 与 new 的区别"></a>make 与 new 的区别</h3><p>1）作用变量类型不同，new给string,int和数组分配内存，make给切片，map，channel分配内存；</p>
+<p>2）返回类型不一样，new返回指向变量的指针，make返回变量本身；</p>
+<p>3）new 分配的空间被清零。make 分配空间后，会进行初始化；</p>
+<h3 id="数组和切片的区别"><a href="#数组和切片的区别" class="headerlink" title="数组和切片的区别"></a><strong>数组和切片的区别</strong></h3><p>1）数组是定长，访问和复制不能超过数组定义的长度，否则就会下标越界，切片长度和容量可以自动扩容</p>
+<p>2）数组是值类型，切片是引用类型，每个切片都引用了一个底层数组，切片本身不能存储任何数据，都是这底层数组存储数据，所以修改切片的时候修改的是底层数组中的数据。切片一旦扩容，指向一个新的底层数组，内存地址也就随之改变</p>
+<h3 id="方法与函数的区别？"><a href="#方法与函数的区别？" class="headerlink" title="方法与函数的区别？"></a>方法与函数的区别？</h3><p>在Go语言中，函数和方法不太一样，有明确的概念区分。其他语言中，比如Java，一般来说函数就是方法，方法就是函数；但是在Go语言中，<strong>函数是指不属于任何结构体、类型的方法，也就是说函数是没有接收者的；而方法是有接收者的。</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">//方法</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>t <span class="token operator">*</span>T<span class="token punctuation">)</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b 
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 其中T是自定义类型或者结构体，不能是基础数据类型int等</span>
+
+<span class="token comment" spellcheck="true">//函数</span>
+<span class="token keyword">func</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b 
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="方法值接收者和指针接收者的区别"><a href="#方法值接收者和指针接收者的区别" class="headerlink" title="方法值接收者和指针接收者的区别?"></a>方法值接收者和指针接收者的区别?</h3><p>如果方法的接收者是<strong>指针类型</strong>，无论调用者是对象还是对象指针，修改的都是对象本身，会影响调用者；</p>
+<p>如果方法的接收者是<strong>值类型</strong>，无论调用者是对象还是对象指针，修改的都是对象的副本，不影响调用者；</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> Person <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    age <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 如果实现了接收者是指针类型的方法，会隐含地也实现了接收者是值类型的IncrAge1方法。</span>
+<span class="token comment" spellcheck="true">// 会修改age的值</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p <span class="token operator">*</span>Person<span class="token punctuation">)</span> <span class="token function">IncrAge1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    p<span class="token punctuation">.</span>age <span class="token operator">+=</span> <span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 如果实现了接收者是值类型的方法，会隐含地也实现了接收者是指针类型的IncrAge2方法。</span>
+<span class="token comment" spellcheck="true">// 不会修改age的值</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p Person<span class="token punctuation">)</span> <span class="token function">IncrAge2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    p<span class="token punctuation">.</span>age <span class="token operator">+=</span> <span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 如果实现了接收者是值类型的方法，会隐含地也实现了接收者是指针类型的GetAge方法。</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p Person<span class="token punctuation">)</span> <span class="token function">GetAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> p<span class="token punctuation">.</span>age
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// p1 是值类型</span>
+    p <span class="token operator">:=</span> Person<span class="token punctuation">{</span>age<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 值类型 调用接收者是指针类型的方法</span>
+    p<span class="token punctuation">.</span><span class="token function">IncrAge1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span><span class="token function">GetAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//11</span>
+    <span class="token comment" spellcheck="true">// 值类型 调用接收者是值类型的方法</span>
+    p<span class="token punctuation">.</span><span class="token function">IncrAge2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span><span class="token function">GetAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//11</span>
+
+    <span class="token comment" spellcheck="true">// ----------------------</span>
+
+    <span class="token comment" spellcheck="true">// p2 是指针类型</span>
+    p2 <span class="token operator">:=</span> <span class="token operator">&amp;</span>Person<span class="token punctuation">{</span>age<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 指针类型 调用接收者是指针类型的方法</span>
+    p2<span class="token punctuation">.</span><span class="token function">IncrAge1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>p2<span class="token punctuation">.</span><span class="token function">GetAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//21</span>
+    <span class="token comment" spellcheck="true">// 指针类型 调用接收者是值类型的方法</span>
+    p2<span class="token punctuation">.</span><span class="token function">IncrAge2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>p2<span class="token punctuation">.</span><span class="token function">GetAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//21</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="函数返回局部变量的指针是否安全"><a href="#函数返回局部变量的指针是否安全" class="headerlink" title="函数返回局部变量的指针是否安全?"></a>函数返回局部变量的指针是否安全?</h3><p>一般来说，局部变量会在函数返回后被销毁，因此被返回的引用就成为了”无所指”的引用，程序会进入未知状态。</p>
+<p>但这在 Go 中是安全的，Go 编译器将会对每个局部变量进行逃逸分析。<strong>如果发现局部变量的作用域超出该函数，则不会将内存分配在栈上，而是分配在堆上，因为他们不在栈区，即使释放函数，其内容也不会受影响。</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">*</span><span class="token builtin">int</span> <span class="token punctuation">{</span>
+res <span class="token operator">:=</span> <span class="token number">0</span>
+res <span class="token operator">=</span> x <span class="token operator">+</span> y
+<span class="token keyword">return</span> <span class="token operator">&amp;</span>res
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 编译时可以借助选项 -gcflags=-m，查看变量逃逸的情况</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">:</span>          res escapes to heap<span class="token punctuation">:</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">:</span>        flow<span class="token punctuation">:</span> ~r2 <span class="token operator">=</span> <span class="token operator">&amp;</span>res<span class="token punctuation">:</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">:</span>     from <span class="token operator">&amp;</span><span class="token function">res</span> <span class="token punctuation">(</span>address<span class="token operator">-</span>of<span class="token punctuation">)</span> at <span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">8</span><span class="token punctuation">:</span><span class="token number">9</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">:</span>     from <span class="token keyword">return</span> <span class="token operator">&amp;</span><span class="token function">res</span> <span class="token punctuation">(</span><span class="token keyword">return</span><span class="token punctuation">)</span> at <span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">8</span><span class="token punctuation">:</span><span class="token number">2</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">:</span>         moved to heap<span class="token punctuation">:</span> res
+<span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">12</span><span class="token punctuation">:</span><span class="token number">13</span><span class="token punctuation">:</span> <span class="token operator">...</span> argument does not escape <span class="token number">0xc0000ae008</span>
+
+res escapes to heap 即表示 res 逃逸到堆上了。
+</code></pre>
+<h3 id="uintptr与unsafe-Pointer区别？"><a href="#uintptr与unsafe-Pointer区别？" class="headerlink" title="uintptr与unsafe.Pointer区别？"></a>uintptr与unsafe.Pointer区别？</h3><p>unsafe.Pointer 是通用指针类型，它不能参与计算，任何类型的指针都可以转化成 unsafe.Pointer，unsafe.Pointer 可以转化成任何类型的指针，uintptr 可以转换为 unsafe.Pointer，unsafe.Pointer 可以转换为 uintptr。uintptr 是指针运算的工具，但是它不能持有指针对象（意思就是它跟指针对象不能互相转换），unsafe.Pointer 是指针对象进行运算（也就是 uintptr）的桥梁。</p>
+<h2 id="Slice"><a href="#Slice" class="headerlink" title="Slice"></a><strong>Slice</strong></h2><h3 id="array和slice的区别？"><a href="#array和slice的区别？" class="headerlink" title="array和slice的区别？"></a>array和slice的区别？</h3><p><strong>数组长度</strong>不能改变，初始化后长度就是固定的；切片的长度是不固定的，可以追加元素，在追加时可能使切片的容量增大。</p>
+<p><strong>结构不同</strong>，数组是一串固定数据，切片描述的是截取数组的一部分数据，从概念上说是一个结构体。</p>
+<p><strong>初始化方式不同</strong>，如上。另外在声明时的时候：声明数组时，方括号内写明了数组的长度或使用<code>...</code>自动计算长度，而声明<code>slice</code>时，方括号内没有任何字符。</p>
+<p>函数调用时的<strong>传递方式不同</strong>，数组按值传递，slice按引用传递。</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    s <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span>
+    s1 <span class="token operator">:=</span> s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token function">PrintSlice</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// [1,4]</span>
+  
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// [1,4,3]</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// [1]</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">PrintSlice</span><span class="token punctuation">(</span>s <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="slice深拷贝和浅拷贝"><a href="#slice深拷贝和浅拷贝" class="headerlink" title="slice深拷贝和浅拷贝"></a>slice深拷贝和浅拷贝</h3><p>深拷贝：拷贝的是数据本身，创造一个新对象，<strong>新创建的对象与原对象不共享内存</strong>，新创建的对象在内存中开辟一个新的内存地址，新对象值修改时不会影响原对象值、</p>
+<p>实现深拷贝的方式：</p>
+<ol>
+<li>copy(slice2, slice1)</li>
+<li>遍历append赋值</li>
+</ol>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    slice1 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span>
+    slice2 <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"slice1: %v, %p"</span><span class="token punctuation">,</span> slice1<span class="token punctuation">,</span> slice1<span class="token punctuation">)</span>
+    
+    <span class="token function">copy</span><span class="token punctuation">(</span>slice2<span class="token punctuation">,</span> slice1<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"slice2: %v, %p"</span><span class="token punctuation">,</span> slice2<span class="token punctuation">,</span> slice2<span class="token punctuation">)</span>
+    slice3 <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> slice1 <span class="token punctuation">{</span>
+        slice3 <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>slice3<span class="token punctuation">,</span> v<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"slice3: %v, %p"</span><span class="token punctuation">,</span> slice3<span class="token punctuation">,</span> slice3<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+slice1<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0xc0000b0030</span>
+slice2<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0xc0000b0060</span>
+slice3<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0xc0000b0090</span>
+</code></pre>
+<p>浅拷贝：拷贝的是数据地址，<strong>只复制指向的对象的指针</strong>，此时新对象和老对象指向的内存地址是一样的，新对象值修改时老对象也会变化</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    slice1 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"slice1: %v, %p"</span><span class="token punctuation">,</span> slice1<span class="token punctuation">,</span> slice1<span class="token punctuation">)</span>
+    slice2 <span class="token operator">:=</span> slice1
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"slice2: %v, %p"</span><span class="token punctuation">,</span> slice2<span class="token punctuation">,</span> slice2<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+slice1<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0xc00001a120</span>
+slice2<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0xc00001a120</span>
+</code></pre>
+<h3 id="slice扩容机制？"><a href="#slice扩容机制？" class="headerlink" title="slice扩容机制？"></a>slice扩容机制？</h3><p>扩容会发生在slice append的时候，当slice的cap不足以容纳新元素，就会进行扩容，扩容规则如下</p>
+<ul>
+<li>如果<strong>新申请容量比两倍原有容量大</strong>，那么扩容后容量大小 为 <strong>新申请容量</strong></li>
+<li>如果原有 slice 长度<strong>小于 1024</strong>， 那么每次就扩容为原来的 <strong>2 倍</strong></li>
+<li>如果原 slice 长度<strong>大于等于 1024</strong>， 那么每次扩容就扩为原来的 <strong>1.25 倍</strong></li>
+</ul>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    slice1 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">16</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        slice1 <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>slice1<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"addr: %p, len: %v, cap: %v"</span><span class="token punctuation">,</span> slice1<span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>slice1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>slice1<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc00001a120</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">6</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc00001a120</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">6</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc00001a120</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">6</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc000060060</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">12</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc000060060</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">12</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc000060060</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">12</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc000060060</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">12</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc000060060</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">12</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc000060060</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">12</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc00007c000</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">24</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc00007c000</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">24</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc00007c000</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">24</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc00007c000</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">24</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc00007c000</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">17</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">24</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc00007c000</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">24</span>
+addr<span class="token punctuation">:</span> <span class="token number">0xc00007c000</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">:</span> <span class="token number">19</span><span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">:</span> <span class="token number">24</span>
+</code></pre>
+<h3 id="slice为什么不是线程安全的？"><a href="#slice为什么不是线程安全的？" class="headerlink" title="slice为什么不是线程安全的？"></a>slice为什么不是线程安全的？</h3><p>slice底层结构并没有使用加锁等方式，不支持并发读写，所以并不是线程安全的，使用多个 goroutine 对类型为 slice 的变量进行操作，每次输出的值大概率都不会一样，与预期值不一致; <strong>slice在并发执行中不会报错，但是数据会丢失</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestSliceConcurrencySafe</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    a <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10000</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span>i <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            a <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+            wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// not equal 10000</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="扩容前后的-Slice-是否相同？"><a href="#扩容前后的-Slice-是否相同？" class="headerlink" title="扩容前后的 Slice 是否相同？"></a>扩容前后的 Slice 是否相同？</h3><p>情况一：</p>
+<p>原数组还有容量<strong>可以扩容（实际容量没有填充完）</strong>，这种情况下，<strong>扩容以后的数组还是指向原来的数组</strong>，对一个切片的操作可能影响多个指针指向相同地址 的 Slice。</p>
+<p>情况二：</p>
+<p>原来数组的容量已经<strong>达到了最大值</strong>，再想扩容， Go 默认会先开一片内存区域，<strong>把原来的值拷贝过来，然后再执行 append() 操作</strong>。这种情况丝毫不影响 原数组。</p>
+<p>要复制一个 Slice，最好使用 Copy 函数。</p>
+<h3 id="slice分配在堆上还是栈上"><a href="#slice分配在堆上还是栈上" class="headerlink" title="slice分配在堆上还是栈上"></a>slice分配在堆上还是栈上</h3><p>有可能分配到栈上，也有可能分配到栈上。当开辟切片空间较大时，会逃逸到堆上。</p>
+<h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><h3 id="Go-channel有什么特点？"><a href="#Go-channel有什么特点？" class="headerlink" title="Go channel有什么特点？"></a>Go channel有什么特点？</h3><p>channel有2种类型：无缓冲、有缓冲</p>
+<p>channel有3种模式：写操作模式（单向通道）、读操作模式（单向通道）、读写操作模式（双向通道）</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>写操作模式</th>
+<th>读操作模式</th>
+<th>读写操作模式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>创建</td>
+<td>make(chan&lt;- int)</td>
+<td>make(&lt;-chan int)</td>
+<td>make(chan int)</td>
+</tr>
+</tbody></table>
+<p>channel有3种状态：未初始化、正常、关闭</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>未初始化</th>
+<th>关闭</th>
+<th>正常</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>关闭</td>
+<td>panic</td>
+<td>panic</td>
+<td>正常关闭</td>
+</tr>
+<tr>
+<td>发送</td>
+<td>永远阻塞导致死锁</td>
+<td>panic</td>
+<td>阻塞或者成功发送</td>
+</tr>
+<tr>
+<td>接收</td>
+<td>永远阻塞导致死锁</td>
+<td>缓冲区为空则为零值, 否则可以继续读</td>
+<td>阻塞或者成功接收</td>
+</tr>
+</tbody></table>
+<p><strong>注意点</strong>：</p>
+<ol>
+<li>一个 channel不能多次关闭，会导致painc</li>
+<li>如果多个 goroutine 都监听同一个 channel，那么 channel 上的数据都<strong>可能随机被某一个 goroutine 取走进行消费</strong></li>
+<li>如果多个 goroutine 监听同一个 channel，如果这个 channel 被关闭，则所有 goroutine <strong>都能收到退出信号</strong></li>
+</ol>
+<h3 id="Go-channel的底层实现原理？"><a href="#Go-channel的底层实现原理？" class="headerlink" title="Go channel的底层实现原理？"></a>Go channel的底层实现原理？</h3><p>底层结构需要描述出来，这个简单，buf，发送队列，接收队列，lock。</p>
+<img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/hchan.png" alt="hchan" style="zoom: 50%;">  
+
+<p><strong>发送</strong></p>
+<p>向 channel 中发送数据时大概分为两大块：检查和数据发送，数据发送流程如下：</p>
+<ul>
+<li>如果 channel 的读等待队列存在接收者goroutine</li>
+<li>将数据<strong>直接发送</strong>给第一个等待的 goroutine， <strong>唤醒接收的 goroutine</strong></li>
+<li>如果 channel 的读等待队列不存在接收者goroutine</li>
+<li>如果循环数组buf未满，那么将会把数据发送到循环数组buf的队尾</li>
+<li>如果循环数组buf已满，这个时候就会走阻塞发送的流程，将当前 goroutine 加入写等待队列，并<strong>挂起等待唤醒</strong></li>
+</ul>
+<p><strong>接收</strong></p>
+<p>向 channel 中接收数据时大概分为两大块，检查和数据发送，而数据接收流程如下：</p>
+<ul>
+<li>如果 channel 的写等待队列存在发送者goroutine</li>
+<li>如果是无缓冲 channel，<strong>直接</strong>从第一个发送者goroutine那里把数据拷贝给接收变量，<strong>唤醒发送的 goroutine</strong></li>
+<li>如果是有缓冲 channel（已满），将循环数组buf的队首元素拷贝给接收变量，将第一个发送者goroutine的数据拷贝到 buf循环数组队尾，<strong>唤醒发送的 goroutine</strong></li>
+<li>如果 channel 的写等待队列不存在发送者goroutine</li>
+<li>如果循环数组buf非空，将循环数组buf的队首元素拷贝给接收变量</li>
+<li>如果循环数组buf为空，这个时候就会走阻塞接收的流程，将当前 goroutine 加入读等待队列，并<strong>挂起等待唤醒</strong></li>
+</ul>
+<p><strong>总结hchan结构体的主要组成部分有四个：</strong></p>
+<ul>
+<li>用来保存goroutine之间传递数据的循环数组：buf</li>
+<li>用来记录此循环数组当前发送或接收数据的下标值：sendx和recvx</li>
+<li>用于保存向该chan发送和从该chan接收数据被阻塞的goroutine队列： sendq 和 recvq</li>
+<li>保证channel写入和读取数据时线程安全的锁：lock</li>
+</ul>
+<p><strong>使用场景：</strong> 消息传递、消息过滤，信号广播，事件订阅与广播，请求、响应转发，任务分发，结果汇总，并发控制，限流，同步与异步</p>
+<h3 id="Go-channel有无缓冲的区别？"><a href="#Go-channel有无缓冲的区别？" class="headerlink" title="Go channel有无缓冲的区别？"></a>Go channel有无缓冲的区别？</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>无缓冲</th>
+<th>有缓冲</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>创建方式</td>
+<td>make(chan TYPE)</td>
+<td>make(chan TYPE, SIZE)</td>
+</tr>
+<tr>
+<td>发送阻塞</td>
+<td>数据接收前发送阻塞</td>
+<td>缓冲满时发送阻塞</td>
+</tr>
+<tr>
+<td>接收阻塞</td>
+<td>数据发送前接收阻塞</td>
+<td>缓冲空时接收阻塞</td>
+</tr>
+</tbody></table>
+<h3 id="Go-channel为什么是线程安全的？"><a href="#Go-channel为什么是线程安全的？" class="headerlink" title="Go channel为什么是线程安全的？"></a>Go channel为什么是线程安全的？</h3><p><strong>为什么设计成线程安全？</strong></p>
+<p>不同协程通过channel进行通信，本身的使用场景就是多线程，为了保证数据的一致性，必须实现线程安全</p>
+<p><strong>如何实现线程安全的？</strong></p>
+<p>channel的底层实现中，hchan结构体中采用Mutex锁来保证数据读写安全。在对循环数组buf中的数据进行入队和出队操作时，必须先获取互斥锁，才能操作channel数据</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h3 id="map的底层实现原理"><a href="#map的底层实现原理" class="headerlink" title="map的底层实现原理"></a>map的底层实现原理</h3><img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/640.png" alt="图片" style="zoom:70%;"> 
+
+<p>Go中的map是一个指针，占用8个字节，指向hmap结构体</p>
+<p>源码包中<code>src/runtime/map.go</code>定义了hmap的数据结构：</p>
+<p>hmap包含若干个结构为bmap的数组，每个bmap底层都采用链表结构，bmap通常叫其bucket</p>
+<p><strong>hmap结构体</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// A header for a Go map.</span>
+<span class="token keyword">type</span> hmap <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+  count     <span class="token builtin">int</span> 
+  <span class="token comment" spellcheck="true">// 代表哈希表中的元素个数，调用len(map)时，返回的就是该字段值。</span>
+  flags     <span class="token builtin">uint8</span> 
+  <span class="token comment" spellcheck="true">// 状态标志（是否处于正在写入的状态等）</span>
+  B         <span class="token builtin">uint8</span>  
+  <span class="token comment" spellcheck="true">// buckets（桶）的对数</span>
+  <span class="token comment" spellcheck="true">// 如果B=5，则buckets数组的长度 = 2^B=32，意味着有32个桶</span>
+  noverflow <span class="token builtin">uint16</span> 
+  <span class="token comment" spellcheck="true">// 溢出桶的数量</span>
+  hash0     <span class="token builtin">uint32</span> 
+  <span class="token comment" spellcheck="true">// 生成hash的随机数种子</span>
+  buckets    unsafe<span class="token punctuation">.</span>Pointer 
+  <span class="token comment" spellcheck="true">// 指向buckets数组的指针，数组大小为2^B，如果元素个数为0，它为nil。</span>
+  oldbuckets unsafe<span class="token punctuation">.</span>Pointer 
+  <span class="token comment" spellcheck="true">// 如果发生扩容，oldbuckets是指向老的buckets数组的指针，老的buckets数组大小是新的buckets的1/2;非扩容状态下，它为nil。</span>
+  nevacuate  <span class="token builtin">uintptr</span>        
+  <span class="token comment" spellcheck="true">// 表示扩容进度，小于此地址的buckets代表已搬迁完成。</span>
+  extra <span class="token operator">*</span>mapextra 
+  <span class="token comment" spellcheck="true">// 存储溢出桶，这个字段是为了优化GC扫描而设计的，下面详细介绍</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>bmap结构体</strong></p>
+<p><code>bmap</code> 就是我们常说的“桶”<strong>，一个桶里面会最多装 8 个 key</strong>，这些 key 之所以会落入同一个桶，是因为它们经过哈希计算后，<strong>哈希结果的低B位是相同的</strong>，关于key的定位我们在map的查询中详细说明。在桶内，又会 <strong>根据 key 计算出来的 hash 值的高 8 位来决定 key 到底落入桶内的哪个位置（一个桶内最多有8个位置)。</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// A bucket for a Go map.</span>
+<span class="token keyword">type</span> bmap <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+  tophash <span class="token punctuation">[</span>bucketCnt<span class="token punctuation">]</span><span class="token builtin">uint8</span>        
+  <span class="token comment" spellcheck="true">// len为8的数组</span>
+  <span class="token comment" spellcheck="true">// 用来快速定位key是否在这个bmap中</span>
+  <span class="token comment" spellcheck="true">// 一个桶最多8个槽位，如果key所在的tophash值在tophash中，则代表该key在这个桶中</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>上面bmap结构是静态结构，在编译过程中<code>runtime.bmap</code>会拓展成以下结构体：</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> bmap <span class="token keyword">struct</span><span class="token punctuation">{</span>
+tophash <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token builtin">uint8</span>
+keys <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span>keytype 
+<span class="token comment" spellcheck="true">// keytype 由编译器编译时候确定</span>
+values <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span>elemtype 
+<span class="token comment" spellcheck="true">// elemtype 由编译器编译时候确定</span>
+overflow <span class="token builtin">uintptr</span> 
+<span class="token comment" spellcheck="true">// overflow指向下一个bmap，overflow是uintptr而不是*bmap类型，保证bmap完全不含指针，是为了减少gc，溢出桶存储到extra字段中</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>tophash就是用于实现快速定位key的位置，在实现过程中会使用key的hash值的高8位作为tophash值，存放在bmap的tophash字段中</strong></p>
+<p>tophash字段不仅<strong>存储key哈希值的高8位</strong>，还会<strong>存储一些状态值，用来表明当前桶单元状态</strong>，这些状态值都是小于minTopHash的</p>
+<p>为了避免key哈希值的高8位值和这些状态值相等，产生混淆情况，所以当key哈希值高8位若小于minTopHash时候，自动将其值加上minTopHash作为该key的tophash。桶单元的状态值如下：</p>
+<pre class=" language-go"><code class="language-go">emptyRest      <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment" spellcheck="true">// 表明此桶单元为空，且更高索引的单元也是空</span>
+emptyOne       <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment" spellcheck="true">// 表明此桶单元为空</span>
+evacuatedX     <span class="token operator">=</span> <span class="token number">2</span> <span class="token comment" spellcheck="true">// 用于表示扩容迁移到新桶前半段区间</span>
+evacuatedY     <span class="token operator">=</span> <span class="token number">3</span> <span class="token comment" spellcheck="true">// 用于表示扩容迁移到新桶后半段区间</span>
+evacuatedEmpty <span class="token operator">=</span> <span class="token number">4</span> <span class="token comment" spellcheck="true">// 用于表示此单元已迁移</span>
+minTopHash     <span class="token operator">=</span> <span class="token number">5</span> <span class="token comment" spellcheck="true">// key的tophash值与桶状态值分割线值，小于此值的一定代表着桶单元的状态，大于此值的一定是key对应的tophash值</span>
+
+<span class="token keyword">func</span> <span class="token function">tophash</span><span class="token punctuation">(</span>hash <span class="token builtin">uintptr</span><span class="token punctuation">)</span> <span class="token builtin">uint8</span> <span class="token punctuation">{</span>
+top <span class="token operator">:=</span> <span class="token function">uint8</span><span class="token punctuation">(</span>hash <span class="token operator">>></span> <span class="token punctuation">(</span>goarch<span class="token punctuation">.</span>PtrSize<span class="token operator">*</span><span class="token number">8</span> <span class="token operator">-</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> top <span class="token operator">&lt;</span> minTopHash <span class="token punctuation">{</span>
+top <span class="token operator">+=</span> minTopHash
+<span class="token punctuation">}</span>
+<span class="token keyword">return</span> top
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>mapextra结构体</strong></p>
+<p>当map的key和value都不是指针类型时候，bmap将完全不包含指针，那么gc时候就不用扫描bmap。bmap指向溢出桶的字段overflow是uintptr类型，为了防止这些overflow桶被gc掉，所以需要mapextra.overflow将它保存起来。如果bmap的overflow是*bmap类型，那么gc扫描的是一个个拉链表，效率明显不如直接扫描一段内存(hmap.mapextra.overflow)</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> mapextra <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+overflow    <span class="token operator">*</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">*</span>bmap
+<span class="token comment" spellcheck="true">// overflow 包含的是 hmap.buckets 的 overflow 的 buckets</span>
+oldoverflow <span class="token operator">*</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">*</span>bma
+<span class="token comment" spellcheck="true">// oldoverflow 包含扩容时 hmap.oldbuckets 的 overflow 的 bucket</span>
+nextOverflow <span class="token operator">*</span>bmap 
+<span class="token comment" spellcheck="true">// 指向空闲的 overflow bucket 的指针</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>总结</strong></p>
+<p>bmap（bucket）内存数据结构可视化如下:</p>
+<p>注意到 key 和 value 是各自放在一起的，并不是 <code>key/value/key/value/...</code> 这样的形式，当key和value类型不一样的时候，key和value占用字节大小不一样，使用key&#x2F;value这种形式可能会因为内存对齐导致内存空间浪费，所以Go采用key和value分开存储的设计，更节省内存空间</p>
+<p><img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/640-20220309173633627.png" alt="图片"> </p>
+<h3 id="Go-map如何查找？"><a href="#Go-map如何查找？" class="headerlink" title="Go map如何查找？"></a>Go map如何查找？</h3><p>Go 语言中读取 map 有两种语法：带 comma 和 不带 comma。当要查询的 key 不在 map 里，带 comma 的用法会返回一个 bool 型变量提示 key 是否在 map 中；而不带 comma 的语句则会返回一个 value 类型的零值。如果 value 是 int 型就会返回 0，如果 value 是 string 类型，就会返回空字符串。</p>
+<pre class=" language-stylus"><code class="language-stylus"><span class="token comment" spellcheck="true">// 不带 comma 用法</span>
+<span class="token variable-declaration"><span class="token variable">value</span> <span class="token operator">:=</span> m<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span></span>
+fmt<span class="token punctuation">.</span><span class="token func"><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"value:%s"</span><span class="token punctuation">,</span> value<span class="token punctuation">)</span></span>
+
+<span class="token comment" spellcheck="true">// 带 comma 用法</span>
+value, ok <span class="token punctuation">:</span>= m<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span>
+<span class="token statement"><span class="token keyword">if</span> ok <span class="token punctuation">{</span></span>
+fmt<span class="token punctuation">.</span><span class="token func"><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"value:%s"</span><span class="token punctuation">,</span> value<span class="token punctuation">)</span></span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>map的查找通过生成汇编码可以知道，根据 key 的不同类型&#x2F;返回参数，编译器会将查找函数用更具体的函数替换，以优化效率：</p>
+<table>
+<thead>
+<tr>
+<th align="left">key 类型</th>
+<th align="left">查找</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">uint32</td>
+<td align="left">mapaccess1_fast32(t <em>maptype, h</em> hmap, key uint32) unsafe.Pointer</td>
+</tr>
+<tr>
+<td align="left">uint32</td>
+<td align="left">mapaccess2_fast32(t <em>maptype, h</em> hmap, key uint32) (unsafe.Pointer, bool)</td>
+</tr>
+<tr>
+<td align="left">uint64</td>
+<td align="left">mapaccess1_fast64(t <em>maptype, h</em> hmap, key uint64) unsafe.Pointer</td>
+</tr>
+<tr>
+<td align="left">uint64</td>
+<td align="left">mapaccess2_fast64(t <em>maptype, h</em> hmap, key uint64) (unsafe.Pointer, bool)</td>
+</tr>
+<tr>
+<td align="left">string</td>
+<td align="left">mapaccess1_faststr(t <em>maptype, h</em> hmap, ky string) unsafe.Pointer</td>
+</tr>
+<tr>
+<td align="left">string</td>
+<td align="left">mapaccess2_faststr(t <em>maptype, h</em> hmap, ky string) (unsafe.Pointer, bool)</td>
+</tr>
+</tbody></table>
+<p><strong>查找流程</strong></p>
+<img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/image-20220117201006909.png" alt="img" style="zoom:67%;"> 
+
+<ol>
+<li><strong>写保护监测</strong></li>
+</ol>
+<p>函数首先会检查 map 的标志位 flags。如果 flags 的写标志位此时被置 1 了，说明有其他协程在执行“写”操作，进而导致程序 panic，这也说明了 map 不是线程安全的</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">if</span> h<span class="token punctuation">.</span>flags<span class="token operator">&amp;</span>hashWriting <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+    <span class="token function">throw</span><span class="token punctuation">(</span><span class="token string">"concurrent map read and map write"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ol>
+<li><strong>计算hash值</strong></li>
+</ol>
+<pre class=" language-go"><code class="language-go">hash <span class="token operator">:=</span> t<span class="token punctuation">.</span><span class="token function">hasher</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>h<span class="token punctuation">.</span>hash0<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<p>key经过哈希函数计算后，得到的哈希值如下（主流64位机下共 64 个 bit 位）， 不同类型的key会有不同的hash函数</p>
+<pre class=" language-go"><code class="language-go"><span class="token number">10010111</span> <span class="token operator">|</span> <span class="token number">000011110110110010001111001010100010010110010101010</span> │ <span class="token number">01010</span>
+</code></pre>
+<ol>
+<li><strong>找到hash对应的bucket</strong></li>
+</ol>
+<p>bucket定位：<strong>哈希值的低B个bit 位</strong>，用来定位key所存放的bucket</p>
+<p>如果当前正在扩容中，并且定位到的旧bucket数据还未完成迁移，则使用旧的bucket（扩容前的bucket）</p>
+<pre class=" language-go"><code class="language-go">hash <span class="token operator">:=</span> t<span class="token punctuation">.</span><span class="token function">hasher</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>h<span class="token punctuation">.</span>hash0<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 桶的个数m-1，即 1&lt;&lt;B-1,B=5时，则有0~31号桶</span>
+    m <span class="token operator">:=</span> <span class="token function">bucketMask</span><span class="token punctuation">(</span>h<span class="token punctuation">.</span>B<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 计算哈希值对应的bucket</span>
+    <span class="token comment" spellcheck="true">// t.bucketsize为一个bmap的大小，通过对哈希值和桶个数取模得到桶编号，通过对桶编号和buckets起始地址进行运算，获取哈希值对应的bucket</span>
+    b <span class="token operator">:=</span> <span class="token punctuation">(</span><span class="token operator">*</span>bmap<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span>h<span class="token punctuation">.</span>buckets<span class="token punctuation">,</span> <span class="token punctuation">(</span>hash<span class="token operator">&amp;</span>m<span class="token punctuation">)</span><span class="token operator">*</span><span class="token function">uintptr</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>bucketsize<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 是否在扩容</span>
+    <span class="token keyword">if</span> c <span class="token operator">:=</span> h<span class="token punctuation">.</span>oldbuckets<span class="token punctuation">;</span> c <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 桶个数已经发生增长一倍，则旧bucket的桶个数为当前桶个数的一半</span>
+        <span class="token keyword">if</span> <span class="token operator">!</span>h<span class="token punctuation">.</span><span class="token function">sameSizeGrow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// There used to be half as many buckets; mask down one more power of two.</span>
+            m <span class="token operator">>>=</span> <span class="token number">1</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 计算哈希值对应的旧bucket</span>
+        oldb <span class="token operator">:=</span> <span class="token punctuation">(</span><span class="token operator">*</span>bmap<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> <span class="token punctuation">(</span>hash<span class="token operator">&amp;</span>m<span class="token punctuation">)</span><span class="token operator">*</span><span class="token function">uintptr</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>bucketsize<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true">// 如果旧bucket的数据没有完成迁移，则使用旧bucket查找</span>
+        <span class="token keyword">if</span> <span class="token operator">!</span><span class="token function">evacuated</span><span class="token punctuation">(</span>oldb<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            b <span class="token operator">=</span> oldb
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p><strong>4. 遍历bucket查找</strong></p>
+<p>tophash值定位：<strong>哈希值的高8个bit 位</strong>，用来快速判断key是否已在当前bucket中（如果不在的话，需要去bucket的overflow中查找）</p>
+<p>用步骤2中的hash值，得到高8个bit位，也就是<code>10010111</code>，转化为十进制，也就是<strong>151</strong></p>
+<pre class=" language-go"><code class="language-go">    top <span class="token operator">:=</span> <span class="token function">tophash</span><span class="token punctuation">(</span>hash<span class="token punctuation">)</span>
+        <span class="token keyword">func</span> <span class="token function">tophash</span><span class="token punctuation">(</span>hash <span class="token builtin">uintptr</span><span class="token punctuation">)</span> <span class="token builtin">uint8</span> <span class="token punctuation">{</span>
+        top <span class="token operator">:=</span> <span class="token function">uint8</span><span class="token punctuation">(</span>hash <span class="token operator">>></span> <span class="token punctuation">(</span>goarch<span class="token punctuation">.</span>PtrSize<span class="token operator">*</span><span class="token number">8</span> <span class="token operator">-</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> top <span class="token operator">&lt;</span> minTopHash <span class="token punctuation">{</span>
+        top <span class="token operator">+=</span> minTopHash
+    <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> top
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>上面函数中hash是64位的，sys.PtrSize值是8，所以<code>top := uint8(hash &gt;&gt; (sys.PtrSize*8 - 8))</code>等效<code>top = uint8(hash &gt;&gt; 56)</code>，最后top取出来的值就是hash的高8位值</p>
+<p>在 bucket 及bucket的overflow中寻找<strong>tophash 值（HOB hash）为 151 的 槽位</strong>，即为key所在位置，找到了空槽位或者 2 号槽位，这样整个查找过程就结束了，其中找到空槽位代表没找到。</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">for</span> <span class="token punctuation">;</span> b <span class="token operator">!=</span> <span class="token boolean">nil</span><span class="token punctuation">;</span> b <span class="token operator">=</span> b<span class="token punctuation">.</span><span class="token function">overflow</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> bucketCnt<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> b<span class="token punctuation">.</span>tophash<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> top <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// 未被使用的槽位，插入</span>
+                <span class="token keyword">if</span> b<span class="token punctuation">.</span>tophash<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> emptyRest <span class="token punctuation">{</span>
+                    <span class="token keyword">break</span> bucketloop
+                <span class="token punctuation">}</span>
+                <span class="token keyword">continue</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">// 找到tophash值对应的的key</span>
+            k <span class="token operator">:=</span> <span class="token function">add</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span> dataOffset<span class="token operator">+</span>i<span class="token operator">*</span><span class="token function">uintptr</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>keysize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> t<span class="token punctuation">.</span>key<span class="token punctuation">.</span><span class="token function">equal</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                e <span class="token operator">:=</span> <span class="token function">add</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span> dataOffset<span class="token operator">+</span>bucketCnt<span class="token operator">*</span><span class="token function">uintptr</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>keysize<span class="token punctuation">)</span><span class="token operator">+</span>i<span class="token operator">*</span><span class="token function">uintptr</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>elemsize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> e
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/f39e10e1474fda593cbca86eb0c517e2.png" alt="img" style="zoom:30%;"> 
+
+<p><strong>5. 返回key对应的指针</strong></p>
+<p>如果通过上面的步骤找到了key对应的槽位下标 i，我们再详细分析下key&#x2F;value值是如何获取的：</p>
+<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// keys的偏移量</span>
+dataOffset <span class="token operator">=</span> unsafe<span class="token punctuation">.</span><span class="token function">Offsetof</span><span class="token punctuation">(</span><span class="token keyword">struct</span><span class="token punctuation">{</span>
+b bmap
+v <span class="token builtin">int64</span>
+<span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">.</span>v<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 一个bucket的元素个数</span>
+bucketCnt <span class="token operator">=</span> <span class="token number">8</span>
+
+<span class="token comment" spellcheck="true">// key 定位公式</span>
+k <span class="token operator">:=</span><span class="token function">add</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span>dataOffset<span class="token operator">+</span>i<span class="token operator">*</span><span class="token function">uintptr</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>keysize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// value 定位公式</span>
+v<span class="token operator">:=</span> <span class="token function">add</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span>dataOffset<span class="token operator">+</span>bucketCnt<span class="token operator">*</span><span class="token function">uintptr</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>keysize<span class="token punctuation">)</span><span class="token operator">+</span>i<span class="token operator">*</span><span class="token function">uintptr</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>valuesize<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<p>bucket 里 keys 的起始地址就是 unsafe.Pointer(b)+dataOffset</p>
+<p>第 i 个下标 key 的地址就要在此基础上跨过 i 个 key 的大小；</p>
+<p>而我们又知道，value 的地址是在所有 key 之后，因此第 i 个下标 value 的地址还需要加上所有 key 的偏移。</p>
+<h3 id="map如何扩容"><a href="#map如何扩容" class="headerlink" title="map如何扩容?"></a>map如何扩容?</h3><p><strong>扩容时机：</strong></p>
+<p>在<strong>向 map 插入新 key</strong> 的时候，会进行条件检测，符合下面这 2 个条件，就会触发扩容</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">if</span> <span class="token operator">!</span>h<span class="token punctuation">.</span><span class="token function">growing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token function">overLoadFactor</span><span class="token punctuation">(</span>h<span class="token punctuation">.</span>count<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> h<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">tooManyOverflowBuckets</span><span class="token punctuation">(</span>h<span class="token punctuation">.</span>noverflow<span class="token punctuation">,</span> h<span class="token punctuation">.</span>B<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token function">hashGrow</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> h<span class="token punctuation">)</span>
+<span class="token keyword">goto</span> again <span class="token comment" spellcheck="true">// Growing the table invalidates everything, so try again</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 判断是否在扩容</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>h <span class="token operator">*</span>hmap<span class="token punctuation">)</span> <span class="token function">growing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>
+<span class="token keyword">return</span> h<span class="token punctuation">.</span>oldbuckets <span class="token operator">!=</span> <span class="token boolean">nil</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>扩容条件：</strong></p>
+<p><strong>条件1：超过负载</strong></p>
+<p><strong>map元素个数 &gt; 6.5 * 桶个数</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">overLoadFactor</span><span class="token punctuation">(</span>count <span class="token builtin">int</span><span class="token punctuation">,</span> B <span class="token builtin">uint8</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>
+<span class="token keyword">return</span> count <span class="token operator">></span> bucketCnt <span class="token operator">&amp;&amp;</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span> <span class="token operator">></span> loadFactor<span class="token operator">*</span><span class="token function">bucketShift</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+其中 
+bucketCnt <span class="token operator">=</span> <span class="token number">8</span>，一个桶可以装的最大元素个数
+loadFactor <span class="token operator">=</span> <span class="token number">6.5</span>，负载因子，平均每个桶的元素个数
+<span class="token function">bucketShift</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span> 桶的个数
+</code></pre>
+<p><strong>条件2：溢出桶太多</strong></p>
+<p>当桶总数 &lt; 2 ^ 15 时，如果溢出桶总数 &gt;&#x3D; 桶总数，则认为溢出桶过多。</p>
+<p>当桶总数 &gt;&#x3D; 2 ^ 15 时，直接与 2 ^ 15 比较，当溢出桶总数 &gt;&#x3D; 2 ^ 15 时，即认为溢出桶太多了。</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">tooManyOverflowBuckets</span><span class="token punctuation">(</span>noverflow <span class="token builtin">uint16</span><span class="token punctuation">,</span> B <span class="token builtin">uint8</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">// If the threshold is too low, we do extraneous work.</span>
+<span class="token comment" spellcheck="true">// If the threshold is too high, maps that grow and shrink can hold on to lots of unused memory.</span>
+<span class="token comment" spellcheck="true">// "too many" means (approximately) as many overflow buckets as regular buckets.</span>
+<span class="token comment" spellcheck="true">// See incrnoverflow for more details.</span>
+<span class="token keyword">if</span> B <span class="token operator">></span> <span class="token number">15</span> <span class="token punctuation">{</span>
+B <span class="token operator">=</span> <span class="token number">15</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// The compiler does not see here that B &lt; 16; mask B to generate shorter shift code.</span>
+<span class="token keyword">return</span> noverflow <span class="token operator">>=</span> <span class="token function">uint16</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token punctuation">(</span>B<span class="token operator">&amp;</span><span class="token number">15</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>对于条件2，其实算是对条件1的补充。因为在负载因子比较小的情况下，有可能 map 的查找和插入效率也很低，而第 1 点识别不出来这种情况。</p>
+<p>表面现象就是负载因子比较小比较小，即 map 里元素总数少，但是桶数量多（真实分配的桶数量多，包括大量的溢出桶）。比如不断的增删，这样会造成overflow的bucket数量增多，但负载因子又不高，达不到第 1 点的临界值，就不能触发扩容来缓解这种情况。这样会造成桶的使用率不高，值存储得比较稀疏，查找插入效率会变得非常低，因此有了第 2 扩容条件。</p>
+<p><strong>扩容机制：</strong></p>
+<p><strong>双倍扩容</strong>：<strong>针对条件1，新建一个buckets数组，新的buckets大小是原来的2倍，然后旧buckets数据搬迁到新的buckets。该方法我们称之为双倍扩容</strong></p>
+<p>**等量扩容：针对条件2，并不扩大容量，buckets数量维持不变，重新做一遍类似双倍扩容的搬迁动作，把松散的键值对重新排列一次，使得同一个 bucket 中的 key 排列地更紧密，节省空间，提高 bucket 利用率，进而保证更快的存取。该方法我们称之为**等量扩容**。</p>
+<p><strong>扩容函数：</strong></p>
+<p>上面说的 <code>hashGrow()</code> 函数实际上并没有真正地“搬迁”，它只是分配好了新的 buckets，并将老的 buckets 挂到了 oldbuckets 字段上。真正搬迁 buckets 的动作在 <code>growWork()</code> 函数中，而调用 <code>growWork()</code> 函数的动作是在 mapassign 和 mapdelete 函数中。也就是<strong>插入或修改、删除 key 的时候，都会尝试进行搬迁 buckets 的工作</strong>。先检查 oldbuckets 是否搬迁完毕，具体来说就是检查 oldbuckets 是否为 nil</p>
+<pre class=" language-go"><code class="language-go"><span class="token number">1</span>  <span class="token keyword">func</span> <span class="token function">hashGrow</span><span class="token punctuation">(</span>t <span class="token operator">*</span>maptype<span class="token punctuation">,</span> h <span class="token operator">*</span>hmap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token number">2</span>  <span class="token comment" spellcheck="true">// 如果达到条件 1，那么将B值加1，相当于是原来的2倍</span>
+<span class="token number">3</span>  <span class="token comment" spellcheck="true">// 否则对应条件 2，进行等量扩容，所以 B 不变</span>
+<span class="token number">4</span>    bigger <span class="token operator">:=</span> <span class="token function">uint8</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token number">5</span>    <span class="token keyword">if</span> <span class="token operator">!</span><span class="token function">overLoadFactor</span><span class="token punctuation">(</span>h<span class="token punctuation">.</span>count<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> h<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token number">6</span>        bigger <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token number">7</span>        h<span class="token punctuation">.</span>flags <span class="token operator">|=</span> sameSizeGrow
+<span class="token number">8</span>    <span class="token punctuation">}</span>
+<span class="token number">9</span>  <span class="token comment" spellcheck="true">// 记录老的buckets</span>
+<span class="token number">10</span>    oldbuckets <span class="token operator">:=</span> h<span class="token punctuation">.</span>buckets
+<span class="token number">11</span>  <span class="token comment" spellcheck="true">// 申请新的buckets空间</span>
+<span class="token number">12</span>    newbuckets<span class="token punctuation">,</span> nextOverflow <span class="token operator">:=</span> <span class="token function">makeBucketArray</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> h<span class="token punctuation">.</span>B<span class="token operator">+</span>bigger<span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span>
+<span class="token number">13</span>  <span class="token comment" spellcheck="true">// 注意&amp;^ 运算符，这块代码的逻辑是转移标志位</span>
+<span class="token number">14</span>    flags <span class="token operator">:=</span> h<span class="token punctuation">.</span>flags <span class="token operator">&amp;^</span> <span class="token punctuation">(</span>iterator <span class="token operator">|</span> oldIterator<span class="token punctuation">)</span>
+<span class="token number">15</span>    <span class="token keyword">if</span> h<span class="token punctuation">.</span>flags<span class="token operator">&amp;</span>iterator <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+<span class="token number">16</span>        flags <span class="token operator">|=</span> oldIterator
+<span class="token number">17</span>    <span class="token punctuation">}</span>
+<span class="token number">18</span>    <span class="token comment" spellcheck="true">// 提交grow (atomic wrt gc)</span>
+<span class="token number">19</span>    h<span class="token punctuation">.</span>B <span class="token operator">+=</span> bigger
+<span class="token number">20</span>    h<span class="token punctuation">.</span>flags <span class="token operator">=</span> flags
+<span class="token number">21</span>    h<span class="token punctuation">.</span>oldbuckets <span class="token operator">=</span> oldbuckets
+<span class="token number">22</span>    h<span class="token punctuation">.</span>buckets <span class="token operator">=</span> newbuckets
+<span class="token number">23</span>  <span class="token comment" spellcheck="true">// 搬迁进度为0</span>
+<span class="token number">24</span>    h<span class="token punctuation">.</span>nevacuate <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token number">25</span>  <span class="token comment" spellcheck="true">// overflow buckets 数为0</span>
+<span class="token number">26</span>    h<span class="token punctuation">.</span>noverflow <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token number">27</span>
+<span class="token number">28</span>  <span class="token comment" spellcheck="true">// 如果发现hmap是通过extra字段 来存储 overflow buckets时</span>
+<span class="token number">29</span>    <span class="token keyword">if</span> h<span class="token punctuation">.</span>extra <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token operator">&amp;&amp;</span> h<span class="token punctuation">.</span>extra<span class="token punctuation">.</span>overflow <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+<span class="token number">30</span>        <span class="token keyword">if</span> h<span class="token punctuation">.</span>extra<span class="token punctuation">.</span>oldoverflow <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+<span class="token number">31</span>            <span class="token function">throw</span><span class="token punctuation">(</span><span class="token string">"oldoverflow is not nil"</span><span class="token punctuation">)</span>
+<span class="token number">32</span>        <span class="token punctuation">}</span>
+<span class="token number">33</span>        h<span class="token punctuation">.</span>extra<span class="token punctuation">.</span>oldoverflow <span class="token operator">=</span> h<span class="token punctuation">.</span>extra<span class="token punctuation">.</span>overflow
+<span class="token number">34</span>        h<span class="token punctuation">.</span>extra<span class="token punctuation">.</span>overflow <span class="token operator">=</span> <span class="token boolean">nil</span>
+<span class="token number">35</span>    <span class="token punctuation">}</span>
+<span class="token number">36</span>    <span class="token keyword">if</span> nextOverflow <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+<span class="token number">37</span>        <span class="token keyword">if</span> h<span class="token punctuation">.</span>extra <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+<span class="token number">38</span>            h<span class="token punctuation">.</span>extra <span class="token operator">=</span> <span class="token function">new</span><span class="token punctuation">(</span>mapextra<span class="token punctuation">)</span>
+<span class="token number">39</span>        <span class="token punctuation">}</span>
+<span class="token number">40</span>        h<span class="token punctuation">.</span>extra<span class="token punctuation">.</span>nextOverflow <span class="token operator">=</span> nextOverflow
+<span class="token number">41</span>    <span class="token punctuation">}</span>
+<span class="token number">42</span><span class="token punctuation">}</span>
+</code></pre>
+<p>由于 map 扩容需要将原有的 key&#x2F;value 重新搬迁到新的内存地址，如果map存储了数以亿计的key-value，一次性搬迁将会造成比较大的延时，因此 Go map 的扩容采取了一种称为<strong>“渐进式”</strong>的方式，原有的 key 并不会一次性搬迁完毕，<strong>每次最多只会搬迁 2 个 bucket。</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">growWork</span><span class="token punctuation">(</span>t <span class="token operator">*</span>maptype<span class="token punctuation">,</span> h <span class="token operator">*</span>hmap<span class="token punctuation">,</span> bucket <span class="token builtin">uintptr</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 为了确认搬迁的 bucket 是我们正在使用的 bucket</span>
+    <span class="token comment" spellcheck="true">// 即如果当前key映射到老的bucket1，那么就搬迁该bucket1。</span>
+    <span class="token function">evacuate</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> h<span class="token punctuation">,</span> bucket<span class="token operator">&amp;</span>h<span class="token punctuation">.</span><span class="token function">oldbucketmask</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 如果还未完成扩容工作，则再搬迁一个bucket。</span>
+    <span class="token keyword">if</span> h<span class="token punctuation">.</span><span class="token function">growing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">evacuate</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> h<span class="token punctuation">,</span> h<span class="token punctuation">.</span>nevacuate<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="map中删除一个-key-它的内存会释放么"><a href="#map中删除一个-key-它的内存会释放么" class="headerlink" title="map中删除一个 key 它的内存会释放么"></a>map中删除一个 key 它的内存会释放么</h3><ul>
+<li>如果删除的元素是值类型，如int，float，bool，string以及数组和struct，map的内存不会自动释放</li>
+<li>如果删除的元素是引用类型，如指针，slice，map，chan等，map的内存会自动释放，但释放的内存是子元素应用类型的内存占用</li>
+<li>将map设置为nil后，内存被回收</li>
+</ul>
+<h3 id="nil-map和空map有何不同？"><a href="#nil-map和空map有何不同？" class="headerlink" title="nil map和空map有何不同？"></a>nil map和空map有何不同？</h3><p><strong>1）可以对未初始化的map进行取值，但取出来的东西是空：</strong></p>
+<p>var m1 map[string]string</p>
+<p>fmt.Println(m1[“1”])</p>
+<p><strong>2）不能对未初始化的map进行赋值，这样将会抛出一个异常：</strong></p>
+<p>var m1 map[string]string</p>
+<p>m1[“1”] &#x3D; “1”</p>
+<p>panic: assignment to entry in nil map</p>
+<p>3）通过fmt打印map时，空map和nil map结果是一样的，都为map[]。所以，这个时候别断定map是空还是nil，而应该通过map &#x3D;&#x3D; nil来判断。</p>
+<p><strong>nil map 未初始化，空map是长度为空</strong></p>
+<h3 id="slices能作为map类型的key吗？"><a href="#slices能作为map类型的key吗？" class="headerlink" title="slices能作为map类型的key吗？"></a>slices能作为map类型的key吗？</h3><p>当时被问的一脸懵逼，其实是这个问题的变种：golang 哪些类型可以作为map key？</p>
+<p>答案是：<strong>在golang规范中，可比较的类型都可以作为map key；</strong>这个问题又延伸到在：golang规范中，哪些数据类型可以比较？</p>
+<p><strong>不能作为map key 的类型包括：</strong></p>
+<ul>
+<li>slices</li>
+<li>maps</li>
+<li>functions</li>
+</ul>
+<h2 id="GMP"><a href="#GMP" class="headerlink" title="GMP"></a>GMP</h2><h3 id="什么是-GMP？"><a href="#什么是-GMP？" class="headerlink" title="什么是 GMP？"></a>什么是 GMP？</h3><p>1、我们通过 go func () 来创建一个 goroutine；</p>
+<p> 2、有两个存储 G 的队列，一个是<strong>局部调度器 P 的本地队列</strong>、一个是<strong>全局 G 队列</strong>。新创建的 G 会先保存在 P 的本地队列中，如果 P 的本地队列已经满了就会保存在全局的队列中；</p>
+<p> 3、G 只能运行在 M 中，一个 M 必须持有一个 P，M 与 P 是 1：1 的关系。M 会从 P 的本地队列弹出一个可执行状态的 G 来执行，如果 P 的本地队列为空，就会想其他的 MP 组合偷取一个可执行的 G 来执行 这种从其它P偷的方式称之为 <strong>work stealing；</strong></p>
+<p>4、一个 M 调度 G 执行的过程是一个循环机制；</p>
+<p> 5、- 如果 M在执行 G 的过程发生<strong>系统调用阻塞</strong>（同步），会阻塞G和M（操作系统限制），此时P会和当前M解绑，并寻找新的M，如果没有空闲的M就会新建一个M ，接管正在阻塞G所属的P，接着继续执行 P中其余的G，这种阻塞后释放P的方式称之为<strong>hand off</strong>。当<strong>系统调用结束</strong>后，这个G会尝试获取一个空闲的P执行，优先获取之前绑定的P，并放入到这个P的本地队列，如果获取不到P，那么这个线程M变成休眠状态，加入到空闲线程中，然后这个G会被放入到全局队列中。</p>
+<p>​         如果M在执行G的过程发生网络IO等操作阻塞时（异步），阻塞G，<strong>不会阻塞M</strong>。M会寻找P中其它可执行的G继续执行，G会被网络轮询器network poller 接手，当阻塞的G恢复后，G1从network poller 被移回到P的 LRQ 中，重新进入可执行状态。异步情况下，通过调度，Go scheduler 成功地将 I&#x2F;O 的任务转变成了 CPU 任务，或者说将内核级别的线程切换转变成了用户级别的 goroutine 切换，大大提高了效率。</p>
+<p> 6、当 M 系统调用结束时候，这个 G 会尝试获取一个空闲的 P 执行，并放入到这个 P 的本地队列。如果获取不到 P，那么这个线程 M 变成休眠状态， 加入到空闲线程中，然后这个 G 会被放入全局队列中。</p>
+<img src="https://cdn.learnku.com/uploads/images/202003/11/58489/Ugu3C2WSpM.jpeg!large" alt="16-GMP-调度.png" style="zoom:50%;"> 
+
+<h3 id="work-stealing-机制？"><a href="#work-stealing-机制？" class="headerlink" title="work stealing 机制？"></a><strong>work stealing 机制？</strong></h3><p>窃取流程</p>
+<p>源码见runtime&#x2F;proc.go stealWork函数，窃取流程如下，如果经过多次努力一直找不到需要运行的goroutine则调用stopm进入睡眠状态，等待被其它工作线程唤醒。</p>
+<ol>
+<li>选择要窃取的P</li>
+<li>从P中偷走一半G（向下取整）</li>
+</ol>
+<p><strong>选择要窃取的P</strong></p>
+<p>窃取的实质就是遍历allp中的所有p，查看其运行队列是否有goroutine，如果有，则取其一半到当前工作线程的运行队列</p>
+<p>为了保证公平性，遍历allp时并不是固定的从allp[0]即第一个p开始，而是从<strong>随机位置上的p开始</strong>，而且遍历的顺序也随机化了，并不是现在访问了第i个p下一次就访问第i+1个p，而是使用了一种伪随机的方式遍历allp中的每个p，防止每次遍历时使用同样的顺序访问allp中的元素</p>
+<p><strong>从P中偷走一半G</strong></p>
+<p>源码见runtime&#x2F;proc.go runqsteal函数：</p>
+<p>挑选出盗取的对象p之后，则调用runqsteal盗取p的运行队列中的goroutine，runqsteal函数再调用runqgrap从p的本地队列尾部批量偷走一半的g</p>
+<p><strong>为啥是偷一半的g，可以理解为负载均衡</strong></p>
+<h3 id="hand-off-机制"><a href="#hand-off-机制" class="headerlink" title="hand off 机制"></a>hand off 机制</h3><p>也称为P分离机制，当本线程 M 因为 G 进行的系统调用阻塞时，线程释放绑定的 P，把 P 转移给其他空闲的 M 执行，也提高了线程利用率（避免站着茅坑不拉shi）。</p>
+<p>当前线程M阻塞时，释放P，给其它空闲的M处理</p>
+<img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/image-20220419152721948.png" alt="img" style="zoom:70%;"> 
+
+<h3 id="抢占式调度是如何抢占的？"><a href="#抢占式调度是如何抢占的？" class="headerlink" title="抢占式调度是如何抢占的？"></a><strong>抢占式调度是如何抢占的？</strong></h3><p>在1.2版本之前，Go的调度器仍然不支持抢占式调度，程序只能依靠Goroutine主动让出CPU资源才能触发调度，这会引发一些问题，比如：</p>
+<ul>
+<li>某些 Goroutine 可以长时间占用线程，造成其它 Goroutine 的饥饿</li>
+<li>垃圾回收器是需要stop the world的，如果垃圾回收器想要运行了，那么它必须先通知其它的goroutine停下来，这会造成较长时间的等待时间</li>
+</ul>
+<p>为解决这个问题：</p>
+<ul>
+<li>Go 1.2 中实现了基于协作的“抢占式”调度</li>
+<li>Go 1.14 中实现了基于信号的“抢占式”调度</li>
+</ul>
+<h4 id="基于协作的抢占式调度"><a href="#基于协作的抢占式调度" class="headerlink" title="基于协作的抢占式调度"></a>基于协作的抢占式调度</h4><p>协作式：大家都按事先定义好的规则来，比如：一个goroutine执行完后，退出，让出p，然后下一个goroutine被调度到p上运行。这样做的缺点就在于 是否让出p的决定权在groutine自身。一旦某个g不主动让出p或执行时间较长，那么后面的goroutine只能等着，没有方法让前者让出p，导致延迟甚至饿死。</p>
+<p>非协作式: 就是由runtime来决定一个goroutine运行多长时间，如果你不主动让出，对不起，我有手段可以抢占你，把你踢出去，让后面的goroutine进来运行。</p>
+<p>基于协作的抢占式调度流程：</p>
+<ul>
+<li>编译器会在调用函数前插入 runtime.morestack，让运行时有机会在这段代码中检查是否需要执行抢占调度</li>
+<li>Go语言运行时会在垃圾回收暂停程序、系统监控发现 Goroutine 运行超过 10ms，那么会在这个协程设置一个抢占标记</li>
+<li>当发生函数调用时，可能会执行编译器插入的 runtime.morestack，它调用的 runtime.newstack会检查抢占标记，如果有抢占标记就会触发抢占让出cpu，切到调度主协程里</li>
+</ul>
+<p>这种解决方案只能说局部解决了“饿死”问题，只在有函数调用的地方才能插入“抢占”代码（埋点），对于没有函数调用而是纯算法循环计算的 G，Go 调度器依然无法抢占。</p>
+<p>比如，死循环等并没有给编译器插入抢占代码的机会，以下程序在 go 1.14 之前的 go版本中，运行后会一直卡住，而不会打印 <code>I got scheduled!</code></p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    runtime<span class="token punctuation">.</span><span class="token function">GOMAXPROCS</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//P 的数量</span>
+    <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"I got scheduled!"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>为了解决这些问题，<strong>Go 在 1.14 版本中增加了对非协作的抢占式调度的支持</strong>，这种<strong>抢占式调度是基于系统信号的，也就是通过向线程发送信号的方式来抢占正在运行的 Goroutine</strong></p>
+<h4 id="基于信号的抢占式调度"><a href="#基于信号的抢占式调度" class="headerlink" title="基于信号的抢占式调度"></a>基于信号的抢占式调度</h4><p>真正的抢占式调度是基于信号完成的，所以也称为“异步抢占”。不管协程有没有意愿主动让出 cpu 运行权，只要某个协程执行时间过长，就会发送信号强行夺取 cpu 运行权。</p>
+<ul>
+<li>M 注册一个 SIGURG 信号的处理函数：sighandler</li>
+<li>sysmon启动后会间隔性的进行监控，最长间隔10ms，最短间隔20us。如果发现某协程独占P超过10ms，<strong>会给M发送抢占信号</strong></li>
+<li>M 收到信号后，内核执行 sighandler 函数把当前协程的状态从_Grunning正在执行改成 _Grunnable可执行，<strong>把抢占的协程放到全局队列里，M继续寻找其他 goroutine 来运行</strong></li>
+<li>被抢占的 G 再次调度过来执行时，会继续原来的执行流</li>
+</ul>
+<p>抢占分为<code>_Prunning</code>和<code>_Psyscall</code>，<code>_Psyscall</code>抢占通常是由于阻塞性系统调用引起的，比如磁盘io、cgo。<code>_Prunning</code>抢占通常是由于一些类似死循环的计算逻辑引起的。</p>
+<h2 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h2><h3 id="状态流转"><a href="#状态流转" class="headerlink" title="状态流转"></a>状态流转</h3><table>
+<thead>
+<tr>
+<th>状态</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空闲中_Gidle</td>
+<td>G刚刚新建, 仍未初始化</td>
+</tr>
+<tr>
+<td>待运行_Grunnable</td>
+<td>就绪状态，G在运行队列中, 等待M取出并运行</td>
+</tr>
+<tr>
+<td>运行中_Grunning</td>
+<td>M正在运行这个G, 这时候M会拥有一个P</td>
+</tr>
+<tr>
+<td>系统调用中_Gsyscall</td>
+<td>M正在运行这个G发起的系统调用, 这时候M并不拥有P</td>
+</tr>
+<tr>
+<td>等待中_Gwaiting</td>
+<td>G在等待某些条件完成, 这时候G不在运行也不在运行队列中(可能在channel的等待队列中)</td>
+</tr>
+<tr>
+<td>已中止_Gdead</td>
+<td>G未被使用, 可能已执行完毕</td>
+</tr>
+<tr>
+<td>栈复制中_Gcopystack</td>
+<td>G正在获取一个新的栈空间并把原来的内容复制过去(用于防止GC扫描)</td>
+</tr>
+</tbody></table>
+<p><img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/5.2.goroutine_state.jpg" alt="img"> </p>
+<h3 id="进程线程协程的区别"><a href="#进程线程协程的区别" class="headerlink" title="进程线程协程的区别"></a>进程线程协程的区别</h3><p><strong>线程和进程之间的区别</strong></p>
+<ol>
+<li>线程是程序执行的最小单位，而进程是操作系统分配资源的最小单位；</li>
+<li>一个进程由一个或多个线程组成，线程是一个进程中代码的不同执行路线；</li>
+<li>进程之间相互独立，但同一进程下的各个线程之间共享程序的内存空间(包括代码段、数据集、堆等)及一些进程级的资源(如打开文件和信号)，某进程内的线程在其它进程不可见；</li>
+<li>调度和切换：线程上下文切换比进程上下文切换要快得多</li>
+</ol>
+<p><strong>线程和协程之间的区别</strong></p>
+<ol>
+<li>从占用资源的角度来说：线程大小初始一般为为1M，协程为2KB，可随需要增大</li>
+<li>线程是由OS内核完成调度，协程是由用户完成</li>
+<li><strong>切换的开销</strong>：线程切换涉及模式切换(从用户态切换到内核态)、16个寄存器、PC、SP…等寄存器的刷新等；协程只有三个寄存器的值修改 - PC &#x2F; SP &#x2F; DX.</li>
+<li>线程资源占用太高，频繁创建销毁会带来严重的性能问题；协程资源占用小,不会带来严重的性能问题</li>
+<li>在数据的同步上：线程需要用锁等机制确保数据的一致性和可见性；协程不需要多线程的锁机制，因为只有一个线程，也不存在同时写变量冲突，<strong>在协程中控制共享资源不加锁，只需要判断状态就好了，所以执行效率比多线程高很多。</strong></li>
+</ol>
+<p>进程：是应用程序的启动实例，每个进程都有独立的内存空间，不同的进程通过进程间的通信方式来通信。</p>
+<p>线程：从属于进程，每个进程至少包含一个线程，线程是 CPU 调度的基本单位，多个线程之间可以共享进程的资源并通过共享内存等线程间的通信方式来通信。</p>
+<p>协程：为轻量级线程，与线程相比，协程不受操作系统的调度，协程的调度器由用户应用程序提供，协程调度器按照调度策略把协程调度到线程中运行</p>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><h3 id="Go-互斥锁的实现原理？"><a href="#Go-互斥锁的实现原理？" class="headerlink" title="Go 互斥锁的实现原理？"></a>Go 互斥锁的实现原理？</h3><p><strong>底层实现结构：</strong></p>
+<p>互斥锁对应的是底层结构是sync.Mutex结构体，，位于 src&#x2F;sync&#x2F;mutex.go中</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> Mutex <span class="token keyword">struct</span> <span class="token punctuation">{</span>  
+    state <span class="token builtin">int32</span>  
+    sema  <span class="token builtin">uint32</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>state表示锁的状态，有锁定、被唤醒、饥饿模式等，并且是用state的二进制位来标识的，不同模式下会有不同的处理方式</p>
+<p><img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/mutex_state.png" alt="mutex_state"> </p>
+<p>sema表示信号量，mutex阻塞队列的定位是通过这个变量来实现的，从而实现goroutine的阻塞和唤醒</p>
+<p><img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/mutex_sema.png" alt="mutex_sema"> </p>
+<p><strong>操作：</strong></p>
+<p>锁的实现一般会依赖于原子操作、信号量，通过atomic 包中的一些原子操作来实现锁的锁定，通过信号量来实现线程的阻塞与唤醒</p>
+<p><strong>加锁</strong></p>
+<p>通过原子操作cas加锁，如果加锁不成功，根据不同的场景选择自旋重试加锁或者阻塞等待被唤醒后加锁</p>
+<p><img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/mutex_lock.png" alt="img"></p>
+<p><strong>解锁</strong></p>
+<p>通过原子操作add解锁，如果仍有goroutine在等待，唤醒等待的goroutine</p>
+<p><img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/mutex_unlock.png" alt="mutex_unlock"></p>
+<h3 id="Mutex-有几种模式？"><a href="#Mutex-有几种模式？" class="headerlink" title="Mutex 有几种模式？"></a>Mutex 有几种模式？</h3><p>在Go一共可以分为两种抢锁的模式，一种是<strong>正常模式</strong>，另外一种是<strong>饥饿模式</strong>。</p>
+<p><strong>正常模式(非公平锁)</strong></p>
+<p>在刚开始的时候，是处于正常模式（Barging），也就是，当一个G1持有着一个锁的时候，G2会自旋的去尝试获取这个锁</p>
+<p>当<strong>自旋超过4次</strong>还没有能获取到锁的时候，这个G2就会被加入到获取锁的等待队列里面，并阻塞等待唤醒</p>
+<pre class=" language-go"><code class="language-go">正常模式下，所有等待锁的 goroutine 按照 <span class="token function">FIFO</span><span class="token punctuation">(</span>先进先出<span class="token punctuation">)</span>顺序等待。唤醒的goroutine 不会直接拥有锁，而是会和新请求锁的 goroutine 竞争锁。新请求锁的 goroutine 具有优势：它正在 CPU 上执行，而且可能有好几个，所以刚刚唤醒的 goroutine 有很大可能在锁竞争中失败，长时间获取不到锁，就会切换到饥饿模式
+</code></pre>
+<p><strong>饥饿模式(公平锁)</strong></p>
+<p>当一个 goroutine 等待锁时间超过 1 毫秒时，它可能会遇到饥饿问题。 在版本1.9中，这种场景下Go Mutex 切换到饥饿模式（handoff），解决饥饿问题。</p>
+<pre class=" language-go"><code class="language-go">starving <span class="token operator">=</span> <span class="token function">runtime_nanotime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span>waitStartTime <span class="token operator">></span> <span class="token number">1e6</span>
+饥饿模式下，直接把锁交给等待队列中排在第一位的<span class="token function">goroutine</span><span class="token punctuation">(</span>队头<span class="token punctuation">)</span>，同时饥饿模式下，新进来的goroutine不会参与抢锁也不会进入自旋状态，会直接进入等待队列的尾部<span class="token punctuation">,</span>这样很好的解决了老的goroutine一直抢不到锁的场景。
+</code></pre>
+<p>那么也不可能说永远的保持一个饥饿的状态，总归会有吃饱的时候，也就是总有那么一刻Mutex会回归到正常模式，那么回归正常模式必须具备的条件有以下几种：</p>
+<pre class=" language-go"><code class="language-go"><span class="token number">1</span><span class="token punctuation">.</span> G的执行时间小于1ms
+<span class="token number">2</span><span class="token punctuation">.</span> 等待队列已经全部清空了
+</code></pre>
+<p>当满足上述两个条件的任意一个的时候，Mutex会切换回正常模式，而Go的抢锁的过程，就是在这个正常模式和饥饿模式中来回切换进行的。</p>
+<pre class=" language-go"><code class="language-go">delta <span class="token operator">:=</span> <span class="token function">int32</span><span class="token punctuation">(</span>mutexLocked <span class="token operator">-</span> <span class="token number">1</span><span class="token operator">&lt;&lt;</span>mutexWaiterShift<span class="token punctuation">)</span>  
+<span class="token keyword">if</span> <span class="token operator">!</span>starving <span class="token operator">||</span> old<span class="token operator">>></span>mutexWaiterShift <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">{</span>  
+delta <span class="token operator">-=</span> mutexStarving
+<span class="token punctuation">}</span>
+atomic<span class="token punctuation">.</span><span class="token function">AddInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>m<span class="token punctuation">.</span>state<span class="token punctuation">,</span> delta<span class="token punctuation">)</span>
+</code></pre>
+<p><strong>总结</strong></p>
+<p>对于两种模式，正常模式下的性能是最好的，goroutine 可以连续多次获取锁，饥饿模式解决了取锁公平的问题，但是性能会下降，其实是性能和公平的 一个平衡模式。</p>
+<h3 id="RWMutex-读写锁"><a href="#RWMutex-读写锁" class="headerlink" title="RWMutex 读写锁"></a>RWMutex 读写锁</h3><p>读写互斥锁RWMutex，是对Mutex的一个扩展，当一个 goroutine 获得了读锁后，其他 goroutine可以获取读锁，但不能获取写锁；当一个 goroutine 获得了写锁后，其他 goroutine既不能获取读锁也不能获取写锁（只能存在一个写者或多个读者，可以同时读）</p>
+<p><strong>使用场景：</strong></p>
+<p><strong>读</strong>多于<strong>写</strong>的情况（既保证线程安全，又保证性能不太差）</p>
+<p><strong>互斥锁和读写锁的区别：</strong></p>
+<ul>
+<li>读写锁区分读者和写者，而互斥锁不区分</li>
+<li>互斥锁同一时间只允许一个线程访问该对象，无论读写；读写锁同一时间内只允许一个写者，但是允许多个读者同时读对象。</li>
+</ul>
+<h3 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h3><p><strong>概念：</strong></p>
+<p>可重入锁又称为递归锁，是指在<strong>同一个线程</strong>在外层方法获取锁的时候，在进入该线程的内层方法时会自动获取锁，不会因为之前已经获取过还没释放再次加锁导致死锁</p>
+<p><strong>为什么Go语言中没有可重入锁？</strong></p>
+<p>Mutex 不是可重入的锁。Mutex 的实现中没有记录哪个 goroutine 拥有这把锁。理论上，任何 goroutine 都可以随意地 Unlock 这把锁，所以没办法计算重入条件，并且Mutex 重复Lock会导致死锁。</p>
+<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><h3 id="Go-内存逃逸机制"><a href="#Go-内存逃逸机制" class="headerlink" title="Go 内存逃逸机制"></a>Go 内存逃逸机制</h3><p><strong>概念</strong></p>
+<p>在一段程序中，每一个函数都会有自己的内存区域存放自己的局部变量、返回地址等，这些内存会由编译器在栈中进行分配，每一个函数都会分配一个栈桢，在函数运行结束后进行销毁，但是有些变量我们想在函数运行结束后仍然使用它，那么就需要把这个变量在堆上分配，这种从”栈”上逃逸到”堆”上的现象就成为内存逃逸。</p>
+<p>在栈上分配的地址，一般由系统申请和释放，不会有额外性能的开销，比如函数的入参、局部变量、返回值等。在堆上分配的内存，如果要回收掉，需要进行 GC，那么GC 一定会带来额外的性能开销。编程语言不断优化GC算法，主要目的都是为了减少 GC带来的额外性能开销，变量一旦逃逸会导致性能开销变大。</p>
+<p><strong>逃逸机制</strong></p>
+<p>编译器会根据变量是否被外部引用来决定是否逃逸：</p>
+<ol>
+<li>如果函数外部没有引用，则优先放到栈中；</li>
+<li>如果函数外部存在引用，则必定放到堆中;</li>
+<li>如果栈上放不下，则必定放到堆上;</li>
+</ol>
+<p>逃逸分析也就是由编译器决定哪些变量放在栈，哪些放在堆中，通过编译参数<code>-gcflag=-m</code>可以查看编译过程中的逃逸分析，发生逃逸的几种场景如下：</p>
+<p><strong>指针逃逸</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">func</span> <span class="token function">escape1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span><span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> a <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">return</span> <span class="token operator">&amp;</span>a
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">escape1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>通过<code>go build -gcflags=-m main.go</code>查看逃逸情况：</p>
+<pre class=" language-go"><code class="language-go"><span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span> moved to heap<span class="token punctuation">:</span> a
+</code></pre>
+<p>函数返回值为局部变量的指针，函数虽然退出了，但是因为指针的存在，指向的内存不能随着函数结束而回收，因此只能分配在堆上。</p>
+<p><strong>栈空间不足</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">func</span> <span class="token function">escape2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    s <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> index<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> <span class="token keyword">range</span> s <span class="token punctuation">{</span>
+        s<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> index
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">escape2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>通过<code>go build -gcflags=-m main.go</code>查看逃逸情况：</p>
+<pre class=" language-go"><code class="language-go"><span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token number">11</span><span class="token punctuation">:</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">)</span> escapes to heap
+</code></pre>
+<p>当栈空间足够时，不会发生逃逸，但是当变量过大时，已经完全超过栈空间的大小时，将会发生逃逸到堆上分配内存。局部变量s占用内存过大，编译器会将其分配到堆上</p>
+<p><strong>变量大小不确定</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">func</span> <span class="token function">escape3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    number <span class="token operator">:=</span> <span class="token number">10</span>
+    s <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> number<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 编译期间无法确定slice的长度</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">escape3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>编译期间无法确定slice的长度，这种情况为了保证内存的安全，编译器也会触发逃逸，在堆上进行分配内存。直接<code>s := make([]int, 10)</code>不会发生逃逸</p>
+<p><strong>动态类型</strong></p>
+<p>动态类型就是编译期间不确定参数的类型、参数的长度也不确定的情况下就会发生逃逸</p>
+<p>空接口 interface{} 可以表示任意的类型，如果函数参数为 interface{}，编译期间很难确定其参数的具体类型，也会发生逃逸。</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">func</span> <span class="token function">escape4</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token number">1111</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">escape4</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>通过<code>go build -gcflags=-m main.go</code>查看逃逸情况：</p>
+<pre class=" language-go"><code class="language-go"><span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token number">14</span><span class="token punctuation">:</span> <span class="token number">1111</span> escapes to heap
+</code></pre>
+<p>fmt.Println(a …interface{})函数参数为interface，编译器不确定参数的类型，会将变量分配到堆上</p>
+<p><strong>闭包引用对象</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">func</span> <span class="token function">escape5</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> i <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">return</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+        i<span class="token operator">++</span>
+        <span class="token keyword">return</span> i
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">escape5</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>通过<code>go build -gcflags=-m main.go</code>查看逃逸情况：</p>
+<pre class=" language-go"><code class="language-go"><span class="token punctuation">.</span><span class="token operator">/</span>main<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">:</span> moved to heap<span class="token punctuation">:</span> i
+</code></pre>
+<p>闭包函数中局部变量i在后续函数是继续使用的，编译器将其分配到堆上</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>栈上分配内存比在堆中分配内存效率更高</li>
+<li>栈上分配的内存不需要 GC 处理，而堆需要</li>
+<li>逃逸分析目的是决定内分配地址是栈还是堆</li>
+<li>逃逸分析在编译阶段完成</li>
+</ol>
+<p>因为无论变量的大小，只要是指针变量都会在堆上分配，所以对于小变量我们还是使用传值效率（而不是传指针）更高一点。</p>
+<h3 id="Go-GC流程"><a href="#Go-GC流程" class="headerlink" title="Go GC流程"></a>Go GC流程</h3><p>一次完整的垃圾回收会分为四个阶段，分别是<strong>标记准备、标记开始、标记终止、清理：</strong></p>
+<ol>
+<li><strong>标记准备（Mark Setup）</strong>：打开写屏障（Write Barrier），需 STW（stop the world)</li>
+<li><strong>标记开始（Marking）</strong>：使用三色标记法并发标记 ，与用户程序并发执行</li>
+<li><strong>标记终止（Mark Termination</strong>）：对触发写屏障的对象进行重新扫描标记，关闭写屏障（Write Barrier），需 STW（stop the world)</li>
+<li><strong>清理（Sweeping）</strong>：将需要回收的内存归还到堆中，将过多的内存归还给操作系统，与用户程序并发执行</li>
+</ol>
+<img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/imgcdn/image-20220504185906969.png" alt="img" style="zoom:88%;"> 
+
+<h3 id="三色标记法"><a href="#三色标记法" class="headerlink" title="三色标记法"></a><strong>三色标记法</strong></h3><ol>
+<li>初始状态下所有对象都是白色的。</li>
+<li>从根节点开始遍历所有对象，把遍历到的root对象变成灰色对象</li>
+<li>遍历灰色对象，将灰色对象引用的对象也变成灰色对象，然后将遍历过的灰色对象变成黑色对象。</li>
+<li>循环步骤3，直到灰色对象全部变黑色。</li>
+<li>通过写屏障(write-barrier)检测对象有变化，重复以上操作</li>
+</ol>
+<ul>
+<li><strong>写屏障（Write Barrier）</strong>：上面说到的 STW 的目的是防止 GC 扫描时内存变化引起的混乱，而写屏障就是让 goroutine 与 GC 同时运行的手段，虽然不能完全消除 STW，但是可以大大减少 STW 的时间。写屏障在 GC 的特定时间开启，开启后<strong>指针传递时</strong>会把指针标记，即本轮不回收，下次 GC 时再确定。</li>
+<li><strong>辅助 GC（Mutator Assist）</strong>：为了防止内存分配过快，在 GC 执行过程中，GC 过程中 mutator 线程会并发运行，而 mutator assist 机制会协助 GC 做一部分的工作。</li>
+</ul>
+<p>​    6、收集所有白色对象（垃圾）。</p>
+<p><strong>root对象</strong></p>
+<p>根对象在垃圾回收的术语中又叫做根集合，它是垃圾回收器在标记过程时最先检查的对象，包括：</p>
+<p>全局变量：程序在编译期就能确定的那些存在于程序整个生命周期的变量。<br>执行栈：每个 goroutine 都包含自己的执行栈，这些执行栈上指向堆内存的指针。<br>寄存器：寄存器的值可能表示一个指针，参与计算的这些指针可能指向某些赋值器分配的堆内存区块。</p>
+<p><strong>插入写屏障</strong></p>
+<p>对象被引用时触发的机制（只在堆内存中生效）：赋值器这一行为通知给并发执行的回收器，被引用的对象标记为灰色</p>
+<p>缺点：结束时需要STW来重新扫描栈，标记栈上引用的白色对象的存活</p>
+<p><strong>删除写屏障</strong></p>
+<p>对象被删除时触发的机制（只在堆内存中生效）：赋值器将这一行为通知给并发执行的回收器，被删除的对象，如果自身为灰色或者白色，那么标记为灰色</p>
+<p>缺点：一个对象的引用被删除后，即使没有其他存活的对象引用它，它仍然会活到下一轮，会产生很大冗余扫描成本，且降低了回收精度</p>
+<p><strong>混合写屏障</strong></p>
+<p>GC没有混合写屏障前，一直是插入写屏障；混合写屏障是插入写屏障 + 删除写屏障，写屏障只应用在堆上应用，栈上不启用（栈上启用成本很高）</p>
+<ul>
+<li>GC开始将栈上的对象全部扫描并标记为黑色。</li>
+<li>GC期间，任何在栈上创建的新对象，均为黑色。</li>
+<li>被删除的对象标记为灰色。</li>
+<li>被添加的对象标记为灰色。</li>
+</ul>
+<h3 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h3><p>是指程序在申请内存后，无法释放已申请的内存空间，一次内存泄露危害可以忽略，但内存泄露堆积后果很严重，无论多少内存,迟早会被占光。</p>
+<p>go 中的内存泄漏一般都是 goroutine 泄漏，就是 <strong>goroutine 没有被关闭，或者没有添加超时控制</strong>，让 goroutine 一只处于阻塞状态，不能被 GC。</p>
+<p>互斥锁未释放或者造成死锁会造成内存泄漏</p>
+<p>time.Ticker 是每隔指定的时间就会向通道内写数据。作为循环触发器，必须调用 stop 方法才会停止，从而被 GC 掉，否则会一直占用内存空间。</p>
+<h3 id="GC-触发机制"><a href="#GC-触发机制" class="headerlink" title="GC 触发机制"></a>GC 触发机制</h3><p>GC 的触发情况主要分为两大类，分别是：</p>
+<ol>
+<li>系统触发：运行时自行根据内置的条件，检查、发现到，则进行 GC 处理，维护整个应用程序的可用性。</li>
+<li>a. 使用系统监控，当超过两分钟没有产生任何GC时，强制触发 GC；</li>
+<li>b.使用步调（Pacing）算法，其核心思想是控制内存增长的比例,当前内存分配达到一定比例则触发</li>
+<li>手动触发：开发者在业务代码中自行调用 runtime.GC 方法来触发 GC 行为。</li>
+</ol>
+<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><h3 id="Go-常用的并发模型？"><a href="#Go-常用的并发模型？" class="headerlink" title="Go 常用的并发模型？"></a>Go 常用的并发模型？</h3><p><strong>共享内存并发模型</strong></p>
+<p>通过直接共享内存 + 锁的方式同步信息，传统多线程并发</p>
+<p><img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/img/image-20220514161804822.png" alt="img"> </p>
+<p><strong>CSP并发模型</strong></p>
+<p>通过发送消息的方式来同步信息，Go语言推荐使用的<em>通信顺序进程</em>（communicating sequential processes）并发模型，通过goroutine和channel来实现</p>
+<ul>
+<li><code>goroutine</code> 是Go语言中并发的执行单位，可以理解为”线程“</li>
+<li><code>channel</code>是Go语言中各个并发结构体(<code>goroutine</code>)之前的通信机制。 通俗的讲，就是各个<code>goroutine</code>之间通信的”管道“，类似于Linux中的管道</li>
+</ul>
+<p><img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/img/image-20220514161841437.png" alt="img"></p>
+<h3 id="Go-WaitGroup实现原理？"><a href="#Go-WaitGroup实现原理？" class="headerlink" title="Go WaitGroup实现原理？"></a>Go WaitGroup实现原理？</h3><p><strong>概念</strong></p>
+<p><code>Go</code>标准库提供了<code>WaitGroup</code>原语, 可以用它来等待一批 Goroutine 结束</p>
+<p><strong>底层数据结构</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// A WaitGroup must not be copied after first use.</span>
+<span class="token keyword">type</span> WaitGroup <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    noCopy noCopy
+     state1 <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token builtin">uint32</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>其中 <code>noCopy</code> 是 golang 源码中检测禁止拷贝的技术。如果程序中有 WaitGroup 的赋值行为，使用 <code>go vet</code> 检查程序时，就会发现有报错。但需要注意的是，noCopy 不会影响程序正常的编译和运行。</p>
+<p><code>state1</code>主要是存储着状态和信号量，状态维护了 2 个计数器，一个是请求计数器counter ，另外一个是等待计数器waiter（已调用 <code>WaitGroup.Wait</code> 的 goroutine 的个数）</p>
+<p>当数组的首地址是处于一个<code>8</code>字节对齐的位置上时，那么就将这个数组的前<code>8</code>个字节作为<code>64</code>位值使用表示状态，后<code>4</code>个字节作为<code>32</code>位值表示信号量(<code>semaphore</code>)；同理如果首地址没有处于<code>8</code>字节对齐的位置上时，那么就将前<code>4</code>个字节作为<code>semaphore</code>，后<code>8</code>个字节作为<code>64</code>位数值。</p>
+<p><img src="https://image-1302243118.cos.ap-beijing.myqcloud.com/img/image-20220522104433409.png" alt="img"> </p>
+<p><strong>使用方法</strong></p>
+<p>在WaitGroup里主要有3个方法：</p>
+<ul>
+<li><code>WaitGroup.Add()</code>：可以添加或减少请求的goroutine数量，*<code>Add(n)</code> 将会导致 <code>counter += n</code>*</li>
+<li><code>WaitGroup.Done()</code>：相当于Add(-1)，<code>Done()</code> 将导致 <code>counter -=1</code>，请求计数器counter为0 时通过信号量调用<code>runtime_Semrelease</code>唤醒waiter线程</li>
+<li><code>WaitGroup.Wait()</code>：会将 <code>waiter++</code>，同时通过信号量调用 <code>runtime_Semacquire(semap)</code>阻塞当前 goroutine</li>
+</ul>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">defer</span> wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="Go-Cond实现原理？"><a href="#Go-Cond实现原理？" class="headerlink" title="Go Cond实现原理？"></a>Go Cond实现原理？</h3><p><code>Go</code>标准库提供了<code>Cond</code>原语，可以让 Goroutine 在满足特定条件时被阻塞和唤醒</p>
+<p><strong>底层数据结构</strong></p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> Cond <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    noCopy noCopy
+
+    <span class="token comment" spellcheck="true">// L is held while observing or changing the condition</span>
+    L Locker
+
+    notify  notifyList
+    checker copyChecker
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> notifyList <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    wait   <span class="token builtin">uint32</span>
+    notify <span class="token builtin">uint32</span>
+    lock   <span class="token builtin">uintptr</span> <span class="token comment" spellcheck="true">// key field of the mutex</span>
+    head   unsafe<span class="token punctuation">.</span>Pointer
+    tail   unsafe<span class="token punctuation">.</span>Pointer
+<span class="token punctuation">}</span>
+</code></pre>
+<p>主要有<code>4</code>个字段：</p>
+<ul>
+<li><code>nocopy</code> ： golang 源码中检测禁止拷贝的技术。如果程序中有 WaitGroup 的赋值行为，使用 <code>go vet</code> 检查程序时，就会发现有报错，但需要注意的是，noCopy 不会影响程序正常的编译和运行</li>
+<li><code>checker</code>：用于禁止运行期间发生拷贝，双重检查(<code>Double check</code>)</li>
+<li><code>L</code>：可以传入一个读写锁或互斥锁，当修改条件或者调用<code>Wait</code>方法时需要加锁</li>
+<li><code>notify</code>：通知链表，调用<code>Wait()</code>方法的<code>Goroutine</code>会放到这个链表中，从这里获取需被唤醒的Goroutine列表</li>
+</ul>
+<p><strong>使用方法</strong></p>
+<p>在Cond里主要有3个方法：</p>
+<ul>
+<li><code>sync.NewCond(l Locker)</code>: 新建一个 sync.Cond 变量，注意该函数需要一个 Locker 作为必填参数，这是因为在 <code>cond.Wait()</code> 中底层会涉及到 Locker 的锁操作</li>
+<li><code>Cond.Wait()</code>: 阻塞等待被唤醒，调用Wait函数前<strong>需要先加锁</strong>；并且由于Wait函数被唤醒时存在虚假唤醒等情况，导致唤醒后发现，条件依旧不成立，因此需要使用 for 语句来循环地进行等待，直到条件成立为止</li>
+<li><code>Cond.Signal()</code>: 只唤醒一个最先 Wait 的 goroutine，可以不用加锁</li>
+<li><code>Cond.Broadcast()</code>: 唤醒所有Wait的goroutine，可以不用加锁</li>
+</ul>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">var</span> status <span class="token builtin">int64</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    c <span class="token operator">:=</span> sync<span class="token punctuation">.</span><span class="token function">NewCond</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sync<span class="token punctuation">.</span>Mutex<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        <span class="token keyword">go</span> <span class="token function">listen</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">go</span> <span class="token function">broadcast</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">broadcast</span><span class="token punctuation">(</span>c <span class="token operator">*</span>sync<span class="token punctuation">.</span>Cond<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 原子操作</span>
+    atomic<span class="token punctuation">.</span><span class="token function">StoreInt64</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>status<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> 
+    c<span class="token punctuation">.</span><span class="token function">Broadcast</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">listen</span><span class="token punctuation">(</span>c <span class="token operator">*</span>sync<span class="token punctuation">.</span>Cond<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    c<span class="token punctuation">.</span>L<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> atomic<span class="token punctuation">.</span><span class="token function">LoadInt64</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>status<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">1</span> <span class="token punctuation">{</span>
+        c<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+        <span class="token comment" spellcheck="true">// Wait 内部会先调用 c.L.Unlock()，来先释放锁，如果调用方不先加锁的话，会报错</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"listen"</span><span class="token punctuation">)</span>
+    c<span class="token punctuation">.</span>L<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">谦</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://loveQevol.github.io/2023/04/05/golang%E9%9D%A2%E8%AF%95/">http://loveQevol.github.io/2023/04/05/golang%E9%9D%A2%E8%AF%95/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">谦</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
+                                    <span class="chip bg-color">Go语言</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/04/05/golang%E9%9D%A2%E8%AF%95/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="GoLang面试题">
+                        
+                        <span class="card-title">GoLang面试题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/category/%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">Go语言</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/04/04/GoLang%E9%9D%A2%E8%AF%95%E9%A2%98/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/22.jpg" class="responsive-img" alt="GoLand面试题">
+                        
+                        <span class="card-title">GoLand面试题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/category/%E6%88%91%E7%9A%84%E9%9D%A2%E8%AF%95/" class="post-category">
+                                    我的面试
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">
+                        <span class="chip bg-color">面试题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">谦</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/loveQevol" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1716762100@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1716762100" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1716762100" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
