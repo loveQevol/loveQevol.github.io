@@ -466,14 +466,14 @@ Zookeeper翻译过来是 动物管理员，他是用来管理Hadoop(大象)、Hi
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    100
+                    3.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    17 分
                 </div>
                 
 
@@ -502,6 +502,563 @@ Zookeeper翻译过来是 动物管理员，他是用来管理Hadoop(大象)、Hi
 <li><strong>分布式锁</strong></li>
 <li><strong>集群管理</strong></li>
 </ul>
+</li>
+</ul>
+<h2 id="ZooKeeper命令操作"><a href="#ZooKeeper命令操作" class="headerlink" title="ZooKeeper命令操作"></a>ZooKeeper命令操作</h2><h3 id="ZooKeeper数据模型"><a href="#ZooKeeper数据模型" class="headerlink" title="ZooKeeper数据模型"></a>ZooKeeper数据模型</h3><ul>
+<li><strong>ZooKeeper是一个树形目录服务,其数据模型和Unix的文件 系统目录树很类似，拥有一个层次化结构。</strong></li>
+<li><strong>这里面的每一个节点都被称为：ZNode，每个节点都会保存自己的数据和节点信息。</strong></li>
+<li><strong>节点可以拥有子节点，同时也允许少量(1MB)数据存储在该节点之下。</strong></li>
+<li><strong>节点可以分为四大类：</strong><ul>
+<li><strong>PERSISTENT持久化节点</strong></li>
+<li><strong>EPHEMERAL临时节点: -e</strong></li>
+<li><strong>PERSISTENT_ SEQUENTIAL 持久化顺序节点: -S</strong></li>
+<li><strong>EPHEMERAL SEQUENTIAL临时顺序节点: -es</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="ZooKeeper客户端常用命令"><a href="#ZooKeeper客户端常用命令" class="headerlink" title="ZooKeeper客户端常用命令"></a>ZooKeeper客户端常用命令</h3><p><img src="/2022/11/04/zookeeper%E5%85%A5%E9%97%A8/image-20230408165259231.png"></p>
+<p><img src="/2022/11/04/zookeeper%E5%85%A5%E9%97%A8/image-20230408171201874.png"></p>
+<h3 id="ZooKeeper-JavaAPI操作"><a href="#ZooKeeper-JavaAPI操作" class="headerlink" title="ZooKeeper JavaAPI操作"></a>ZooKeeper JavaAPI操作</h3><h4 id="Curator介绍"><a href="#Curator介绍" class="headerlink" title="Curator介绍"></a>Curator介绍</h4><ul>
+<li>Curator是Apache ZooKeeper的Java客户端库。</li>
+<li>常见的ZooKeeper Java API :<ul>
+<li>原生JavaAPI</li>
+<li>ZKClient</li>
+<li>Curator</li>
+</ul>
+</li>
+<li>Curator项目的目标是简化ZooKeeper客户端的使用。</li>
+</ul>
+<h4 id="Curator-API常用操作"><a href="#Curator-API常用操作" class="headerlink" title="Curator API常用操作"></a>Curator API常用操作</h4><ul>
+<li>建立连接</li>
+<li>添加节点</li>
+<li>删除节点</li>
+<li>修改节点</li>
+<li>查询节点</li>
+<li>Watch事件监听</li>
+<li>分布式锁的实现</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CuratorTest</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 建立连接
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testConnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/**
+         * @param connectString 连接字符串。zk server 地址和端口"192. 168. 149.135:2181, 192. 168. 149.136:2181”
+         * @param sessionTimeoutMs 会话超时时间单位ms
+         * @param connectionTimeoutMs 连接超时时间单位ms
+         * @param retryPolicy 重试策略
+         */</span>
+        <span class="token comment" spellcheck="true">// 重试策略</span>
+        RetryPolicy retryPolicy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ExponentialBackoffRetry</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 1.第一种方式</span>
+<span class="token comment" spellcheck="true">//        CuratorFramework client = CuratorFrameworkFactory.newClient("8.130.113.49:2181",</span>
+<span class="token comment" spellcheck="true">//                60 * 1000, 15 * 1000, retryPolicy);</span>
+<span class="token comment" spellcheck="true">//        client.start();</span>
+        <span class="token comment" spellcheck="true">// 2.第二种方式</span>
+        CuratorFramework client <span class="token operator">=</span> CuratorFrameworkFactory<span class="token punctuation">.</span><span class="token function">builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">connectString</span><span class="token punctuation">(</span><span class="token string">"8.130.113.49:2181"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">sessionTimeoutMs</span><span class="token punctuation">(</span><span class="token number">60</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">connectionTimeoutMs</span><span class="token punctuation">(</span><span class="token number">15</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">retryPolicy</span><span class="token punctuation">(</span>retryPolicy<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        client<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CuratorTest</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> CuratorFramework client<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 建立连接
+     */</span>
+    <span class="token annotation punctuation">@Before</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testConnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/**
+         * @param connectString 连接字符串。zk server 地址和端口"192. 168. 149.135:2181, 192. 168. 149.136:2181”
+         * @param sessionTimeoutMs 会话超时时间单位ms
+         * @param connectionTimeoutMs 连接超时时间单位ms
+         * @param retryPolicy 重试策略
+         */</span>
+        <span class="token comment" spellcheck="true">// 重试策略</span>
+        RetryPolicy retryPolicy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ExponentialBackoffRetry</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 1.第一种方式</span>
+<span class="token comment" spellcheck="true">//        CuratorFramework client = CuratorFrameworkFactory.newClient("8.130.113.49:2181",</span>
+<span class="token comment" spellcheck="true">//                60 * 1000, 15 * 1000, retryPolicy);</span>
+<span class="token comment" spellcheck="true">//        client.start();</span>
+        <span class="token comment" spellcheck="true">// 2.第二种方式</span>
+        client <span class="token operator">=</span> CuratorFrameworkFactory<span class="token punctuation">.</span><span class="token function">builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">connectString</span><span class="token punctuation">(</span><span class="token string">"8.130.113.49:2181"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">sessionTimeoutMs</span><span class="token punctuation">(</span><span class="token number">60</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">connectionTimeoutMs</span><span class="token punctuation">(</span><span class="token number">15</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">retryPolicy</span><span class="token punctuation">(</span>retryPolicy<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">namespace</span><span class="token punctuation">(</span><span class="token string">"itheima"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        client<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"已经建立连接"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 创建节点：create 持久化节点 临时 顺序 数据
+     * 1.基本创建
+     * 2.创建节点 带有数据
+     * 3.设置节点类型
+     * 4.创建多级节点 /app1/p1
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"开始写入节点"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//1.基本创建</span>
+        <span class="token comment" spellcheck="true">// 如果创建节点，没有指定数据，则默认将当前客户端的ip作为数据存储</span>
+        String path <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app5"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"结束写入节点"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testCreate2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"开始写入节点"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 2.创建节点，带有数据</span>
+        String path <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app1"</span><span class="token punctuation">,</span><span class="token string">"haha"</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"写入数据结束"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testCreate3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        String path <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">withMode</span><span class="token punctuation">(</span>CreateMode<span class="token punctuation">.</span>EPHEMERAL<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testCreate4</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 创建多级节点</span>
+        <span class="token comment" spellcheck="true">// creatingParentsIfNeeded() 如果父节点不存在，，则创建父节点</span>
+        String path <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">creatingParentsIfNeeded</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app4/p1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 查询节点
+     * 1.查询数据：get
+     * 2.查询子节点 ls
+     * 3.查询节点状态信息：ls -s
+     * @throws Exception
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testGet1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 查询数据</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> data <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testGet2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 查询子节点：ls</span>
+        List<span class="token operator">&lt;</span>String<span class="token operator">></span> path <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">getChildren</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app4"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testGet3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        Stat status <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Stat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 3.查询节点状态信息：ls -s</span>
+        client<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">storingStatIn</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 修改数据
+     * 1.修改数据
+     * 2.根据版本修改
+     * @throws Exception
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        client<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app1"</span><span class="token punctuation">,</span><span class="token string">"itcast"</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"修改成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testSetForVersion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        Stat status <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Stat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 3.查询节点状态信息：ls -s</span>
+        client<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">storingStatIn</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">int</span> version <span class="token operator">=</span> status<span class="token punctuation">.</span><span class="token function">getVersion</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//查询出来的</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"版本号为:"</span> <span class="token operator">+</span> version<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        client<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">withVersion</span><span class="token punctuation">(</span>version<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app1"</span><span class="token punctuation">,</span><span class="token string">"didi"</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 删除节点：delete deleteall
+     * 1.删除单个节点
+     * 2.删除带有子节点的节点
+     * 3.必须成功的删除
+     * 4.回调
+     * @throws Exception
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testDelete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 1.删除单个节点</span>
+        client<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testDelete2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 2.删除带有子节点的节点</span>
+        client<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">deletingChildrenIfNeeded</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app4"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testDelete3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//3.必须删除成功</span>
+        client<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">guaranteed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testDelete4</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 4.回调</span>
+        client<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">guaranteed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">inBackground</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BackgroundCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">processResult</span><span class="token punctuation">(</span>CuratorFramework curatorFramework<span class="token punctuation">,</span> CuratorEvent event<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"我被删除了~"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forPath</span><span class="token punctuation">(</span><span class="token string">"/app2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@After</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>client <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            client<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"关闭成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="Curator-API常用操作-Watch事件监听"><a href="#Curator-API常用操作-Watch事件监听" class="headerlink" title="Curator API常用操作- Watch事件监听"></a>Curator API常用操作- Watch事件监听</h4><ul>
+<li>ZooKeeper允许用户在指定节点上注册一些Watcher, 并且在一些特定事件触发的时候， ZooKeeper 服务端会将事件通<br>知到感兴趣的客户端上去,该机制是ZooKeeper实现分布式协调服务的重要特性。</li>
+<li>ZooKeeper中引入了Watcher机制来实现了发布&#x2F;订阅功能能，能够让多个订阅者同时监听某一 个对象,当-个对象自身状态变化时，会通知所有订阅者。</li>
+<li>ZooKeeper原生支持通过注册Watcher来进行事件监听，但是其使用并不是特别方便需要开发人员自己反复注册Watcher,比较繁琐。</li>
+<li>Curator引入了Cache来实现对ZooKeeper服务端事件的监听。</li>
+<li>ZooKeeper提供了三种Watcher:<ul>
+<li>NodeCache:只是监听某一个特定的节点</li>
+<li>PathChildrenC ache:监控一个ZNode的子节点.</li>
+<li>TreeCache:可以监控整个树上的所有节点，类似于PathChildrenCache和NodeCache的组合</li>
+</ul>
+</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CuratorWatcherTest</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> CuratorFramework client<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 建立连接
+     */</span>
+    <span class="token annotation punctuation">@Before</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testConnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/**
+         * @param connectString 连接字符串。zk server 地址和端口"192. 168. 149.135:2181, 192. 168. 149.136:2181”
+         * @param sessionTimeoutMs 会话超时时间单位ms
+         * @param connectionTimeoutMs 连接超时时间单位ms
+         * @param retryPolicy 重试策略
+         */</span>
+        <span class="token comment" spellcheck="true">// 重试策略</span>
+        RetryPolicy retryPolicy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ExponentialBackoffRetry</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 1.第一种方式</span>
+<span class="token comment" spellcheck="true">//        CuratorFramework client = CuratorFrameworkFactory.newClient("8.130.113.49:2181",</span>
+<span class="token comment" spellcheck="true">//                60 * 1000, 15 * 1000, retryPolicy);</span>
+<span class="token comment" spellcheck="true">//        client.start();</span>
+        <span class="token comment" spellcheck="true">// 2.第二种方式</span>
+        client <span class="token operator">=</span> CuratorFrameworkFactory<span class="token punctuation">.</span><span class="token function">builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">connectString</span><span class="token punctuation">(</span><span class="token string">"8.130.113.49:2181"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">sessionTimeoutMs</span><span class="token punctuation">(</span><span class="token number">60</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">connectionTimeoutMs</span><span class="token punctuation">(</span><span class="token number">15</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">retryPolicy</span><span class="token punctuation">(</span>retryPolicy<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">namespace</span><span class="token punctuation">(</span><span class="token string">"itheima"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        client<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"已经建立连接"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@After</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>client <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            client<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"关闭成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 演示 NodeCache：给指定的一个节点注册监听器
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testNodeCache</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 1.创建NodeCache对象</span>
+        NodeCache nodeCache <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NodeCache</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span><span class="token string">"/app1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 2.注册监听</span>
+        nodeCache<span class="token punctuation">.</span><span class="token function">getListenable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">NodeCacheListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">nodeChanged</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"节点变化了~"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> data <span class="token operator">=</span> nodeCache<span class="token punctuation">.</span><span class="token function">getCurrentData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 3.开启监听,如果设置为true，则开启监听是，加载缓冲数据</span>
+        nodeCache<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 演示PathChildrenCache: 监听某个节点的所有子节点
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testPathChildrenCache</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 1.创建监听对象</span>
+        PathChildrenCache pathChildrenCache <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PathChildrenCache</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span><span class="token string">"/app2"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 2.绑定监听器</span>
+        pathChildrenCache<span class="token punctuation">.</span><span class="token function">getListenable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">PathChildrenCacheListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">childEvent</span><span class="token punctuation">(</span>CuratorFramework curatorFramework<span class="token punctuation">,</span> PathChildrenCacheEvent event<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"子节点变化了~"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">// 监听子节点的数据变更，并且拿到变更后的数据</span>
+                <span class="token comment" spellcheck="true">// 1.获取类型</span>
+                PathChildrenCacheEvent<span class="token punctuation">.</span>Type type <span class="token operator">=</span> event<span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">// 2.判断类型是否是update</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>PathChildrenCacheEvent<span class="token punctuation">.</span>Type<span class="token punctuation">.</span>CHILD_UPDATED<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> data <span class="token operator">=</span> event<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 3.开启</span>
+        pathChildrenCache<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 演示 TreeCache：监听某个节点自己和所有子节点
+     * @throws Exception
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testTreeCache</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//1.创建监听器</span>
+        TreeCache treeCache <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TreeCache</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span><span class="token string">"/app2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//2.注册监听</span>
+        treeCache<span class="token punctuation">.</span><span class="token function">getListenable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">TreeCacheListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">childEvent</span><span class="token punctuation">(</span>CuratorFramework client<span class="token punctuation">,</span> TreeCacheEvent event<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"节点变化了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//3.开启</span>
+        treeCache<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h4><ul>
+<li>在我们进行单机应用开发,涉极并发同步的时候,我们往往采用synchronized或者Lock的方式来解决多线程间的代码同步问题,<br>这时多线程的运行都是在同一个JVM之下,没有任何问题。</li>
+<li>但当我们的应用是分布式集群工作的情况下，属于多JVM下的工作环境，跨JVM之间已经无法通过多线程的锁解决同步问题。</li>
+<li>那么就需要一种更加高级的锁机制，来处理种<font color="red">跨机器的进程之间的数据同步问题</font>一这就是分布式锁。</li>
+</ul>
+<h4 id="ZooKeeper分布式锁原理"><a href="#ZooKeeper分布式锁原理" class="headerlink" title="ZooKeeper分布式锁原理"></a>ZooKeeper分布式锁原理</h4><ul>
+<li>核心思想：当客户端要获取锁，则创建节点，使用完锁，则删除该节点。</li>
+</ul>
+<ol>
+<li>客户端获取锁时，在lock节点下创建<font color="red">临时顺序</font>节点。</li>
+<li>然后获取lock下面的所有子节点，客户端获取到所有的子节点之后，如果发现自己创建的子节点序号最小，那么就认为该客户端获取到了锁，使用完锁之后，将该节点删除。</li>
+<li>如果发现自己创建的节点并非ock所有子节点中最小的，说明自己还没有获取到锁，此时客户端需要找到比自己小的那个节点，同时对其注册事件监听器,监<br>监听删除事件。</li>
+<li>如果发现比自己小的那个节点被删除，则客户端的Watcher会收到相应通知，此时再次判断自己创建的节点是否是lock子节，点中序号最小的，如果是则获取到了锁,如果不是则重复以上步骤继续获取到此自己小的一个节点并注册监听。</li>
+</ol>
+<h4 id="Curator实现分布式锁API"><a href="#Curator实现分布式锁API" class="headerlink" title="Curator实现分布式锁API"></a>Curator实现分布式锁API</h4><ul>
+<li>在Curator中有五种锁方案:<ul>
+<li>InterProcessSemaphoreMutex:分布式排它锁(非可重入锁)</li>
+<li>InterProcessMutex:分布式可重入排它锁</li>
+<li>InterProcessReadWriteLock:分布式读写锁</li>
+<li>InterProcessMultiLock:将移个锁作为单个实体管理的容器</li>
+<li>InterProcessSemaphoreV2:共享信号量</li>
+</ul>
+</li>
+</ul>
+<h4 id="分布式锁案例-模拟12306售票"><a href="#分布式锁案例-模拟12306售票" class="headerlink" title="分布式锁案例-模拟12306售票"></a>分布式锁案例-模拟12306售票</h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LockTest</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Ticket12306 ticket12306 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Ticket12306</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 创建客户端</span>
+        Thread t1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span>ticket12306<span class="token punctuation">,</span><span class="token string">"携程"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Thread t2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span>ticket12306<span class="token punctuation">,</span><span class="token string">"飞猪"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        t1<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        t2<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Ticket12306</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">int</span> tickets <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//数据库的票数</span>
+
+    <span class="token keyword">private</span> InterProcessMutex lock<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">Ticket12306</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        RetryPolicy retryPolicy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ExponentialBackoffRetry</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        CuratorFramework client <span class="token operator">=</span> CuratorFrameworkFactory<span class="token punctuation">.</span><span class="token function">builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">connectString</span><span class="token punctuation">(</span><span class="token string">"8.130.113.49:2181"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">sessionTimeoutMs</span><span class="token punctuation">(</span><span class="token number">60</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">connectionTimeoutMs</span><span class="token punctuation">(</span><span class="token number">15</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">retryPolicy</span><span class="token punctuation">(</span>retryPolicy<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        client<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        lock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">InterProcessMutex</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span><span class="token string">"/lock"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 获取锁</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                lock<span class="token punctuation">.</span><span class="token function">acquire</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>tickets <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> tickets<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    tickets<span class="token operator">--</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token keyword">finally</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// 释放锁</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    lock<span class="token punctuation">.</span><span class="token function">release</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="ZooKeeper集群搭建"><a href="#ZooKeeper集群搭建" class="headerlink" title="ZooKeeper集群搭建"></a>ZooKeeper集群搭建</h2><h3 id="Zookeeper集群介绍"><a href="#Zookeeper集群介绍" class="headerlink" title="Zookeeper集群介绍"></a>Zookeeper集群介绍</h3><p>Leader选举：</p>
+<ul>
+<li><p>Serverid:服务器ID</p>
+<p>比如有三台服务器，编号分别是1,23。编号越大在选择算法中的权重越大。</p>
+</li>
+<li><p>Zxid:数据ID</p>
+<p>服务器中存放的最大数据ID.值越大说明数据越新，在选举算法中数据越新权重越大。</p>
+</li>
+<li><p>在Leader选举的过程中，如果某台ZooKeeper获得了超过半数的选票,则此ZooKeeper就可以成为Leader了。</p>
+</li>
+</ul>
+<h3 id="搭建Zookeeper集群"><a href="#搭建Zookeeper集群" class="headerlink" title="搭建Zookeeper集群"></a>搭建Zookeeper集群</h3><h4 id="1-1搭建要求"><a href="#1-1搭建要求" class="headerlink" title="1.1搭建要求"></a>1.1搭建要求</h4><p>真实的集群是需要部署在不同的服务器上的,但是在我们测试时同时启动很多个虚拟机内存会吃不消，所以我们通<br>常会搭建伪集群，也就是把所有的服务都搭建在-台虚拟机上，用端口进行区分。</p>
+<p>我们这里要求搭建一个三个节 点的Zookeeper集群(伪集群)。</p>
+<h4 id="1-2准备工作"><a href="#1-2准备工作" class="headerlink" title="1.2准备工作"></a>1.2准备工作</h4><p>重新部署一台虚拟机作为我们搭建集群的测试服务器。</p>
+<p>（1）安装JDK [此步骤省略]。</p>
+<p>（2）Zookeeper压缩包.上传到服务器</p>
+<p>（3）将Zookeeper解压，建立&#x2F;usr&#x2F;local&#x2F;zookeeper-cluster目录，将解压后的Zookeeper复制到以下三个目录</p>
+<p>&#x2F;usr&#x2F;local&#x2F;zookeeper-custer&#x2F;zookeeper-1<br>&#x2F;usr&#x2F;local&#x2F;zookeeper-cluster&#x2F;zookeeper-2<br>&#x2F;usr&#x2F;local&#x2F;zookeeper-cluster&#x2F;zookeeper-3</p>
+<pre class=" language-shell"><code class="language-shell">[root@localhost ~]# mkdir /usr/loca1/zookeeper-cluster
+[root@localhost ~]# cp -r apache-zookeeper-3.5.6-bin/usr/1oca1/zookeeper 一
+cluster /zookeeper -1
+[root@localhost ~]# cp -r apache-zookeeper-3.5.6-bin/usr/1oca1/zookeeper 一
+cluster /zookeeper -2
+[root@localhost ~]# cp -r apache-zookeeper-3.5.6-bin/usr/1oca1/zookeeper -
+cluster /zookeeper -3
+</code></pre>
+<p>（4）创建data目录，并且将conf下z00_ sample.cfg文件改名为z00.cfg</p>
+<pre class=" language-shell"><code class="language-shell">mkdir /usr/loca1/zookeeper -cluster/ zookeeper-1/data
+mkdir /usr/loca1/zookeeper -cluster/zookeeper-2/data
+mkdir /usr/loca1/zookeeper -cluster/zookeeper-3/data
+
+mv /usr/1oca1/zookeeper -cluster /zookeeper-1/conf/zoo_ samp1e.cfg /usr/1oca1/zookeeper -
+cluster /zookeeper-1/conf/zoo. cfg
+mv /usr/1oca1/zookeeper -cluster /zookeeper -2/conf/zoo_ sample.cfg /usr/1oca1/zookeeper-
+cluster / zookeeper-2/conf/zoo.cfg
+mv /usr/1oca1/ zookeeper -cluster /zookeeper -3/conf/zoo_ sample.cfg /usr/1oca1/zookeeper -
+cluster/zookeeper-3/conf/zoo.cfg
+</code></pre>
+<p>（5）配置每一个Zookeeper的dataDir和clientPort分别为2181 2182 2183</p>
+<p>修改&#x2F;usr&#x2F;local&#x2F;zookeeper-cluster&#x2F;zookeeper-1&#x2F;conf&#x2F;zoo.cfg</p>
+<pre class=" language-shell"><code class="language-shell">vim /usr/1oca1/zookeeper-cluster/zookeeper-1/conf/zoo.cfg
+cli entPort=2181
+dataDir=/usr/1oca1/zookeeper-cluster/zookeeper-1/data
+</code></pre>
+<p>修改&#x2F;usr&#x2F;local&#x2F;zookeeper-cluster&#x2F;zookeeper-2&#x2F;conf&#x2F;zoo.cfg</p>
+<pre class=" language-shell"><code class="language-shell">vim /usr/1oca1/zookeeper-cluster/zookeeper-2/conf/zoo.cfg
+clientPort=2182
+dataDir=/usr/1oca1/zookeeper-cluster/zookeeper-2/data
+</code></pre>
+<p>修改&#x2F;usr&#x2F;local&#x2F;zookeeper-cluster&#x2F;zookeeper-3&#x2F;conf&#x2F;zoo.cfg</p>
+<pre class=" language-shell"><code class="language-shell">vim /usr/1oca1/zookeeper-cluster/zookeeper-3/conf/zoo.cfg
+clientPort=2183
+dataDir=/usr/1oca1/zookeeper-cluster/zookeeper-3/data
+</code></pre>
+<h4 id="1-3配置集群"><a href="#1-3配置集群" class="headerlink" title="1.3配置集群"></a>1.3配置集群</h4><p>（1）在每个zookeeper的data目录下创建一个而yid文件，内容分别是1、2、3。这个文件就是记录每个服务器的ID</p>
+<pre class=" language-shell"><code class="language-shell">echo 1 >/usr/loca1/zookeeper-cluster/zookeeper-1/data/myid
+echo 2 >/usr/1oca1/zookeeper-cluster/zookeeper-2/data/myid
+echo 3 >/usr/1oca1/zookeeper-cluster/zookeeper-3/data/myid
+</code></pre>
+<p>（2）在每一个zookeeper的z00.cfg配置客户端访问端口(clientPort) 和集群服务器IP列表。</p>
+<p>集群服务器IP列表如下</p>
+<pre class=" language-shell"><code class="language-shell">vim /usr/1oca1/zookeeper-cluster/zookeeper-1/conf/zoo.cfg
+vim /usr/1oca1/zookeeper-cluster/zookeeper-2/conf/zoo.cfg
+vim /usr/1oca1/zookeeper-cluster/zookeeper-3/conf/zoo.cfg
+server.1=192.168.149.135:2881:3881
+server.2=192.168.149.135:2882:3882
+server.3=192.168.149.135:2883:3883
+</code></pre>
+<p>解释: server.服务器ID&#x3D;服务器IP地址:服务器之间通信端口:服务器之间投票选举端口</p>
+<h4 id="1-4启动集群"><a href="#1-4启动集群" class="headerlink" title="1.4启动集群"></a>1.4启动集群</h4><p>启动集群就是分别启动每个实例。</p>
+<pre class=" language-shell"><code class="language-shell">/usr/1oca1/zookeeper-cluster/zookeeper-1/bin/zkServer.sh start
+/usr/1oca1/zookeeper-cluster/zookeeper-2/bin/zkServer.sh start
+/usr/1oca1/zookeeper-cluster/zookeeper-3/bin/zkServer.sh start
+</code></pre>
+<h4 id="1-5模拟集群异常"><a href="#1-5模拟集群异常" class="headerlink" title="1.5模拟集群异常"></a>1.5模拟集群异常</h4><p>（1）首先我们先测试如果是从服务器挂掉，会怎么样</p>
+<p>把3号服务器停掉，观察1号和2号,发现状态并没有变化</p>
+<pre class=" language-shell"><code class="language-shell">/usr/1oca1/zookeeper-cluster/zookeeper-3/bin/zkServer.sh stop 
+/usr/1oca1/zookeeper-cluster/zookeeper-1/bin/zkServer.sh status
+/usr/1oca1/zookeeper-cluster/zookeeper-2/bin/zkServer.sh status
+</code></pre>
+<p>由此得出结论，3个节点的集群，从服务器挂掉,集群正常</p>
+<p>（2）我们再把1号服务器(从服务器)也停掉,查看2号(主服务器)的状态，发现已经停止运行了。</p>
+<pre class=" language-shell"><code class="language-shell">/usr/1oca1/zookeeper-cluster/zookeeper-1/bin/zkServer.sh stop
+/usr/1oca1/zookeeper-cluster/zookeeper-2/bin/zkServer.sh status
+</code></pre>
+<p>由此得出结论，3个节点的集群，2个从服务器都挂掉,主服务器也无法运行。因为可运行的机器没有超过集群总数量的半数。</p>
+<p>（3）我们再次把1号服务器启动起来，发现2号服务器又开始正常工作了。而且依然是领导者。</p>
+<pre class=" language-shell"><code class="language-shell">/usr/loca1/zookeeper-cluster/zookeeper-1/bin/zkServer.sh start
+/usr/loca1/zookeeper-cluster/zookeeper-2/bin/zkServer.sh status
+</code></pre>
+<p>（4）我们把3号服务器也启动起来，把2号服务器停掉,停掉后观察1号和3号的状态。</p>
+<pre class=" language-shell"><code class="language-shell">/usr/1oca1/zookeephr-cluster/zookeeper-2/bin/zkServer .sh stop
+/usr/loca1/zookeeper-cluster/zookeeper-1/bin/zkServer .sh status
+
+/usr/1oca1/zookeeper-cluster/zookeeper-3/bin/zkServer .sh status
+</code></pre>
+<p>发现新的leader产生了~</p>
+<p>由此我们得出结论，当集群中的主服务器挂了,集群中的其他服务器会自动进行选举状态,然后产生新得leader</p>
+<p>（5）我们再次测试，当我们把2号服务器重新启动起来启动后，会发生什么? 2号服务器会再次成为新的领导吗?</p>
+<h3 id="Zookeeper集群角色"><a href="#Zookeeper集群角色" class="headerlink" title="Zookeeper集群角色"></a>Zookeeper集群角色</h3><p>在ZooKeeper集群服中务中有三个角色：</p>
+<ul>
+<li><p>Leader领导者:</p>
+<p>​    1.处理事务请求</p>
+<p>​    2.集群内部各服务器的调度者</p>
+</li>
+<li><p>Follower跟随者：</p>
+<p>​    1.处理客户端非事务请求，转发事务请求给L eader服务器</p>
+<p>​    2.参与Leader选举投票</p>
+</li>
+<li><p>Observer观察者:</p>
+<p>处理客户端非事务请求，转发事务请求给Leader服务器</p>
 </li>
 </ul>
 

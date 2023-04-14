@@ -841,7 +841,7 @@ ConfigurableApplicationContext<span class="token operator">:</span>接口，是A
 <p>@DeleteMapping：支持的delete请求方式，等同于@RequestMapping（method&#x3D;RequestMethod.DELETE）</p>
 <p>@RestController：复合注解，是@Controller和@ResponseBody组合</p>
 <p>表示当前这个类中的所有方法都加入了@ResponseBody</p>
-<h3 id="5-2、在页面中或者ajax中，支持pub，delete请求"><a href="#5-2、在页面中或者ajax中，支持pub，delete请求" class="headerlink" title="5.2、在页面中或者ajax中，支持pub，delete请求"></a>5.2、在页面中或者ajax中，支持pub，delete请求</h3><p>在SpringMVC中有一个过滤器，支持post请求转为put，delete</p>
+<h3 id="5-2、在页面中或者ajax中，支持put，delete请求"><a href="#5-2、在页面中或者ajax中，支持put，delete请求" class="headerlink" title="5.2、在页面中或者ajax中，支持put，delete请求"></a>5.2、在页面中或者ajax中，支持put，delete请求</h3><p>在SpringMVC中有一个过滤器，支持post请求转为put，delete</p>
 <p>过滤器：org.springframework.web.filter.HiddenHttpMethodFilter</p>
 <p>作用：把请求中的post请求转为put，delete</p>
 <p>实现步骤：</p>

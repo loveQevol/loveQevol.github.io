@@ -5,7 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Kafka教程, 谦谦的个人博客">
-    <meta name="description" content="Kafka教程">
+    <meta name="description" content="Kafka教程Kafka简介1.1 消息队列
+消息队列– 用于存放消息的组件
+程序员可以将消息放入到队列中，也可以从消息队列中获取消息
+很多时候消息队列不是一个永久性的存储， 是作为临时存储存在的(设定一个期限: 设置消息在MQ中保存10天">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -455,14 +458,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -482,7 +485,152 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Kafka教程"><a href="#Kafka教程" class="headerlink" title="Kafka教程"></a>Kafka教程</h1>
+                <h1 id="Kafka教程"><a href="#Kafka教程" class="headerlink" title="Kafka教程"></a>Kafka教程</h1><h2 id="Kafka简介"><a href="#Kafka简介" class="headerlink" title="Kafka简介"></a>Kafka简介</h2><h3 id="1-1-消息队列"><a href="#1-1-消息队列" class="headerlink" title="1.1 消息队列"></a>1.1 消息队列</h3><ul>
+<li>消息队列– 用于存放消息的组件</li>
+<li>程序员可以将消息放入到队列中，也可以从消息队列中获取消息</li>
+<li>很多时候消息队列不是一个永久性的存储， 是作为临时存储存在的(设定一个期限: 设置消息在MQ中保存10<br>天)</li>
+<li>消息队列中间件:消息队列的组件，例如: Kafka、 Active MQ、RabbitMQ、 RocketMQ、 ZeroMQ</li>
+</ul>
+<h3 id="1-2-Kafka的应用场景"><a href="#1-2-Kafka的应用场景" class="headerlink" title="1.2 Kafka的应用场景"></a>1.2 Kafka的应用场景</h3><ul>
+<li>异步处理<ul>
+<li>可以将一些耗时的操作放在其他系统中，通过消息队列将需要进行处理的消息进行存储，其他系统可以消费消息队列中的数据</li>
+<li>比较常见的：发送短信验证码、发送邮件</li>
+</ul>
+</li>
+<li>系统解耦<ul>
+<li>原先一个微服务是通过接口(Http)调用另一个微服务，这时候耦合严重，只要接口发送变化就会导致系统不可用。</li>
+<li>使用消息队列可以将系统进行解耦合,现在第一个微服务可以将消息放入到消息队列中，另一个微服务可<br>以从消息队列中把消息取出来进行处理。进行系统解耦</li>
+</ul>
+</li>
+<li>流量削峰<ul>
+<li>因为消息队列是低延迟，高可靠、高吞吐、可以应对大量并发</li>
+</ul>
+</li>
+<li>日志处理<ul>
+<li>可以使用消息队列作为临时存储，或者一种通信管道</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-消息队列的两种模型"><a href="#1-3-消息队列的两种模型" class="headerlink" title="1.3 消息队列的两种模型"></a>1.3 消息队列的两种模型</h3><ul>
+<li>生产者、消费者模型<ul>
+<li>生产者负责将消息生产到MQ中</li>
+<li>消费者负责从MQ中获取消息</li>
+<li>生产者和消费者是解耦的，可能是生产者一个程序、消费者是另外一个程序</li>
+</ul>
+</li>
+<li>消息队列的模式<ul>
+<li>点对点：一个消费者消费一个消息</li>
+<li>发布订阅：多个消费者可以消费一个消息</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kafka集群搭建"><a href="#Kafka集群搭建" class="headerlink" title="Kafka集群搭建"></a>Kafka集群搭建</h2><ul>
+<li>Kafka集群是必须要有ZooKeeper的</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>每一个Kafka的节点都需要修改broker.id（每个节点的标识，不能重复）</li>
+<li>log.dir数据存储目录需要配置</li>
+</ul>
+<h3 id="2-1-搭建Kafaka集群"><a href="#2-1-搭建Kafaka集群" class="headerlink" title="2.1 搭建Kafaka集群"></a>2.1 搭建Kafaka集群</h3><ol>
+<li>将Kafka的安装包上传到虚拟机，并解压</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell">cd /opt/software/
+tar -xvzf tar -xvzf kafka_2.12-2.4.1.tgz -C ../module/
+cd /opt/module/kafka_2.12-2.4.1/
+</code></pre>
+<ol start="2">
+<li>修改 server.properties</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell">cd /opt/module/server/kafka_2.12-2.4.1/config
+vim server.properties
+# 指定broker的id
+broker.id=0
+# 指定Kafka数据的位置
+log.dirs=/opt/module/kafka_2.12-2.4.1/data
+# 配置zk的三个节点
+zookeeper.connect=node1.itcast.cn:2181,node2.itcast.cn:2181,node3.itcast.cn:2181
+</code></pre>
+<ol start="3">
+<li>将安装好的kafka复制到另外两台服务器</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell">cd /opt/modules
+scp -r kafka_2.12-2.4.1/ node2.itcast.cn:$PWD
+scp -r kafka_2.12-2.4.1/ node3.itcast.cn:$PWD
+
+修改另外两个节点的broker.id分别为1和2
+---------node2.itcast.cn--------------
+cd /opt/modules/kafka_2.12-2.4.1/config
+vim erver.properties
+broker.id=1
+--------node3.itcast.cn--------------
+cd /opt/modules/kafka_2.12-2.4.1/config
+vim server.properties
+broker.id=2
+</code></pre>
+<ol start="4">
+<li>配置KAFKA_HOME环境变量</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell">vim /etc/profile
+export KAFKA_HOME=/opt/modules/kafka_2.12-2.4.1
+export PATH=:$PATH:${KAFKA_HOME}
+
+分发到各个节点
+scp /etc/profile node2.itcast.cn:$PWD
+scp /etc/profile node3.itcast.cn:$PWD
+每个节点加载环境变量
+source /etc/profile
+</code></pre>
+<ol start="5">
+<li>启动服务器</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell"># 启动ZooKeeper
+nohup bin/zookeeper-server-start.sh config/zookeeper.properties &
+# 启动Kafka
+cd /opt/modules/kafka_2.12-2.4.1
+nohup bin/kafka-server-start.sh config/server.properties &
+# 测试Kafka集群是否启动成功
+bin/kafka-topics.sh --bootstrap-server node1.itcast.cn:9092 --list
+</code></pre>
+<h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><h3 id="3-1-创建topic"><a href="#3-1-创建topic" class="headerlink" title="3.1 创建topic"></a>3.1 创建topic</h3><p>创建一个topic (主题)。Kafka中所有的消息都是保存在主题中,要生产消息到Kafka,首先必须要有一个确定的主题。</p>
+<pre class=" language-shell"><code class="language-shell"># 创建名为test的主题
+bin/kafka-topics.sh --create --bootstrap-server node1.itcast.cn:9092 --topic test
+# 查看目前Kafka中的主题
+bin/kafka-topics.sh --list --bootstrap-server node1.itcast.cn:9092
+</code></pre>
+<h3 id="3-2-生产消息到Kafka"><a href="#3-2-生产消息到Kafka" class="headerlink" title="3.2  生产消息到Kafka"></a>3.2  生产消息到Kafka</h3><p>使用Kafka内置的测试程序，生产一些消息到Kafka的test主题中。</p>
+<pre class=" language-shell"><code class="language-shell">bin/kafka-console-producer.sh --broker-list node1.itcast.cn:9092 --topic test
+</code></pre>
+<h3 id="3-3-从Kafka消费消息"><a href="#3-3-从Kafka消费消息" class="headerlink" title="3.3 从Kafka消费消息"></a>3.3 从Kafka消费消息</h3><p>使用下面的命令来消费 test 主题中的消息。</p>
+<pre class=" language-shell"><code class="language-shell">bin/kafka-console-consumer.sh --bootstrap-server node1.itcast.cn:9092 --topic test --from-beginning
+</code></pre>
+<h3 id="3-4-Kafka的生产者-x2F-消费者-x2F-工具"><a href="#3-4-Kafka的生产者-x2F-消费者-x2F-工具" class="headerlink" title="3.4 Kafka的生产者&#x2F;消费者&#x2F;工具"></a>3.4 Kafka的生产者&#x2F;消费者&#x2F;工具</h3><ul>
+<li>安装Kafka集群，可以测试以下<ul>
+<li>创建一个topic主题 (消息都是存放在topic中,类似mysq|建表的过程)</li>
+<li>基于kafka的内置测试生产者脚本来读取标准输入(键盘输入)的数据,并放入到topic中</li>
+<li>基于kafka的内置测试消费者脚本来消费topic中的数据</li>
+</ul>
+</li>
+<li>推荐大家开发的使用Kafka Tool<ul>
+<li>浏览Kafka集群节点多少个topic、 多少个分区</li>
+<li>创建topic&#x2F;删除topic</li>
+<li>浏览ZooKeeper中的数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kafka基准测试"><a href="#Kafka基准测试" class="headerlink" title="Kafka基准测试"></a>Kafka基准测试</h2><h3 id="4-1-基准测试"><a href="#4-1-基准测试" class="headerlink" title="4.1 基准测试"></a>4.1 基准测试</h3><h4 id="4-1-1-基于1个分区1个副本的基准测试"><a href="#4-1-1-基于1个分区1个副本的基准测试" class="headerlink" title="4.1.1 基于1个分区1个副本的基准测试"></a>4.1.1 基于1个分区1个副本的基准测试</h4><p>测试步骤：</p>
+<ol>
+<li>启动Kafka集群</li>
+<li>创建一个1个分区1个副本的topic: benchmark</li>
+<li>同时运行生产者、消费者基准测试程序</li>
+<li>观察结果</li>
+</ol>
+<h5 id="4-1-1-1-创建topic"><a href="#4-1-1-1-创建topic" class="headerlink" title="4.1.1.1 创建topic"></a>4.1.1.1 创建topic</h5><pre class=" language-shell"><code class="language-shell">bin/kafka-topics.sh --zookeeper node1.itcast.cn:2181 --create --topic benchmark --partitions 1 --replication-factor 1
+</code></pre>
+<h5 id="4-1-1-2-生产消息基准测试"><a href="#4-1-1-2-生产消息基准测试" class="headerlink" title="4.1.1.2 生产消息基准测试"></a>4.1.1.2 生产消息基准测试</h5><p>在生产环境中，推荐使用生产5000W消息，这样会性能数据会更准确些。为了方便测试，课程上演示测试500W的消息作为基准测试。</p>
+<pre class=" language-shell"><code class="language-shell">bin/kafka-producer-perf-test.sh --topic benchmark --num-records 5000000 --throughput -1 --record-size 1000 --producer-props bootstrap.servers=node1.itcast.cn:9092,node2.itcast.cn:9092,node3.itcast.cn:9092 acks=1
+</code></pre>
+
                 
             </div>
             <hr/>
@@ -774,13 +922,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/09/01/Nginx%E5%85%A5%E9%97%A8/">
+                <a href="/2022/08/02/%E9%93%BE%E8%A1%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="https://cdn.jsdelivr.net/gh/loveQevol/loveQevol.github.io/medias/featureimages/18.jpg" class="responsive-img" alt="链表">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">链表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -791,7 +939,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-02
                             </span>
                         <span class="publish-author">
                             
@@ -800,6 +948,14 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">数据结构与算法</span>
+                    </a>
+                    
                 </div>
                 
             </div>
